@@ -1,0 +1,100 @@
+@startuml
+!pragma layout smetana
+
+Class HouseHold {
+- int ID
+- String name
+- List <User> users
+- int points
+}
+
+Class User {
+- int ID
+- String passWord
+- String email
+- String name
+-int points
+
++ Task createTask()
++ void taskDone ()
++ Reminder createReminder()
+}
+
+Class Admin extends User {
+- boolean isAdmin?
+
++ HouseHold createHouseHold()
++ void inviteMember()
++ void removeMember()
+}
+
+Class Member extends User {}
+note right
+  Måske er alle andre
+   end Admin, User?
+end note
+
+Enum Role {}
+
+Class Task {
+- ID
+- String title
+- User user
+- Category category
+-date
+-time
+- Frequency frequency
+- boolean reassign
+
++ void reassignTask()
+
+}
+
+Enum Frequency{}
+
+Enum Category{}
+
+Class SimpleTask extends Task {
+- boolean iDone
++ void markAsDone()
++ void undoIsDone()
+}
+note right
+  Vi starter
+  med denne
+end note
+
+Class ProgresionTask extends Task {}
+
+Class Reminder {
+-int ID
+-String description
+- date
+- time
+}
+
+Class ToDo {
+}
+note right
+  evt. en arrayliste
+   i HouseHold
+end note
+
+HouseHold *-- User
+
+HouseHold *-- ToDo
+
+ToDo *---- Task
+
+User *-- Task
+
+Task *-- Category
+
+Task *-- Frequency
+
+User *-- Role
+
+
+
+
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+!pragma layout smetana
+
+object Husholdning
+object Bruger {
+    type
+}
+object Admin
+object Medlem
+object Opgave
+object Statistik
+
+
+Husholdning "1" - "1...*"Bruger
+Bruger <|-- "1"Admin
+Bruger <|-- "0..*" Medlem
+Husholdning --- Statistik
+Husholdning - Opgave
+Statistik --- Opgave
+Opgave "1" --- "0..*" Bruger
+
+
+
+@enduml

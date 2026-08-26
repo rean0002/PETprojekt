@@ -18,9 +18,8 @@ public class User {
         this.role = role;
     }
 
-    public Task createTask(String title, String description, TaskCategory category,
-                           LocalDate date, LocalTime time, TaskFrequency frequency, boolean reassignable) {
-        return new Task(title, description, category, date, time, frequency, reassignable);
+    public Task createSimpleTask(int ID, String title, String description, User user, TaskCategory taskCategory, TaskFrequency taskFrequency) {
+        return new SimpleTask(ID, title, description, user, taskCategory, taskFrequency);
     }
 
     public void taskDone(Task task) {
@@ -31,6 +30,8 @@ public class User {
     public Reminder createReminder(String description, LocalDate date, LocalTime time) {
         return new Reminder(description, date, time);
     }
+
+
     public int getId() {
         return id;
     }

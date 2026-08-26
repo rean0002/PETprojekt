@@ -8,8 +8,8 @@ public class SimpleTask extends Task {
 
     private boolean isdone = false;
 
-    SimpleTask (int ID, String title, User user, TaskCategory taskCategory, TaskFrequency taskFrequency){
-        super(ID, title, user, taskCategory, taskFrequency);
+    SimpleTask (int ID, String title, String description, User user, TaskCategory taskCategory, TaskFrequency taskFrequency){
+        super(ID, title, description, user, taskCategory, taskFrequency);
     }
 
     public void markAsDone(){

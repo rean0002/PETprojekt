@@ -1,0 +1,108 @@
+/* ===== globale variabler ===== */
+:root {
+    --bg: #FFFAEE;
+    --card: #FFEFCC;
+    --primary: #EFA85C;
+    --primary-hover: #E0964A;
+    --text-primary: #4A2E15;
+    --text-second: #A8935F;
+    --border: #EFE2C0;
+    --white: #FFFFFF;
+
+}
+
+/* ===== Reset ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+
+header, main, footer {
+    width: 100%;
+    max-width: 420px;
+}
+
+/* ===== #header-row ===== */
+#header-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px;
+}
+
+
+/* ===== #opret-opgave-card ===== */
+#opret-opgave-card {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 24px 20px;
+    margin: 0 12px 20px;
+
+}
+
+/* ===== dato og tidspunkt ===== */
+.to-felter-raekke {
+    display: flex;
+    gap: 10px;
+}
+
+.to-felter-raekke .field {
+    flex: 1;
+}
+
+.field{
+    padding-block: 13px;
+    display: flex;
+    flex-direction: column;
+
+}
+.input{
+    display: grid;
+}
+input, select{
+   border: #F2E2BC;
+    border-radius: 10px;
+    border: 1px solid #F2E2BC;
+    padding: 10px;
+}
+
+label{
+    padding-bottom: 10px;
+}
+
+.category{
+    background-color: #FFFFFF;
+    border: #F2E2BC;
+    border-radius: 20px;
+    border: 1px solid #F2E2BC;
+    padding: 10px;
+}
+.category:hover{
+    background-color: #F6760E;
+    color: #FFFFFF;
+}
+
+#btn-gem{
+    background-color: #F6760E;
+    color: #FFFFFF;
+    border: #F6760E;
+    border-radius: 12px;
+    width: 380px;
+    height: 40px;
+}
+
+#btn-gem:hover{
+    background-color: rgba(246, 118, 14, 0.55);
+
+}

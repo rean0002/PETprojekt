@@ -1,39 +1,8 @@
-/* ===== globale variabler ===== */
-:root {
-    --bg: #FFFAEE;
-    --card: #FFEFCC;
-    --primary: #EFA85C;
-    --primary-hover: #E0964A;
-    --text-primary: #4A2E15;
-    --text-second: #A8935F;
-    --border: #EFE2C0;
-    --white: #FFFFFF;
+/* ===== Header ===== */
 
+body{
+    font-size: 13px;
 }
-
-/* ===== Reset ===== */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    background: var(--bg);
-    color: var(--text-primary);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-}
-
-
-header, main, footer {
-    width: 100%;
-    max-width: 420px;
-}
-
-/* ===== #header-row ===== */
 #header-row {
     display: flex;
     align-items: center;
@@ -41,68 +10,76 @@ header, main, footer {
     padding: 20px;
 }
 
-
-/* ===== #opret-opgave-card ===== */
-#opret-opgave-card {
-    background: var(--card);
-    border-radius: 20px;
-    padding: 24px 20px;
-    margin: 0 12px 20px;
-
-}
-
 /* ===== dato og tidspunkt ===== */
 .to-felter-raekke {
     display: flex;
-    gap: 10px;
+    gap: 8px;
 }
 
 .to-felter-raekke .field {
     flex: 1;
 }
 
+/* ===== fields ===== */
+
 .field{
-    padding-block: 13px;
+    padding-block: 8px;
     display: flex;
     flex-direction: column;
+    color: var(--brown);
 
 }
 .input{
     display: grid;
 }
-input, select{
-   border: #F2E2BC;
-    border-radius: 10px;
-    border: 1px solid #F2E2BC;
-    padding: 10px;
-}
+
 
 label{
-    padding-bottom: 10px;
+    padding-bottom: 8px;
+    color: var(--brown);
 }
+
+/* ===== kategori ===== */
 
 .category{
-    background-color: #FFFFFF;
-    border: #F2E2BC;
+    background-color: var(--white);
+    border: var(--border-color);
     border-radius: 20px;
-    border: 1px solid #F2E2BC;
+    border: 1px solid var(--border-color);
     padding: 10px;
+    color: var(--brown);
 }
 .category:hover{
-    background-color: #F6760E;
-    color: #FFFFFF;
+    background-color: var(--orange);
+    color: var(--white);
 }
 
-#btn-gem{
-    background-color: #F6760E;
-    color: #FFFFFF;
-    border: #F6760E;
-    border-radius: 12px;
-    width: 380px;
-    height: 40px;
+input, select {
+    color: var(--brown);
+}
+.btn{
+    margin-block: 20px;
 }
 
-#btn-gem:hover{
-    background-color: rgba(246, 118, 14, 0.55);
 
+#btn-tilbage {
+    background: none;
+    border: none;
+    color: var(--brown);
+    padding: 0;
+    cursor: pointer;
+    margin-left: -15px;
 }
+
+#btn-tilbage svg {
+    width: 24px;
+    height: 24px;
+}
+#toggle-arves {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+

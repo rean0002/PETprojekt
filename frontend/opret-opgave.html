@@ -3,20 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Opret opgave</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/color.css">
     <link rel="stylesheet" href="css/toggle.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/opret-opgave.css">
 </head>
 <body>
 
-<header id="header-row">
-    <button id="btn-tilbage">
-        Tilbage
-    </button>
-    <h1>Opret opgave</h1>
+<header>
+
 </header>
 
-<main id="opret-opgave-card">
+<main class="backgroundbox">
+   <div id="header-row">
+       <a href="dashboard.html"><button id="btn-tilbage" aria-label="Tilbage">
+           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M20 12H4M4 12L10 6M4 12L10 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+           </svg>
+       </button></a>
+    <h2 >Opret opgave</h2>
+    </div>
     <form id="opgave-form">
 
         <div id="field-titel" class="field input">
@@ -67,16 +74,19 @@
                 <option value="Alexander" selected>Alexander</option>
             </select>
         </div>
+        <div>
 
         <div id="toggle-arves" class="field">
-            <label for="vidergives">
-                Skal opgaven arves
-                <span class="hjaelpetekst">Gives videre hvis den ikke udføres</span>
-            </label>
-            <input type="checkbox" id="vidergives" name="vidergives">
+              <div><p>Skal opgaven arves</p>
+                <p>Gives videre hvis den ikke udføres</p>
+        </div>
+        <label class="switch">
+        <input type="checkbox" id="vidergives" name="vidergives">
+        <span class="slider"></span>
+        </label>
         </div>
 
-        <button id="btn-gem" type="submit" >Gem opgave</button>
+        <button class="btn organge" type="submit" >Gem opgave</button>
 
     </form>
 </main>

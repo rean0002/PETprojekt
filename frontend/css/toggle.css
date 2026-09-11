@@ -24,7 +24,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #e9e9eb;
+    background-color: var(--orange);
     transition: 0.3s;
     border-radius: 34px;
 }
@@ -43,7 +43,7 @@
 }
 
 input:checked + .slider {
-    background-color: var(--notebook);
+    background-color: var(--brown30percent);
 }
 
 input:checked + .slider::before {

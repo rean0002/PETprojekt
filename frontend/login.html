@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Start side</title>
-    <link rel="stylesheet" href="frontend/css/loginStyle.css">
-    <link rel="stylesheet" href="frontend/css/color.css">
-    <link rel="stylesheet" href="frontend/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/color.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/loginStyle.css" >
 </head>
 <body>
 
@@ -16,24 +17,25 @@
 <div><!-- headline & subtext -->
 
     <h1>Velkommen tilbage</h1>
-    <p class="ancizar">Log ind og se dagens opggaver</p>
+    <h3 class="ancizar">Log ind og se dagens opggaver</h3>
 </div>
 
 <div><!-- log in section -->
 
-    <form action="">
-        <div>
+    <form action="" class="login-container">
+        <div class="input_container">
             <label for="email">Email</label>
             <input type="email" id="email" placeholder="mail@mail.com">
         </div>
-        <div>
+        <div class="input_container">
             <label for="password">Password</label>
             <input type="password" id="password" placeholder="*****">
         </div>
-        <div>
+        <div >
             <a href="">Glemt adgangskode?</a>
         </div>
-            <button type="submit">Log ind</button>
+            <a href="dashboard.html"><button class="btn organge" type="submit">Log ind</button></a>
+
 
     </form>
 </div>
@@ -50,10 +52,10 @@
 </div>
 
 <div><!-- fortæt med google-->
-<button>Fortæt med google</button>
+<button class="btn white">Fortæt med google</button>
 </div>
 
-<div><!-- ny bruger-->
+<div class="ny_container"><!-- ny bruger-->
     <p>Ny bruger? <a href="">Opret konto</a> </p> <!-- link -->
 </div>
 

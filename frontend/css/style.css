@@ -1,25 +1,115 @@
-body{
-    font-family: Arial sans-serif, sans serif;
+
+
+/* ===== Reset ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Inter, sans-serif;
     background: var(--yellow10percent);
-    padding: 40px;
+    color: var(--brown);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
 }
 
-.backgroundbox{
-    background: var(--lightblue);
-    border-radius: 12px;
+
+header, main, footer {
     width: 100%;
-    height:100%;
-
-
+    max-width: 420px;
 }
 
-
+/* ===== fonts ===== */
 h1{
-    font-family: Ancizar Serif, serif;
+    color: #613917;
+    font-family: "Ancizar Serif";
     font-size: 32px;
-    text-align: center;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 150%;
 }
 
-.ancizar{
-    font-family: Ancizar Serif, serif;
+h3{
+    color: #B7A071;
+    font-family: "Ancizar Serif";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: -0.88px;
+}
+
+p{
+    color: #613917;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; /* 21px */
+    letter-spacing: -0.88px;
+
+}
+
+a{
+    text-decoration: none;
+}
+
+
+/* ===== box ===== */
+
+.backgroundbox {
+    font-size: 13px;
+    background: var(--yellow50percent);
+    border-radius: 20px;
+    padding: 24px 30px;
+    margin: 0 12px 20px;
+    margin-top: 3rem;
+    width: 430px;
+    height: 760px;
+}
+
+/* ===== indput felter ===== */
+
+input, select{
+
+    border: var(--border-color);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    padding: 10px;
+}
+
+/* ===== knapper ===== */
+.btn {
+    font-size: 15px;
+    border-radius: 12px;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.white{
+    background-color: var(--white);
+    color: var(--brown);
+    border: 1px solid var(--border-color);
+}
+
+.organge{
+    background-color: var(--orange);
+    color: var(--white);
+    border: var(--orange);
+}
+
+.organge:hover{
+    background-color: rgba(246, 118, 14, 0.55);
+}
+
+.white:hover{
+    background-color: var(--brown10percent);
+}
+input::placeholder {
+    color: var(--placeholder-color);
 }

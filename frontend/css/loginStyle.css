@@ -1,8 +1,47 @@
+.backgroundbox{
+   margin-top: 3rem;
+}
+
 .grid-box{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 
     align-items: center;
     justify-items: center;
+}
 
+h1{
+    text-align: center;
+    padding-top: 80px;
+}
+
+h3{
+    text-align: center;
+    padding-top: 10px;
+}
+
+a{
+    color: var(--orange);
+}
+form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.login-container {
+    margin-top: 70px;
+    margin-bottom: 20px;
+}
+
+.input_container{
+    margin-block: 10px;
+}
+.btn{
+    margin-block: 30px;
+}
+.ny_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

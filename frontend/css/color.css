@@ -1,5 +1,5 @@
 :root{
-
+    --white: #ffffff;
     --lightblue: #BCE0EF;
     --darkblue: #004F6B;
     --darkblue30percent: #B3CAD3;
@@ -9,13 +9,12 @@
     --brown: #613917;
     --brown30percent:#D0C4B9;
     --brown10percent:#EFEBE8;
-    --yellow:#FFCA56; <!-- -->
-    --yellow50percent:#FFE4AA;
+    --yellow:#FFCA56; /* base farve */
+    --yellow50percent:#FFEFCC;
     --yellow30percemt:#FFEFCC;
     --yellow10percent:#FFFAEE;
-
-
-
+    --border-color: #F2E2BC;
+    --placeholder-color:#B7A071;
 
 
 }

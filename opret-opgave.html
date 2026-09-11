@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Opret opgave</title>
+    <link rel="stylesheet" href="css/toggle.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="opret-opgave.css">
+</head>
+<body>
+
+<header id="header-row">
+    <button id="btn-tilbage">
+        Tilbage
+    </button>
+    <h1>Opret opgave</h1>
+</header>
+
+<main id="opret-opgave-card">
+    <form id="opgave-form">
+
+        <div id="field-titel" class="field input">
+            <label for="titel">Titel</label>
+            <input type="text" id="titel" name="titel" placeholder="Fx Støvsug stuen" required>
+        </div>
+
+        <div id="field-beskrivelse" class="field input">
+            <label for="beskrivelse">Beskrivelse (valgfri)</label>
+            <input type="text" id="beskrivelse" name="beskrivelse" placeholder="Tilføj en note...">
+        </div>
+
+        <div id="kategori-group" class="field input">
+            <label>Kategori</label>
+            <div class="pille-row">
+                <button type="button" class="category" data-kategori="rengoring">Rengøring</button>
+                <button type="button" class="category" data-kategori="affald">Affald</button>
+                <button type="button" class="category" data-kategori="koekken">Køkken</button>
+            </div>
+        </div>
+
+        <div class="to-felter-raekke">
+            <div id="field-dato" class="field">
+                <label for="dato">Dato</label>
+                <input type="date" id="dato" name="dato">
+            </div>
+            <div id="field-tidspunkt" class="field">
+                <label for="tidspunkt">Tidspunkt</label>
+                <input type="time" id="tidspunkt" name="tidspunkt">
+            </div>
+        </div>
+
+        <div id="field-gentages" class="field input">
+            <label for="gentages">Gentages</label>
+            <select id="gentages" name="gentages">
+                <option value="ingen">Gentages ikke</option>
+                <option value="dagligt">Dagligt</option>
+                <option value="ugentligt" selected>Ugentligt</option>
+                <option value="maanedligt">Månedligt</option>
+            </select>
+        </div>
+
+        <div id="field-ansvarlig" class="field input">
+            <label for="ansvarlig">Ansvarlig</label>
+            <select id="ansvarlig" name="ansvarlig">
+                <option value="Rebecca" selected>Rebecca</option>
+                <option value="Olga" selected>Olga</option>
+                <option value="Alexander" selected>Alexander</option>
+            </select>
+        </div>
+
+        <div id="toggle-arves" class="field">
+            <label for="vidergives">
+                Skal opgaven arves
+                <span class="hjaelpetekst">Gives videre hvis den ikke udføres</span>
+            </label>
+            <input type="checkbox" id="vidergives" name="vidergives">
+        </div>
+
+        <button id="btn-gem" type="submit" >Gem opgave</button>
+
+    </form>
+</main>
+
+<footer id="footer">
+</footer>
+
+</body>
+</html>

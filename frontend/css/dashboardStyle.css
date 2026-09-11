@@ -78,3 +78,29 @@ progress.newColor::-webkit-progress-value {
 progress.newColor::-moz-progress-bar {
     background-color: var(--orange);
 }
+
+
+.header_card{
+    font-size: 15px;
+    background: var(--lightblue);
+    border-radius: 20px;
+    padding: 24px 30px;
+    margin: 0 12px 20px;
+    margin-top: 3rem;
+    width: 322px;
+    height: 150px;
+}
+
+.task{
+    width: 322px;
+    height: 60px;
+    border-radius: 10px;
+    background: #FFE4AA;
+}
+
+footer{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-block: 30px;
+
+}

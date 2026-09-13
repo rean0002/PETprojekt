@@ -1,6 +1,3 @@
-.backgroundbox{
-   margin-top: 3rem;
-}
 
 .grid-box{
     display: grid;
@@ -12,7 +9,7 @@
 
 h1{
     text-align: center;
-    padding-top: 80px;
+    padding-top: 60px;
 }
 
 h3{

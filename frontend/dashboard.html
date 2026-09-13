@@ -4,87 +4,92 @@
     <meta charset="UTF-8">
     <title>Dahboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/dashboardStyle.css">
-  <link rel="stylesheet" href="css/color.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/toggle.css">
 
-
-    <script src= "js/dashboard.js" defer></script>
-
+    <link rel="stylesheet" href="css/color.css">
+    <link rel="stylesheet" href="css/style.css">       <!-- indeholder .switch--wide -->
+    <link rel="stylesheet" href="css/toggle.css">      <!-- indeholder input:checked + .slider::before { translateX(20px) } -->
+    <link rel="stylesheet" href="css/dashboardStyle.css">
+    <script src="js/dashboard.js" defer></script>
 </head>
 <body>
-<div id="profilBtn" class="btn_circle">
-<a href="#"> <img src="svg/profil_cirkel.svg"> </a>
+<div class="app-container">
+    <main>
+
+        <div id="profilBtn" class="btn_circle">
+            <a href="#"><img src="svg/profil_cirkel.svg" alt="Profil"></a>
+        </div>
+
+        <!-- header -->
+        <div class="header_card">
+            <div class="header">
+                <h1>Velkommen</h1>
+                <h2>profil navn her</h2>
+                <div id="dato-box">dato felt</div>
+            </div>
+        </div>
+
+        <!-- mid section - toggle + dagen + ugen -->
+        <div class="toggleSection">
+        <label class="switch switch--wide">
+            <input type="checkbox" id="vidergives" name="vidergives">
+            <span class="slider"></span>
+            <span class="switch-label switch-label--left">i dag</span>
+            <span class="switch-label switch-label--right">alle</span>
+        </label>
+        </div>
+        <!-- tasks -->
+        <div class="taskFlex">
+            <div class="task">
+                <img style="grid-area: box-1" src="svg/person-icon-orange.svg" alt="">
+                <p style="grid-area: box-2">button tekst 1</p>
+                <p style="grid-area: box-3">button tekst 1</p>
+            </div>
+            <div class="task">
+                <p>button tekst 2</p>
+            </div>
+            <div class="task">
+                <p>button tekst 3</p>
+            </div>
+            <div class="task">
+                <p>button tekst 4</p>
+            </div>
+        </div>
+
+        <!-- bottom section -->
+        <div class="bottomSection">
+            <div class="progressBarElement">
+                <label for="progressBar">0/0</label>
+                <progress id="progressBar" value="" max=""></progress>
+            </div>
+
+            <div id="btn-plus">
+                <a href="opret-opgave.html">
+                    <img src="svg/plusknap.svg" alt="knap" class="btn_circle">
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- footer menu -->
+    <footer>
+        <a href="dashboard.html" class="nav-item active">
+            <img src="svg/nav1.svg" alt="">
+            <span>Hjem</span>
+        </a>
+        <a href="husstand.html" class="nav-item">
+            <img src="svg/nav2.svg" alt="">
+            <span>Husstand</span>
+        </a>
+        <a href="point.html" class="nav-item">
+            <img src="svg/nav3.svg" alt="">
+            <span>Point</span>
+        </a>
+        <a href="reminders.html" class="nav-item">
+            <img src="svg/nav4.svg" alt="">
+            <span>Reminders</span>
+        </a>
+    </footer>
 </div>
-
-<div class="header_card"> <!-- header -->
-    <div class="header">
-        <h1>Velkommen</h1>
-        <h2>profil navn her</h2>
-
-        <div> dato felt</div>
-    </div>
-
-</div><!-- header -->
-
-<div> <!-- mid section - togggle + dagen + ugen-->
-    <label class="switch">
-        <input type="checkbox" id="vidergives" name="vidergives">
-        <span class="slider"></span>
-    </label>
-
-    <div class="idagGrid">
-        <div>i dag</div>
-        <div> ugen </div>
-
-    </div>
-
-</div> <!-- mid section -->
-
-<div class="taskFlex"> <!-- tasks -->
-
-    <div class="task">
-        <img style="grid-area: box-1" src="svg/person-icon-orange.svg">
-        <p style="grid-area: box-2">button tekst 1</p>
-        <p style="grid-area: box-3">button tekst 1</p>
-    </div>
-    <div class="task">
-        <p>button tekst 2</p>
-    </div>
-    <div class="task">
-        <p>button tekst 3</p>
-    </div>
-    <div class="task">
-        <p>button tekst 4</p>
-    </div>
-
-</div>     <!-- tasks -->
-
-<div> <!-- bottom ection -->
-
-
-    <div class="progressBarElement"> <!-- progresss bar -->
-        <label for="progressBar">0/0</label>
-        <progress id="progressBar" value="" max=""></progress>
-
-
-    </div> <!-- progresss bar -->
-
-    <div id= "btn-plus"> <!-- + knap.-->
-<a href="opret-opgave.html"><img src="svg/plusknap.svg" alt="knap" class="btn_circle"></a>
-
-    </div>
-
-</div> <!-- bottom ection -->
-
-<footer> <!-- footer menu-->
-    <a href="#"> <div>hjem</div></a>
-    <a href="#"> <div>hussstand</div></a>
-    <a href="#"> <div>point</div></a>
-    <a href="#"> <div>reminders</div></a>
-</footer>
-
-
 </body>
 </html>

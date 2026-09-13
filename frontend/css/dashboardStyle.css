@@ -1,21 +1,207 @@
-.header{
-    background-color: var(--lightblue);
-    align-content: center;
+/* ===== Layout ===== */
+
+body {
+    display: flex;
+    justify-content: center;
+    background-color: #e8e8e8;
+    margin: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    flex: 1;
+}
+
+
+/* ===== Typografi ===== */
+
+h1{
+    color: #004F6B;
+    text-align: center;
+    font-family: Inter;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 150%;
+}
+
+h2{
+    color: #004F6B;
+    text-align: center;
+    font-family: "Ancizar Serif";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 150%; /* 48px */
+}
+
+
+/* ===== Header (velkomstkort) ===== */
+
+.header_card{
+    font-size: 15px;
+    background: var(--lightblue);
+    border-radius: 20px;
+    padding: 24px 30px;
+    margin: 0 12px 20px;
+    margin-top: 4rem;
+    width: calc(100% - 24px);
+    box-sizing: border-box;
+    height: 150px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 
-#profilBtn{
-    height: 40px;
-    width: 40px;
-    align-content: end;
+.header{
+    background-color: var(--lightblue);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    text-align: center;
 }
 
+#dato-box{
+    color: #0F6483;
+    text-align: center;
+    align-content: center;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    border-radius: 8px;
+    background: #FEF8EC;
+    width: 208px;
+    height: 33px;
+}
+
+#profilBtn{
+    display: flex;
+    position: absolute;
+    top: 1.5%;
+    right: 3%;
+    height: 40px;
+    width: 40px;
+}
+
+
+/* ===== Toggle / switch (mig / alle) ===== */
+
+.switch--wide {
+    position: relative;
+    display: inline-block;
+    width: 170px;
+    height: 25px;
+}
+
+.slider {
+    background-color: var(--yellow10percent);
+    border: solid 1px var(--border-color);
+}
+
+.switch--wide .slider::before {
+    content: "";
+    position: absolute;
+    height: 25px;
+    width: 89px;
+    left: 0px;
+    bottom: 0px;
+    background-color: var(--lightblue);
+    transition: 0.3s;
+    border-radius: 35px;
+    box-shadow: none;
+    z-index: 1; /* ligger under label-teksten */
+}
+
+.switch--wide input:checked + .slider::before {
+    transform: translateX(81px);
+}
+
+input:checked + .slider {
+    background-color: var(--yellow10percent);
+}
+
+.switch-label {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 85px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    pointer-events: none;
+    z-index: 2; /* ligger oven på den bevægelige pille */
+    color: var(--placeholder-color);
+    transition: color 0.3s;
+}
+
+.switch-label--left {
+    left: 0;
+}
+
+.switch-label--right {
+    right: 0;
+}
+
+input:not(:checked) ~ .switch-label--left {
+    color: var(--brown);
+}
+
+input:checked ~ .switch-label--right {
+    color: var(--brown);
+}
+.toggleSection {
+    margin-bottom: 24px;
+}
+
+
+/* ===== Mid section (i dag / ugen) ===== */
 
 .idagGrid{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    justify-items: center;
 }
 
+
+/* ===== Tasks ===== */
+
+.taskFlex{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    padding-inline: 12px;
+    padding-top: 12px;
+    box-sizing: border-box;
+}
+
+.task {
+    background-color: #FFE4AA;
+    font-size: 15px;
+    border-radius: 12px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 60px;
+    cursor: pointer;
+
+    display: grid;
+    grid-template-columns: 54px 1fr;
+    grid-template-rows: 1fr 1fr;
+
+    grid-template-areas:
+        "box-1 box-2"
+        "box-1 box-3";
+}
 
 .task2{
     background-color: var(--yellow50percent);
@@ -24,32 +210,12 @@
     margin: 20px;
 }
 
-.task {
-    background-color: var(--yellow50percent);
-    font-size: 15px;
-    border-radius: 12px;
-    padding: 10px;
-    width: 100%;
-    cursor: pointer;
 
-    display: grid;
-    grid-template-columns: 54px 1fr ;
-    grid-template-rows: 1fr 1fr;
-
-    grid-template-areas:
-"box-1 box-2"
-"box-1 box-3"
-}
-.taskFlex{
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-}
+/* ===== Progress bar ===== */
 
 .progressBarElement {
-    margin: 16px;
     position: relative;
-    width: 300px; /* eller hvad din progress bar er bred */
+    flex: 1;
 }
 
 .progressBarElement label {
@@ -59,24 +225,14 @@
     transform: translate(-50%, -50%);
 }
 
-.progress progress {
-    width: 100%;
-    display: block;
-}
-
-/*#progressBar{
-    height: 50px;
-    color: var(--orange);
-}*/
-
 progress {
     appearance: none;
     -webkit-appearance: none;
     border: none;
-    width: 300px;
+    width: 100%;
     height: 20px;
     border-radius: 10px;
-    overflow: hidden; /* sikrer at udfyldningen ikke "stikker ud" over afrundingen */
+    overflow: hidden;
 }
 
 progress::-webkit-progress-bar {
@@ -84,12 +240,12 @@ progress::-webkit-progress-bar {
 }
 
 progress::-webkit-progress-value {
-    background-color: var(--darkblue);
+    background-color: var(--lightblue);
     border-radius: 10px;
 }
 
 progress.newColor::-webkit-progress-value {
-    background-color: var(--orange); /* eller en anden farve, du ønsker ved "færdig" */
+    background-color: var(--orange);
 }
 
 progress.newColor::-moz-progress-bar {
@@ -97,27 +253,47 @@ progress.newColor::-moz-progress-bar {
 }
 
 
-.header_card{
-    font-size: 15px;
-    background: var(--lightblue);
-    border-radius: 20px;
-    padding: 24px 30px;
-    margin: 0 12px 20px;
-    margin-top: 3rem;
-    width: 322px;
-    height: 150px;
+/* ===== Bottom section (progress + plus-knap) ===== */
+
+.bottomSection {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-inline: 12px;
+    box-sizing: border-box;
+    gap: 16px;
+    margin-top: auto;
+    margin-bottom: -15px;
 }
 
-.task{
-    width: 322px;
-    height: 60px;
-    border-radius: 10px;
-    background: #FFE4AA;
-}
+
+/* ===== Footer / bundnavigation ===== */
 
 footer{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    margin-block: 30px;
+    margin-block: 25px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+}
 
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: var(--darkblue);
+    font-size: 12px;
+}
+
+.nav-item img {
+    width: 22px;
+    height: 22px;
+}
+
+.nav-item.active {
+    color: var(--orange);
 }

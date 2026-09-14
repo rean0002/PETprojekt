@@ -11,6 +11,10 @@ for(const t of taskElm){
     t.addEventListener("click", () =>{
         counter++;
         console.log(counter);
+
+        const img= t.querySelector("img");
+        img.src="svg/flueben.svg";
+
         updateProgressBar();
     });
 }

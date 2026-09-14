@@ -1,55 +1,135 @@
-.header{
-    background-color: var(--lightblue);
-    align-content: center;
+/* ===== fonts ===== */
+h1{
+    color: var(--darkblue);
+    font-family: "Ancizar Serif";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 150%;
+}
+
+h2{
+
+    color: var(--darkblue);
+    font-family: Inter;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 90;
+    line-height: 150%;
+}
+
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.header_card{
+    font-size: 15px;
+    background: var(--lightblue);
+    border-radius: 20px;
+    padding: 10px 0px;
+    margin: 10px 12px 20px;
+    /*margin-top: 3rem;*/
+    width: 322px;
+    height: 150px;
+}
+
+#datoFelt{
+    display: flex;
+    width: 210px;
+    height: 34px;
+    border-radius: 10px;
+    text-align: center;
     justify-content: center;
+    align-items: center;
+    background-color: var(--yellow10percent);
 }
 
 #profilBtn{
-    height: 40px;
-    width: 40px;
-    align-content: end;
+    display: flex;
+    width: 322px;
+    justify-content: flex-end;
+}
+
+.mid-section{
+    border-radius: 20px;
+    padding: 10px 0px;
+    margin: 0px 12px 20px;
+    width: 322px;
+    height: 64px;
+}
+.switch {
+    display: block;
+    margin: 0 auto;
 }
 
 
 .idagGrid{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    width:100%;
+    display: flex;
+    justify-content: space-between;
 }
 
-
-.task2{
-    background-color: var(--yellow50percent);
-    height: 76px;
-    width: 20%;
-    margin: 20px;
-}
 
 .task {
     background-color: var(--yellow50percent);
+    width: 322px;
+    height: 60px;
     font-size: 15px;
     border-radius: 12px;
-    padding: 10px;
-    width: 100%;
+    padding: 10;
     cursor: pointer;
+    margin-bottom: 20px;
 
     display: grid;
     grid-template-columns: 54px 1fr ;
     grid-template-rows: 1fr 1fr;
+    align-items: center;
+
+
 
     grid-template-areas:
 "box-1 box-2"
 "box-1 box-3"
 }
+.task img {
+    justify-self: center;
+}
+
 .taskFlex{
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 0;
+}
+
+.taskHeader{
+    font-size: 15px;
+    color: var(--brown);
+}
+
+.taskDetails{
+    font-size: 12px;
+    color: var(--brown50percent);
+}
+
+
+.bottom-secton{
+    width: 322px;
+    height: 39px;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .progressBarElement {
-    margin: 16px;
+    margin: 20px;
     position: relative;
-    width: 300px; /* eller hvad din progress bar er bred */
+    width: 263px;
+    height: 20px;
 }
 
 .progressBarElement label {
@@ -64,16 +144,11 @@
     display: block;
 }
 
-/*#progressBar{
-    height: 50px;
-    color: var(--orange);
-}*/
-
 progress {
     appearance: none;
     -webkit-appearance: none;
     border: none;
-    width: 300px;
+    width: 263px;
     height: 20px;
     border-radius: 10px;
     overflow: hidden; /* sikrer at udfyldningen ikke "stikker ud" over afrundingen */
@@ -96,24 +171,6 @@ progress.newColor::-moz-progress-bar {
     background-color: var(--orange);
 }
 
-
-.header_card{
-    font-size: 15px;
-    background: var(--lightblue);
-    border-radius: 20px;
-    padding: 24px 30px;
-    margin: 0 12px 20px;
-    margin-top: 3rem;
-    width: 322px;
-    height: 150px;
-}
-
-.task{
-    width: 322px;
-    height: 60px;
-    border-radius: 10px;
-    background: #FFE4AA;
-}
 
 footer{
     display: grid;

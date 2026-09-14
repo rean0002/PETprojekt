@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <title>Dahboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/dashboardStyle.css">
+
   <link rel="stylesheet" href="css/color.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/toggle.css">
-
+  <link rel="stylesheet" href="css/dashboardStyle.css">
 
     <script src= "js/dashboard.js" defer></script>
 
@@ -19,16 +19,18 @@
 </div>
 
 <div class="header_card"> <!-- header -->
-    <div class="header">
-        <h1>Velkommen</h1>
-        <h2>profil navn her</h2>
 
-        <div> dato felt</div>
+
+    <div class="header">
+        <h2>Velkommen</h2>
+        <h1>Fornavn</h1>
+
+        <div id="datoFelt"> dato felt</div>
     </div>
 
 </div><!-- header -->
 
-<div> <!-- mid section - togggle + dagen + ugen-->
+<div class="mid-section"> <!-- mid section - togggle + dagen + ugen-->
     <label class="switch">
         <input type="checkbox" id="vidergives" name="vidergives">
         <span class="slider"></span>
@@ -46,8 +48,8 @@
 
     <div class="task">
         <img style="grid-area: box-1" src="svg/person-icon-orange.svg">
-        <p style="grid-area: box-2">button tekst 1</p>
-        <p style="grid-area: box-3">button tekst 1</p>
+        <p class="taskHeader" style="grid-area: box-2">button header</p>
+        <p class="taskDetails" style="grid-area: box-3">button details</p>
     </div>
     <div class="task">
         <p>button tekst 2</p>
@@ -61,14 +63,12 @@
 
 </div>     <!-- tasks -->
 
-<div> <!-- bottom ection -->
+<div class="bottom-secton"> <!-- bottom ection -->
 
 
     <div class="progressBarElement"> <!-- progresss bar -->
         <label for="progressBar">0/0</label>
         <progress id="progressBar" value="" max=""></progress>
-
-
     </div> <!-- progresss bar -->
 
     <div id= "btn-plus"> <!-- + knap.-->

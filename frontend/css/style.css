@@ -33,6 +33,16 @@ h1{
     line-height: 150%;
 }
 
+h2{
+
+    color: #613917;
+    font-family: Inter;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 90;
+    line-height: 150%;
+}
+
 h3{
     color: #B7A071;
     font-family: "Ancizar Serif";

@@ -12,8 +12,14 @@ for(const t of taskElm){
         counter++;
         console.log(counter);
 
+        t.classList.add("task-new-background");
+
         const img= t.querySelector("img");
         img.src="svg/flueben.svg";
+
+        const header=t.querySelector(".taskHeader");
+        header.classList.add("task-new-text");
+
 
         updateProgressBar();
     });
@@ -24,8 +30,11 @@ progressBar.value=counter;
 progressBar.max=taskElm.length;
 labelProgressBar.textContent=counter+"/"+taskElm.length;
 
+//hvis knap er klikket skal den ikke kunne klikkes igen, eller skal den resettes?
+
 if (counter===taskElm.length){
 progressBar.classList.add("newColor");
+labelProgressBar.textContent="";
 console.log("4/4");
 }
 

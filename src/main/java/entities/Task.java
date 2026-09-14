@@ -1,3 +1,5 @@
+package entities;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -22,8 +24,8 @@ public class Task {
         this.user=user;
         this.taskCategory=taskCategory;
         this.taskFrequency=taskFrequency;
-        //this.taskCategory=TaskCategory.valueOf(taskCategory.toString()); //brug denne syntax når vi bruger database
-        //this.taskFrequency=TaskFrequency.valueOf(taskFrequency.toString());
+        //this.taskCategory=entities.TaskCategory.valueOf(taskCategory.toString()); //brug denne syntax når vi bruger database
+        //this.taskFrequency=entities.TaskFrequency.valueOf(taskFrequency.toString());
     }
 
 

@@ -9,19 +9,28 @@ const labelProgressBar = document.querySelector('label[for="progressBar"]');
 
 for(const t of taskElm){
     t.addEventListener("click", () =>{
-        counter++;
-        console.log(counter);
-
-        t.classList.add("task-new-background");
-
-        const img= t.querySelector("img");
-        img.src="svg/flueben.svg";
-
-        const header=t.querySelector(".taskHeader");
-        header.classList.add("task-new-text");
 
 
-        updateProgressBar();
+        if(t.classList.contains("completed")){
+
+        } else {
+            counter++;
+            console.log(counter);
+            t.classList.add("task-new-background");
+            t.classList.add("completed")
+
+            const img= t.querySelector("img");
+            img.src="svg/flueben.svg";
+
+            const header=t.querySelector(".taskHeader");
+            header.classList.add("task-new-text");
+
+
+            updateProgressBar();
+
+        }
+
+
     });
 }
 

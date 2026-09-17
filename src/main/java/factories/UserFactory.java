@@ -10,9 +10,7 @@ public class UserFactory {
         List<User> users = new ArrayList<>();
 
         String[] emails = {
-                "amalie@mail.com", "rebecca@mail.com", "mette@mail.com", "lasse@mail.com",
-                "sofie@mail.com", "mikkel@mail.com", "freja@mail.com", "noah@mail.com",
-                "clara@mail.com", "victor@mail.com"
+                "olga@mail.com", "rebecca@mail.com"
         };
 
         for (int i = 0; i < emails.length; i++) {

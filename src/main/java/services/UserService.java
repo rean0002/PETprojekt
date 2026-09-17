@@ -34,21 +34,7 @@ public class UserService {
         return null;
     }
 
-    public User createUser(String email, String password) {
-        if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
-            return null;
-        }
-        if (getUser(email) != null) {
-            return null;
-        }
-        if (!validatePassword(password)) {
-            return null;
-        }
-
-        User newUser = new User(email, password);
-        addUser(newUser);
-        return newUser;
-    }
+    //public User createUser() {}
 
     public boolean validatePassword(String password) {
         if (password == null) return false;

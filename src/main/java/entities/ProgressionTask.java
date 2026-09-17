@@ -1,4 +1,6 @@
-public class ProgressionTask extends Task{
+package entities;
+
+public class ProgressionTask extends Task {
 
     private int progresionIndicator=0;
 

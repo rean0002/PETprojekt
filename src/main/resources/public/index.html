@@ -24,14 +24,14 @@
 
 <div><!-- log in section -->
 
-    <form action="" class="login-container">
+    <form action="/login" method="POST" class="login-container">
         <div class="input_container">
             <label for="email">Email</label>
-            <input type="email" id="email" placeholder="mail@mail.com">
+            <input type="email" id="email" name="email" placeholder="mail@mail.com" required>
         </div>
         <div class="input_container">
             <label for="password">Password</label>
-            <input type="password" id="password" placeholder="*****">
+            <input type="password" id="password" name="password" placeholder="*****" required>
         </div>
         <div >
             <a href="">Glemt adgangskode?</a>

@@ -1,6 +1,8 @@
+package entities;
+
 public class SimpleTask extends Task {
 
-    //Class SimpleTask extends Task {
+    //Class entities.SimpleTask extends entities.Task {
     //- boolean iDone
     //+ void markAsDone()
     //+ void undoIsDone()

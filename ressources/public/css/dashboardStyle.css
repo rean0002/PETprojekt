@@ -295,6 +295,16 @@ progress.newColor::-moz-progress-bar {
     gap: 16px;
     margin-top: 20px;
     margin-bottom: -15px;
+
+}
+
+
+.section{
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+
 }
 
 
@@ -325,4 +335,8 @@ footer{
 
 .nav-item.active {
     color: var(--orange);
+}
+
+.app-container .bottomSection{
+    align-self: flex-end;
 }

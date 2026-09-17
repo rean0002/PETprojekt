@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <title>Opret bruger</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/color.css">
+  <link rel="stylesheet" href="css/toggle.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/opret-opgave.css">
+</head>
+<body>
+<div class="app-container">
+
+  <main>
+    <div class="backgroundbox">
+
+      <div id="header-row">
+
+        <a href="/index.html">
+          <button id="btn-tilbage" aria-label="Tilbage">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 12H4M4 12L10 6M4 12L10 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </a>
+        <h2>Opret Bruger</h2>
+      </div>
+
+      <form id="ny-bruger-form" action="/create-user" method="post">
+
+        <div id="firstNameInput" class="field input">
+          <label for="firstnameInput">Fornavn</label>
+          <input type="text" id="firstname" name="firstname"
+                 placeholder="Fornavn" required>
+        </div>
+
+        <div id="lastNameInput" class="field input">
+          <label for="lastNameInput">Efternavn</label>
+          <input type="text" id="lastname" name="lastname"
+                 placeholder="Efternavn">
+        </div>
+
+        <div id="emailInput" class="field input">
+        <label for="emailInput">Email</label>
+        <input type="email" id="email" name="email"
+               placeholder="mail@mail.com">
+        </div>
+
+        <div id="passwordInput" class="field input">
+          <label for="passwordInput">Password</label>
+          <input type="password" id="password" name="password"
+                 placeholder="*****">
+        </div>
+
+
+
+
+
+
+        <button class="btn organge" type="submit">Opret bruger</button>
+
+      </form>
+    </div>
+  </main>
+
+  <footer id="footer">
+  </footer>
+</div>
+</body>
+</html>

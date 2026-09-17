@@ -2,7 +2,7 @@ package entities;
 
 public class User {
     private int id;
-    private String username;
+    private String username; //skal slettes
     private String email;
     private String password;
     private String name;

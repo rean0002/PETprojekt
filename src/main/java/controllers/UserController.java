@@ -5,7 +5,10 @@ import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;
 import services.UserService;
 
+import java.util.ArrayList;
+
 public class UserController {
+    static ArrayList<User> users=new ArrayList<>(); //skal selvfølgelig flyttes
     static UserService userService = new UserService();
 
     public static void setRoutes(JavalinConfig config){

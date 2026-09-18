@@ -7,11 +7,14 @@ import io.javalin.http.Context;
 import services.UserService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserController {
-    static ArrayList<User> users=new ArrayList<>(); //skal selvfølgelig flyttes
+    //static ArrayList<User> users=new ArrayList<>(); //skal selvfølgelig flyttes
+
     static UserService userService = new UserService();
     static UserFactory userFactory = new UserFactory();
+    static List<User> users=userFactory.createUsers();
 
     public static void setRoutes(JavalinConfig config){
         config.routes.post("/login", ctx -> login(ctx));
@@ -44,14 +47,13 @@ public class UserController {
     }
 
     public static void createUserProfile(Context ctx){
-        String firstName=ctx.formParam("firstname");
-        String lastname=ctx.formParam("lastname");
+        String firstName=ctx.formParam("firstName");
+        String lastName=ctx.formParam("lastName");
         String email=ctx.formParam("email");
-        String passsword=ctx.formParam("password");
+        String password=ctx.formParam("password");
 
-        users.add(new User(email, passsword, firstName, lastname));
+        users.add(new User(email, password, firstName, lastName));
 
-        ArrayList <User> users=userFactory.createUser();
 
         ctx.redirect("/index.html");
 

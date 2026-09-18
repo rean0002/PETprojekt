@@ -43,4 +43,14 @@ public class User {
 
     public int getPoint() { return point; }
     public Role getRole() { return role; }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

@@ -16,7 +16,7 @@ public class UserController {
         config.routes.get("/login", ctx -> ctx.redirect("/index.html"));
 
         config.routes.get("/create-user", ctx -> ctx.redirect("/create-user.html"));
-        config.routes.post("/create-user", ctx -> createUser(ctx));
+        config.routes.post("/create-user", ctx -> createUserProfile(ctx));
 
         config.routes.before("/dashboard.html", ctx -> {
             User user = ctx.sessionAttribute("user");
@@ -41,7 +41,7 @@ public class UserController {
         }
     }
 
-    public static void createUser(Context ctx){
+    public static void createUserProfile(Context ctx){
         String firstName=ctx.formParam("firstname");
         String lastname=ctx.formParam("lastname");
         String email=ctx.formParam("email");

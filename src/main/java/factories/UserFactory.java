@@ -5,10 +5,9 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class UserFactory {
+    static List<User> users = new ArrayList<>();
 
     public static List<User> createUsers() {
-        List<User> users = new ArrayList<>();
-
         String[] emails = {
                 "olga@mail.com", "rebecca@mail.com"
         };
@@ -17,6 +16,14 @@ public class UserFactory {
             users.add(new User(emails[i], "password" + (i + 1)));
         }
 
+        return users;
+    }
+
+    public static void addUser(User user) {
+        users.add(user);
+    }
+
+    public static List<User> getUsers() {
         return users;
     }
 }

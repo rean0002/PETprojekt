@@ -14,7 +14,6 @@ public class UserController {
 
     static UserService userService = new UserService();
     static UserFactory userFactory = new UserFactory();
-    static List<User> users=userFactory.createUsers();
 
     public static void setRoutes(JavalinConfig config){
         config.routes.post("/login", ctx -> login(ctx));
@@ -35,6 +34,8 @@ public class UserController {
         String email = ctx.formParam("email");
         String password = ctx.formParam("password");
 
+        System.out.println("Login forsøg med email='" + email + "' password='" + password + "'");
+
         User user = userService.login(email, password);
 
         if(user != null){
@@ -47,17 +48,21 @@ public class UserController {
     }
 
     public static void createUserProfile(Context ctx){
-        String firstName=ctx.formParam("firstName");
-        String lastName=ctx.formParam("lastName");
-        String email=ctx.formParam("email");
-        String password=ctx.formParam("password");
+        String firstName = ctx.formParam("firstName");
+        String lastName = ctx.formParam("lastName");
+        String email = ctx.formParam("email");
+        String password = ctx.formParam("password");
 
-        users.add(new User(email, password, firstName, lastName));
+        if (!userService.validatePassword(password)) {
+            ctx.redirect("/create-user.html?error=Password skal være mellem 8 og 15 tegn");
+            return;
+        }
 
+        userService.addUser(new User(email, password, firstName, lastName));
 
         ctx.redirect("/index.html");
 
-        System.out.println(users);
+        System.out.println(userService.getUser(email));
     }
 
 

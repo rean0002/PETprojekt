@@ -1,5 +1,4 @@
 package services;
-
 import entities.User;
 import factories.UserFactory;
 
@@ -7,18 +6,12 @@ import java.util.List;
 
 public class UserService {
 
-    private List<User> users;
-
-    public UserService() {
-        this.users = UserFactory.createUsers();
-    }
-
-    public void addUser(User user) {
-        users.add(user);
+    public static void addUser(User user) {
+        UserFactory.addUser(user);
     }
 
     public User getUser(String email) {
-        for (User user : users) {
+        for (User user : UserFactory.getUsers()) {
             if (user.getEmail().equals(email)) {
                 return user;
             }

@@ -12,6 +12,9 @@ public class UserController {
         config.routes.post("/login", ctx -> login(ctx));
         config.routes.get("/login", ctx -> ctx.redirect("/index.html"));
 
+        config.routes.get("/create-user", ctx -> ctx.redirect("/create-user.html"));
+        config.routes.post("/create-user", ctx -> createUser(ctx));
+
         config.routes.before("/dashboard.html", ctx -> {
             User user = ctx.sessionAttribute("user");
             if(user == null){

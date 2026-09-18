@@ -11,9 +11,15 @@ public class UserFactory {
         String[] emails = {
                 "olga@mail.com", "rebecca@mail.com"
         };
+        String[] firstNames = {
+                "Olga", "Rebecca"
+        };
+        String[] lastNames = {
+                "Hansen", "Jensen"
+        };
 
         for (int i = 0; i < emails.length; i++) {
-            users.add(new User(emails[i], "password" + (i + 1)));
+            users.add(new User(emails[i], "password" + (i + 1), firstNames[i], lastNames[i]));
         }
 
         return users;

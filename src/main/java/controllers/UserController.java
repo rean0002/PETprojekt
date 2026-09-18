@@ -8,6 +8,7 @@ import services.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class UserController {
     //static ArrayList<User> users=new ArrayList<>(); //skal selvfølgelig flyttes
@@ -27,6 +28,11 @@ public class UserController {
             if(user == null){
                 ctx.redirect("/index.html");
             }
+        });
+
+        config.routes.get("/dashboard.html", ctx -> {
+            User user = ctx.sessionAttribute("user");
+            ctx.render("templates/dashboard.html", Map.of("fornavn", user.getFirstName()));
         });
     }
 
@@ -54,14 +60,13 @@ public class UserController {
         String password = ctx.formParam("password");
 
         if (!userService.validatePassword(password)) {
-            ctx.redirect("/create-user.html?error=Password skal være mellem 8 og 15 tegn");
+            ctx.status(400);
+            ctx.result("Password skal være mellem 8 og 15 tegn");
             return;
         }
 
         userService.addUser(new User(email, password, firstName, lastName));
-
         ctx.redirect("/index.html");
-
         System.out.println(userService.getUser(email));
     }
 

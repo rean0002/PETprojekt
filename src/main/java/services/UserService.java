@@ -27,8 +27,6 @@ public class UserService {
         return null;
     }
 
-    //public User createUser() {}
-
     public boolean validatePassword(String password) {
         if (password == null) return false;
         return password.length() >= 8 && password.length() <= 15;

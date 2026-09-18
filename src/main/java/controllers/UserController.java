@@ -1,6 +1,7 @@
 package controllers;
 
 import entities.User;
+import factories.UserFactory;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;
 import services.UserService;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 public class UserController {
     static ArrayList<User> users=new ArrayList<>(); //skal selvfølgelig flyttes
     static UserService userService = new UserService();
+    static UserFactory userFactory = new UserFactory();
 
     public static void setRoutes(JavalinConfig config){
         config.routes.post("/login", ctx -> login(ctx));
@@ -49,7 +51,9 @@ public class UserController {
 
         users.add(new User(email, passsword, firstName, lastname));
 
-        ctx.redirect("/success.html");
+        ArrayList <User> users=userFactory.createUser();
+
+        ctx.redirect("/index.html");
 
         System.out.println(users);
     }

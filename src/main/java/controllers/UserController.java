@@ -37,4 +37,19 @@ public class UserController {
             ctx.result("Brugeren findes ikke");
         }
     }
+
+    public static void createUser(Context ctx){
+        String firstName=ctx.formParam("firstname");
+        String lastname=ctx.formParam("lastname");
+        String email=ctx.formParam("email");
+        String passsword=ctx.formParam("password");
+
+        users.add(new User(email, passsword, firstName, lastname));
+
+        ctx.redirect("/success.html");
+
+        System.out.println(users);
+    }
+
+
 }

@@ -23,17 +23,7 @@ public class UserController {
         config.routes.get("/create-user", ctx -> ctx.redirect("/create-user.html"));
         config.routes.post("/create-user", ctx -> createUserProfile(ctx));
 
-        config.routes.before("/dashboard.html", ctx -> {
-            User user = ctx.sessionAttribute("user");
-            if(user == null){
-                ctx.redirect("/index.html");
-            }
-        });
-
-        config.routes.get("/dashboard.html", ctx -> {
-            User user = ctx.sessionAttribute("user");
-            ctx.render("templates/dashboard.html", Map.of("fornavn", user.getFirstName()));
-        });
+        config.routes.get("/dashboard.html", ctx -> loadDashboard(ctx));
     }
 
     public static void login(Context ctx){
@@ -70,5 +60,13 @@ public class UserController {
         System.out.println(userService.getUser(email));
     }
 
+public static void loadDashboard (Context ctx){
+
+       // User user = ctx.sessionAttribute("user");
+        User user = ctx.sessionAttribute("user");
+        ctx.render("templates/dashboard.html");
+
+        //Map.of("fornavn", user.getFirstName())
+}
 
 }

@@ -60,13 +60,12 @@ public class UserController {
         System.out.println(userService.getUser(email));
     }
 
-public static void loadDashboard (Context ctx){
+    public static void loadDashboard (Context ctx){
 
-       // User user = ctx.sessionAttribute("user");
         User user = ctx.sessionAttribute("user");
-        ctx.render("templates/dashboard.html");
-
-        //Map.of("fornavn", user.getFirstName())
+        if(user != null) {
+            ctx.render("templates/dashboard.html", Map.of("user", user));
+        } else ctx.redirect("/index.html");
 }
 
 }

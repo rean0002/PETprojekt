@@ -43,37 +43,10 @@
 
         <!-- tasks -->
         <div class="taskFlex">
-            <div class="task">
+            <div class="task" th:each="task : ${user.tasks}">
                 <img style="grid-area: box-1" src="svg/person-icon-orange.svg">
-                <p class="taskHeader" style="grid-area: box-2">button header</p>
-                <p class="taskDetails" style="grid-area: box-3">button details</p>
-            </div>
-
-            <div class="task">
-                <img style="grid-area: box-1" src="svg/person-icon-orange.svg">
-                <p class="taskHeader" style="grid-area: box-2">button header</p>
-                <p class="taskDetails" style="grid-area: box-3">button details</p>
-            </div>
-
-            <div class="task">
-                <img style="grid-area: box-1" src="svg/person-icon-orange.svg">
-                <p class="taskHeader" style="grid-area: box-2">button header</p>
-                <p class="taskDetails" style="grid-area: box-3">button details</p>
-            </div>
-            <div class="task">
-                <img style="grid-area: box-1" src="svg/person-icon-orange.svg">
-                <p class="taskHeader" style="grid-area: box-2">button header</p>
-                <p class="taskDetails" style="grid-area: box-3">button details</p>
-            </div>
-            <div class="task">
-                <img style="grid-area: box-1" src="svg/person-icon-orange.svg">
-                <p class="taskHeader" style="grid-area: box-2">button header</p>
-                <p class="taskDetails" style="grid-area: box-3">button details</p>
-            </div>
-            <div class="task">
-                <img style="grid-area: box-1" src="svg/person-icon-orange.svg">
-                <p class="taskHeader" style="grid-area: box-2">button header</p>
-                <p class="taskDetails" style="grid-area: box-3">button details</p>
+                <p class="taskHeader" th:text="${task.title}" style="grid-area: box-2">button header</p>
+                <p class="taskDetails" th:text="${task.description}" style="grid-area: box-3">button details</p>
             </div>
 
 

@@ -23,7 +23,7 @@ public class UserController {
         config.routes.get("/create-user", ctx -> ctx.redirect("/create-user.html"));
         config.routes.post("/create-user", ctx -> createUserProfile(ctx));
 
-        config.routes.get("/dashboard.html", ctx -> loadDashboard(ctx));
+        config.routes.get("/dashboard", ctx -> ctx.render("/dashboard.html"));
     }
 
     public static void login(Context ctx){
@@ -36,7 +36,7 @@ public class UserController {
 
         if(user != null){
             ctx.sessionAttribute("user", user);
-            ctx.redirect("/dashboard.html");
+            ctx.render("templates/dashboard.html");
         } else {
             ctx.status(404);
             ctx.result("Brugeren findes ikke");
@@ -60,12 +60,12 @@ public class UserController {
         System.out.println(userService.getUser(email));
     }
 
-    public static void loadDashboard (Context ctx){
+    /*public static void loadDashboard (Context ctx){
 
         User user = ctx.sessionAttribute("user");
         if(user != null) {
             ctx.render("templates/dashboard.html", Map.of("user", user));
         } else ctx.redirect("/index.html");
-}
+}*/
 
 }

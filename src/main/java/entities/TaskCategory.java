@@ -5,8 +5,5 @@ public enum TaskCategory {
     CLEANING,
     FOOD,
     SHOPPING,
-    LAUNDRY,
-
-
-
+    LAUNDRY, HOME, EXERCISE,
 }

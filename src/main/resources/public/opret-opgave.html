@@ -25,7 +25,7 @@
                 <h2>Opret opgave</h2>
             </div>
 
-            <form id="opgave-form">
+            <form id="opgave-form" action="/opret-opgave" method="post">
 
                 <div id="field-titel" class="field input">
                     <label for="titel">Titel</label>
@@ -44,6 +44,9 @@
                         <button type="button" class="category" data-kategori="affald">Affald</button>
                         <button type="button" class="category" data-kategori="koekken">Køkken</button>
                     </div>
+
+                    <input type="hidden" id="taskCategory" name="taskCategory">
+
                 </div>
 
                 <div class="to-felter-raekke">
@@ -96,5 +99,13 @@
     <footer id="footer">
     </footer>
 </div>
+<script>
+    document.querySelectorAll(".category").forEach(btn => {
+        btn.addEventListener("click", () => {
+            document.getElementById("taskCategory").value = btn.dataset.kategori;
+        });
+    });
+</script>
+
 </body>
 </html>

@@ -1,4 +1,5 @@
 package services;
+import Exceptions.IllegalUserDataException;
 import entities.User;
 import factories.UserFactory;
 
@@ -10,25 +11,58 @@ public class UserService {
         UserFactory.addUser(user);
     }
 
-    public User getUser(String email) {
-        for (User user : UserFactory.getUsers()) {
-            if (user.getEmail().equals(email)) {
-                return user;
-            }
-        }
-        return null;
+    public User getUser(String email) throws IllegalUserDataException{
+        User user=null;
+
+        for (User u : UserFactory.getUsers()) {
+            if (u.getEmail().equals(email)) {
+                user=u;
+            } }
+        if (user==null){ throw new IllegalUserDataException("Email does not match existing user");}
+        return user;
     }
 
-    public User login(String email, String password) {
+    public User login(String email, String password) throws IllegalUserDataException {
         User user = getUser(email);
-        if (user != null && user.getPassword().equals(password)) {
-            return user;
+        if (!user.getPassword().equals(password)) {
+            throw new IllegalUserDataException("Password er forkert");
         }
-        return null;
+        return user;
     }
 
-    public boolean validatePassword(String password) {
-        if (password == null) return false;
+    public boolean validatePassword(String password)throws IllegalUserDataException {
+        if (password == null) {throw new IllegalUserDataException("password er null");}
         return password.length() >= 8 && password.length() <= 15;
     }
+
+
+    public User createUser(String firstName, String lastName, String email, String password) throws IllegalUserDataException {
+
+        if (firstName == null || firstName.isBlank()){
+            throw new IllegalUserDataException("Please fill out name");
+        }
+        if (lastName == null || lastName.isBlank()){
+            throw new IllegalUserDataException("Please fill out lastname");
+        }
+        if (email == null || email.isBlank()){
+            throw new IllegalUserDataException("Please fill out email address");
+        }
+        if (password == null || password.isBlank()){
+            throw new IllegalUserDataException("Please fill out password");
+        }
+        if(!validatePassword(password)){
+            throw new IllegalUserDataException("password needs to be ... criteria");
+        }
+        if(getUser(email)!=null){
+            throw new IllegalUserDataException("email address is already used by another user");
+        }
+
+        User user=new User(email, password, firstName, lastName);
+
+        addUser(user);
+
+        return user;
+    }
+
+
 }

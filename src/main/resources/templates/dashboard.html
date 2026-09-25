@@ -23,7 +23,7 @@
             <div class="header">
                 <h1>Velkommen</h1>
                 <h2 th:text="${session.user.firstName}">Fornavn</h2>
-                <div id="dato-box">dato felt</div>
+                <div id="dato-box" th:text="${date}">dato felt</div>
             </div>
         </div>
 

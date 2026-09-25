@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.ArrayList;
+
 public class User {
     private int id;
     private String email;
@@ -8,6 +10,8 @@ public class User {
     private Role role;
     private String firstName;
     private String lastName;
+
+    private ArrayList <Task> tasks;
 
     // rigtige konstruktør
     public User(int id, String email, String password, int point, Role role, String firstName, String lastName) {
@@ -46,6 +50,10 @@ public class User {
 
     public int getPoint() { return point; }
     public Role getRole() { return role; }
+
+    public ArrayList<Task> getTasks() { return tasks; }
+
+    public void setTasks(ArrayList<Task> tasks) { this.tasks = tasks; }
 
     @Override
     public String toString() {

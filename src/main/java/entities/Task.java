@@ -27,6 +27,10 @@ public class Task {
         //this.taskCategory=entities.TaskCategory.valueOf(taskCategory.toString()); //brug denne syntax når vi bruger database
         //this.taskFrequency=entities.TaskFrequency.valueOf(taskFrequency.toString());
     }
+    public Task(String title, String description){
+        this.title=title;
+        this.description=description;
+    }
 
 
 
@@ -41,5 +45,13 @@ public class Task {
 
     public TaskCategory getTaskCategory() {
         return taskCategory;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

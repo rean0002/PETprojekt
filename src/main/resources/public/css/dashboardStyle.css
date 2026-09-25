@@ -181,6 +181,14 @@ input:checked ~ .switch-label--right {
 
 /* ===== Tasks ===== */
 
+.section{
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
 .task {
     background-color: var(--yellow50percent);
     width: 366px;

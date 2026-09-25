@@ -83,3 +83,23 @@ input, select {
     gap: 12px;
 }
 
+.step-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 0.9rem;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(90, 60, 20, 0.2);
+}
+
+.dot.active {
+    background: var(--orange);
+    width: 18px;
+    border-radius: 4px;
+}
+

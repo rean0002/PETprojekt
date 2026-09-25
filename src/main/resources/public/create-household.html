@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Opret husstand</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/color.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/toggle.css">
+    <link rel="stylesheet" href="css/createUser.css">
+</head>
+<body>
+<div class="app-container">
+    <main class="household-choice-main">
+        <div class="backgroundbox household-choice-box create-household-box">
+
+            <div class="step-dots">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot active"></span>
+            </div>
+
+            <div class="header-row">
+                <a href="/household-choice">
+                    <button class="btn-back" type="button" aria-label="Tilbage">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 12H4M4 12L10 6M4 12L10 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </a>
+            </div>
+
+            <h2>Opret husstand</h2>
+            <p>Giv jeres husstand et navn, og tilføj eventuelt andre medlemmer.</p>
+
+            <form action="/create-household" method="post" class="household-form">
+                <div class="field-group">
+                    <label for="navn">Husstandens navn</label>
+                    <input type="text" id="navn" name="navn" placeholder="Fx Familien Jensen" required>
+                </div>
+
+                <div class="field-group">
+                    <label for="medlemmer">Tilføj medlemmer <span class="optional">(valgfrit)</span></label>
+                    <input type="text" id="medlemmer" name="medlemmer" placeholder="fx olga@mail.com, alex@mail.com">
+                    </div>
+
+                <button class="btn-primary" type="submit">Opret husstand</button>
+            </form>
+        </div>
+    </main>
+</div>
+</body>
+</html>

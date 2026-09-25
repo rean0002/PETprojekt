@@ -8,12 +8,6 @@ import io.javalin.http.Context;
 import services.DateService;
 import services.UserService;
 
-import javax.swing.text.DateFormatter;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-
 public class UserController {
 
     static UserService userService = new UserService();
@@ -34,8 +28,6 @@ public class UserController {
         String email = ctx.formParam("email");
         String password = ctx.formParam("password");
 
-        //System.out.println("Login forsøg med email='" + email + "' password='" + password + "'");
-
         try {
             String date = dateservice.getDate();
             ctx.attribute("date", date);
@@ -48,8 +40,6 @@ public class UserController {
         }
     }
 
-
-
     public static void createUser(Context ctx){
 
         String firstName = ctx.formParam("firstName");
@@ -58,15 +48,14 @@ public class UserController {
         String password = ctx.formParam("password");
 
         try{
-            userService.createUser(firstName, lastName, email, password);
-            ctx.redirect("/index.html");
+            User user = userService.createUser(firstName, lastName, email, password);
+            ctx.sessionAttribute("user", user);
+            ctx.redirect("/household-choice");
         }catch (IllegalUserDataException e){
             ctx.status(400);
             ctx.result(e.getMessage());
         }
 
     }
-
-
 
 }

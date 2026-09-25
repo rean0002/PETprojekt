@@ -22,6 +22,15 @@ public class UserService {
         return user;
     }
 
+    public boolean emailExists(String email) {
+        for (User u : UserFactory.getUsers()) {
+            if (u.getEmail().equals(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public User login(String email, String password) throws IllegalUserDataException {
         User user = getUser(email);
         if (!user.getPassword().equals(password)) {
@@ -53,7 +62,7 @@ public class UserService {
         if(!validatePassword(password)){
             throw new IllegalUserDataException("password needs to be ... criteria");
         }
-        if(getUser(email)!=null){
+        if(emailExists(email)){
             throw new IllegalUserDataException("email address is already used by another user");
         }
 

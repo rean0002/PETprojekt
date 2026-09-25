@@ -1,3 +1,4 @@
+import controllers.HouseholdController;
 import controllers.TaskController;
 import controllers.UserController;
 import factories.UserFactory;
@@ -13,6 +14,7 @@ public class Main {
             config.staticFiles.add("/public");
             UserController.setRoutes(config);
             TaskController.setRoutes(config);
+            HouseholdController.setRoutes(config);   // ← er denne linje der?
             config.fileRenderer(new JavalinThymeleaf());
         }).start(7070);
     }

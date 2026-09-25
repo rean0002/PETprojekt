@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Tilknyt husstand</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/color.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/toggle.css">
+  <link rel="stylesheet" href="css/createUser.css">
+</head>
+<body>
+<div class="app-container">
+  <main class="household-choice-main">
+    <div class="backgroundbox household-choice-box create-household-box">
+
+      <div class="step-dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot active"></span>
+      </div>
+
+      <div class="header-row">
+        <a href="/household-choice">
+          <button class="btn-back" type="button" aria-label="Tilbage">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 12H4M4 12L10 6M4 12L10 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </a>
+      </div>
+
+      <h2>Tilknyt husstand</h2>
+      <p>Indtast den unikke kode, du har fået af en i din husstand.</p>
+
+      <form action="/tilknyt-household" method="post" class="household-form">
+        <div class="field-group">
+          <label for="kode">Husstandskode</label>
+          <input type="text" id="kode" name="kode" placeholder="Fx AB12CD" required>
+        </div>
+
+        <button class="btn-primary" type="submit">Tilknyt husstand</button>
+      </form>
+    </div>
+  </main>
+</div>
+</body>
+</html>

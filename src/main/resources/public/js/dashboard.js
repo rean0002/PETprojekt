@@ -6,6 +6,25 @@ const progressBar = document.querySelector("#progressBar");
 
 const labelProgressBar = document.querySelector('label[for="progressBar"]');
 
+const toggle =document.querySelector('#vidergives');
+
+
+toggle.addEventListener("change", toggleChange)
+
+function toggleChange (){
+    if (toggle.checked) {
+        window.location.href = "/dashboard?view=alle";
+    } else {
+        window.location.href = "/dashboard?view=mig";
+    }
+}
+
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('view') === 'alle') {
+    toggle.checked = true;
+}
+
+
 
 for(const t of taskElm){
     t.addEventListener("click", () =>{
@@ -33,6 +52,8 @@ for(const t of taskElm){
 
     });
 }
+
+
 
 function updateProgressBar (){
 progressBar.value=counter;

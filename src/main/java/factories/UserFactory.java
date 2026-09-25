@@ -1,5 +1,6 @@
 package factories;
 
+import entities.Household;
 import entities.Task;
 import entities.User;
 import java.util.List;
@@ -19,9 +20,10 @@ public class UserFactory {
         String[] lastNames = {
                 "Hansen", "Jensen"
         };
+        String householdName = "Familien Jensen";
 
         for (int i = 0; i < emails.length; i++) {
-            User user = new User(emails[i], "password" + (i + 1), firstNames[i], lastNames[i]);
+            User user = new User(emails[i], "password" + (i + 1), firstNames[i], lastNames[i], new Household(householdName));
             user.setTasks(tasks());
             users.add(user);
         }

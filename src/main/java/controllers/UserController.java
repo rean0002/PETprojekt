@@ -27,7 +27,8 @@ public class UserController {
         config.routes.get("/create-user", ctx -> ctx.redirect("/create-user.html"));
         config.routes.post("/create-user", ctx -> createUser(ctx));
 
-        config.routes.get("/dashboard", ctx -> ctx.render("templates/dashboard.html"));
+        config.routes.get("/dashboard", ctx -> renderDashboard(ctx));
+
     }
 
     public static void login(Context ctx){
@@ -47,6 +48,18 @@ public class UserController {
             ctx.status(404);
         }
     }
+
+    public static void renderDashboard(Context ctx) {
+
+        String toggle=ctx.queryParam("view");
+        if(toggle.equals("alle")){
+            HouseholdController.loadHouseholdDashboard(ctx);
+         }else {
+            String date = dateservice.getDate();
+            ctx.attribute("date", date);
+            ctx.render("templates/dashboard.html");}
+        }
+
 
 
 

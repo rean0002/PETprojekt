@@ -15,7 +15,7 @@
     <main>
         <div class="backgroundbox">
             <div id="header-row">
-                <a href="/dashboard.html">
+                <a href="/dashboard">
                     <button id="btn-tilbage" aria-label="Tilbage">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M20 12H4M4 12L10 6M4 12L10 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -40,9 +40,9 @@
                 <div id="kategori-group" class="field input">
                     <label>Kategori</label>
                     <div class="pille-row">
-                        <button type="button" class="category" data-kategori="rengoring">Rengøring</button>
-                        <button type="button" class="category" data-kategori="affald">Affald</button>
-                        <button type="button" class="category" data-kategori="koekken">Køkken</button>
+                        <button type="button" class="category" data-kategori="CLEANING">Rengøring</button>
+                        <button type="button" class="category" data-kategori="TRASH">Affald</button>
+                        <button type="button" class="category" data-kategori="FOOD">Køkken</button>
                     </div>
 
                     <input type="hidden" id="taskCategory" name="taskCategory">
@@ -63,19 +63,19 @@
                 <div id="field-gentages" class="field input">
                     <label for="gentages">Gentages</label>
                     <select id="gentages" name="gentages">
-                        <option value="ingen">Gentages ikke</option>
-                        <option value="dagligt">Dagligt</option>
-                        <option value="ugentligt" selected>Ugentligt</option>
-                        <option value="maanedligt">Månedligt</option>
+                        <option value="NONE">Gentages ikke</option>
+                        <option value="DAILY">Dagligt</option>
+                        <option value="WEEKLY" selected>Ugentligt</option>
+                        <option value="MONTHLY">Månedligt</option>
                     </select>
                 </div>
 
                 <div id="field-ansvarlig" class="field input">
                     <label for="ansvarlig">Ansvarlig</label>
                     <select id="ansvarlig" name="ansvarlig">
-                        <option value="Rebecca" selected>Rebecca</option>
-                        <option value="Olga" selected>Olga</option>
-                        <option value="Alexander" selected>Alexander</option>
+                        <option value="Rebecca">Rebecca</option>
+                        <option value="Olga">Olga</option>
+                        <option value="Alexander">Alexander</option>
                     </select>
                 </div>
 

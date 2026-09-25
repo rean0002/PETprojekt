@@ -1,3 +1,4 @@
+import controllers.TaskController;
 import controllers.UserController;
 import factories.UserFactory;
 import io.javalin.Javalin;
@@ -11,6 +12,7 @@ public class Main {
         var app = Javalin.create(config -> {
             config.staticFiles.add("/public");
             UserController.setRoutes(config);
+            TaskController.setRoutes(config);
             config.fileRenderer(new JavalinThymeleaf());
         }).start(7070);
     }

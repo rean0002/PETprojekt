@@ -38,6 +38,13 @@ public class User {
         this.password = password;
     }
 
+    public void addTask(Task task) {
+        if (tasks == null) {
+            tasks = new ArrayList<>();
+        }
+        tasks.add(task);
+    }
+
 
 
     public int getId() { return id; }

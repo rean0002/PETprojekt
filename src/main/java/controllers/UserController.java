@@ -7,12 +7,9 @@ import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;
 import services.UserService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+
 
 public class UserController {
-    //static ArrayList<User> users=new ArrayList<>(); //skal selvfølgelig flyttes
 
     static UserService userService = new UserService();
     static UserFactory userFactory = new UserFactory();
@@ -43,22 +40,6 @@ public class UserController {
         }
     }
 
-   /* public static void createUserProfile(Context ctx){
-        String firstName = ctx.formParam("firstName");
-        String lastName = ctx.formParam("lastName");
-        String email = ctx.formParam("email");
-        String password = ctx.formParam("password");
-
-        if (!userService.validatePassword(password)) {
-            ctx.status(400);
-            ctx.result("Password skal være mellem 8 og 15 tegn");
-            return;
-        }
-
-        userService.addUser(new User(email, password, firstName, lastName));
-        ctx.redirect("/index.html");
-        System.out.println(userService.getUser(email));
-    }*/
 
 
     public static void createUser(Context ctx){
@@ -79,13 +60,5 @@ public class UserController {
     }
 
 
-
-    /*public static void loadDashboard (Context ctx){
-
-        User user = ctx.sessionAttribute("user");
-        if(user != null) {
-            ctx.render("templates/dashboard.html", Map.of("user", user));
-        } else ctx.redirect("/index.html");
-}*/
 
 }

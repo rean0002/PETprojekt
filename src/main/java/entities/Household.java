@@ -7,20 +7,19 @@ import java.util.Random;
 public class Household {
 
     private String name;
-    private User [] members;
+    private ArrayList<User> members;
     private ArrayList<Task> tasks;
     private  String code;
 
     public Household (String name){
         this.name=name;
-        members= new User [10];
-        tasks= new ArrayList<>();
+        members= new ArrayList<>();
         this.code=code();
     }
 
 
-    public ArrayList<Task> householdTasks (){
-        ArrayList <Task>tasks= new ArrayList<>();
+    public ArrayList<Task> setHouseholdTasks (){
+        tasks= new ArrayList<>();
         for(User user:members){
             tasks.addAll(user.getTasks());
         }
@@ -56,7 +55,16 @@ public class Household {
         tasks.add(task);
     }
 
-    public ArrayList<Task>tasks(){return tasks; }
+    public ArrayList<Task>getTasks(){
+        return setHouseholdTasks();
+    }
 
+    public ArrayList<User> getMembers() {
+        return members;
+    }
+
+    public void setMember(User user){
+        members.add(user);
+    }
 
 }

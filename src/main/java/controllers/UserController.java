@@ -39,6 +39,7 @@ public class UserController {
             String date = dateservice.getDate();
             ctx.attribute("date", date);
             User user = userService.login(email, password);
+            //user.getHousehold().setHouseholdTasks();
             ctx.sessionAttribute("user", user);
             ctx.render("templates/dashboard.html");
         }catch(IllegalUserDataException e){
@@ -48,18 +49,16 @@ public class UserController {
     }
 
     public static void renderDashboard(Context ctx) {
-
+        String date = dateservice.getDate();
+        ctx.attribute("date", date);
         String toggle=ctx.queryParam("view");
         if (toggle==null) {
-            String date = dateservice.getDate();
-            ctx.attribute("date", date);
             ctx.render("templates/dashboard.html");}
         else if(toggle.equals("alle")){
             HouseholdController.loadHouseholdDashboard(ctx);
-         }
+         }else if(toggle.equals("mig")){
+            ctx.render("templates/dashboard.html");}
         }
-
-
 
 
     public static void createUser(Context ctx){

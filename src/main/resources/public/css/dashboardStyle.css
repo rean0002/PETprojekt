@@ -234,6 +234,10 @@ input:checked ~ .switch-label--right {
     font-size: 15px;
     color: var(--brown);
 }
+.initials{
+    font-size: 15px;
+    color: var(--orange);
+}
 .task-new-text{
     font-size: 15px;
     color: var(--brown50percent);

@@ -8,7 +8,7 @@ public class Household {
 
     private String name;
     private User [] members;
-    private List<Task> tasks;
+    private ArrayList<Task> tasks;
     private  String code;
 
     public Household (String name){
@@ -55,4 +55,8 @@ public class Household {
     public void addTask (Task task){
         tasks.add(task);
     }
+
+    public ArrayList<Task>tasks(){return tasks; }
+
+
 }

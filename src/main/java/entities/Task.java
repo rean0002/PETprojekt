@@ -8,7 +8,7 @@ public class Task {
     private int ID;
     private String title;
     private String description;
-    private User user;
+    private User responsibleUser;
     private TaskCategory taskCategory;
     private TaskFrequency taskFrequency;
 
@@ -17,11 +17,11 @@ public class Task {
     private boolean reassign=false;
     private boolean isDone=false;
 
-    public Task(int ID, String title, String description, User user, TaskCategory taskCategory, TaskFrequency taskFrequency){
+    public Task(int ID, String title, String description, User responsibleUser, TaskCategory taskCategory, TaskFrequency taskFrequency){
         this.ID=ID;
         this.title=title;
         this.description=description;
-        this.user=user;
+        this.responsibleUser = responsibleUser;
         this.taskCategory=taskCategory;
         this.taskFrequency=taskFrequency;
         //this.taskCategory=entities.TaskCategory.valueOf(taskCategory.toString()); //brug denne syntax når vi bruger database
@@ -54,4 +54,8 @@ public class Task {
     public String getDescription() {
         return description;
     }
+
+    public User getResponsibleUser() {return responsibleUser;}
+
+    public void setResponsibleUser(User responsibleUser) {this.responsibleUser = responsibleUser;}
 }

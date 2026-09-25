@@ -64,5 +64,13 @@ public class UserService {
         return user;
     }
 
+    public User getUserByFirstName(String firstName) {
+        for (User u : UserFactory.getUsers()) {
+            if (u.getFirstName().equals(firstName)) {
+                return u;
+            }
+        }
+        return null;
+    }
 
 }

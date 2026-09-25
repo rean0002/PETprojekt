@@ -17,7 +17,7 @@ public class Task {
     private boolean reassign=false;
     private boolean isDone=false;
 
-    Task (int ID, String title, String description, User user, TaskCategory taskCategory, TaskFrequency taskFrequency){
+    public Task(int ID, String title, String description, User user, TaskCategory taskCategory, TaskFrequency taskFrequency){
         this.ID=ID;
         this.title=title;
         this.description=description;

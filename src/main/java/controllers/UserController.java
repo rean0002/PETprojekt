@@ -21,7 +21,7 @@ public class UserController {
         config.routes.get("/create-user", ctx -> ctx.redirect("/create-user.html"));
         config.routes.post("/create-user", ctx -> createUser(ctx));
 
-        config.routes.get("/dashboard", ctx -> ctx.render("/dashboard.html"));
+        config.routes.get("/dashboard", ctx -> ctx.render("templates/dashboard.html"));
     }
 
     public static void login(Context ctx){

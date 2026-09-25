@@ -28,6 +28,7 @@ public class HouseholdController {
         config.routes.post("/tilknyt-household", ctx -> tilknytHousehold(ctx));
 
         config.routes.post("/household-dashboard", ctx -> loadHouseholdDashboard(ctx));
+        config.routes.get("/household-dashboard", ctx -> loadHouseholdDashboard(ctx) );
     }
 
     public static void createHousehold(Context ctx){
@@ -35,9 +36,9 @@ public class HouseholdController {
         String medlemmer = ctx.formParam("medlemmer");
 
 
-        config.routes.get("/household-dashboard", ctx -> loadHouseholdDashboard(ctx) );
 
-        ctx.redirect("/dashboard");
+
+        UserController.renderDashboard(ctx);
     }
 
     public static void tilknytHousehold(Context ctx){
@@ -45,7 +46,7 @@ public class HouseholdController {
 
 
 
-        ctx.redirect("/dashboard");
+        UserController.renderDashboard(ctx);
     }
 
     public static void loadHouseholdDashboard (Context ctx){

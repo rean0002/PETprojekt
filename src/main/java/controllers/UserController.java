@@ -50,12 +50,13 @@ public class UserController {
     public static void renderDashboard(Context ctx) {
 
         String toggle=ctx.queryParam("view");
-        if(toggle.equals("alle")){
-            HouseholdController.loadHouseholdDashboard(ctx);
-         }else {
+        if (toggle==null) {
             String date = dateservice.getDate();
             ctx.attribute("date", date);
             ctx.render("templates/dashboard.html");}
+        else if(toggle.equals("alle")){
+            HouseholdController.loadHouseholdDashboard(ctx);
+         }
         }
 
 

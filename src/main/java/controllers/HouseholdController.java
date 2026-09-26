@@ -56,7 +56,7 @@ public class HouseholdController {
             ctx.attribute("date", date);
             User user = ctx.sessionAttribute("user");
 
-           Household household = user.getHousehold();
+           //Household household = user.getHousehold();
             //ctx.sessionAttribute("household", household);
 
             ctx.render("templates/household-dashboard.html");

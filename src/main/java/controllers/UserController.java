@@ -39,7 +39,6 @@ public class UserController {
             String date = dateservice.getDate();
             ctx.attribute("date", date);
             User user = userService.login(email, password);
-            //user.getHousehold().setHouseholdTasks();
             ctx.sessionAttribute("user", user);
             ctx.render("templates/dashboard.html");
         }catch(IllegalUserDataException e){

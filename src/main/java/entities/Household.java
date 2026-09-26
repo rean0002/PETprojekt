@@ -9,11 +9,12 @@ public class Household {
     private String name;
     private ArrayList<User> members;
     private ArrayList<Task> tasks;
-    private  String code;
+    private final String code;
 
     public Household (String name){
         this.name=name;
         members= new ArrayList<>();
+        tasks=new ArrayList<>();
         this.code=code();
     }
 
@@ -21,7 +22,9 @@ public class Household {
     public ArrayList<Task> setHouseholdTasks (){
         tasks= new ArrayList<>();
         for(User user:members){
-            tasks.addAll(user.getTasks());
+            for(Task task:user.getTasks()){
+                tasks.add(task);
+            }
         }
         return tasks;
     }
@@ -56,7 +59,12 @@ public class Household {
     }
 
     public ArrayList<Task>getTasks(){
-        return setHouseholdTasks();
+        for (User u: members){
+            for(Task task:u.getTasks()){
+                tasks.add(task);
+            }
+        }
+        return tasks;
     }
 
     public ArrayList<User> getMembers() {

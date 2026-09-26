@@ -27,9 +27,10 @@ public class Task {
         //this.taskCategory=entities.TaskCategory.valueOf(taskCategory.toString()); //brug denne syntax når vi bruger database
         //this.taskFrequency=entities.TaskFrequency.valueOf(taskFrequency.toString());
     }
-    public Task(String title, String description){
+    public Task(String title, String description, User responssibleUser){
         this.title=title;
         this.description=description;
+        this.responsibleUser=responssibleUser;
     }
 
 

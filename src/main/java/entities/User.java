@@ -17,7 +17,7 @@ public class User {
 
     private Household household;
 
-    private ArrayList <Task> tasks;
+    private ArrayList <Task> tasks= new ArrayList<>();
 
     // rigtige konstruktør
     public User(int id, String email, String password, int point, Role role, String firstName, String lastName) {
@@ -53,9 +53,6 @@ public class User {
     }
 
     public void addTask(Task task) {
-        if (tasks == null) {
-            tasks = new ArrayList<>();
-        }
         tasks.add(task);
     }
 

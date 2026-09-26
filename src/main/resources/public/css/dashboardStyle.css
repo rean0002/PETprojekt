@@ -220,6 +220,11 @@ input:checked ~ .switch-label--right {
     justify-self: center;
 }
 
+.initials {
+    font-weight: bold;
+    justify-self: center;
+}
+
 .taskFlex{
     width: 366px;
     height: 320px;

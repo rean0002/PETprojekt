@@ -32,12 +32,23 @@ public class UserFactory {
             User user1 = new User(emails[0], passwords[0], firstNames[0], lastNames[0], household);
             User user2 = new User(emails[1], passwords[1], firstNames[1], lastNames[1], household);
             User user3 = new User(emails[2], passwords[2], firstNames[2], lastNames[2], household);
-            user1.setTasks(tasks());
-            user2.setTasks(tasksTwo());
 
 
+            user1.setTasks(tasks(user1));
             household.setMember(user1);
+            /*for(Task t:user1.getTasks()){
+                household.addTask(t);
+            }*/
+
             household.setMember(user2);
+            user2.setTasks(tasksTwo(user2));
+        /*for(Task t:user2.getTasks()){
+            household.addTask(t);
+        }*/
+
+
+
+
             household.setMember(user3);
 
             users.add(user1);
@@ -55,23 +66,23 @@ public class UserFactory {
         return users;
     }
 
-    public static ArrayList<Task>tasks(){
+    public static ArrayList<Task>tasks(User user){
 
         ArrayList <Task>tasks=new ArrayList<>();
 
-        tasks.add(new Task("vacuum", "everywhere"));
-        tasks.add(new Task("dust", "bedroom"));
-        tasks.add(new Task("Clean fridge", "now"));
-        tasks.add(new Task("meal planning", "plan for 3 days"));
+        tasks.add(new Task("vacuum", "everywhere", user));
+        tasks.add(new Task("dust", "bedroom", user));
+        tasks.add(new Task("Clean fridge", "now", user));
+        tasks.add(new Task("meal planning", "plan for 3 days", user));
 
         return tasks;
     }
-    public static ArrayList<Task>tasksTwo(){
+    public static ArrayList<Task>tasksTwo(User user){
 
         ArrayList <Task>tasks=new ArrayList<>();
 
-        tasks.add(new Task("garbage", "plastic"));
-        tasks.add(new Task("shop for groceries", ""));
+        tasks.add(new Task("garbage", "plastic", user));
+        tasks.add(new Task("shop for groceries", "", user));
 
 
         return tasks;

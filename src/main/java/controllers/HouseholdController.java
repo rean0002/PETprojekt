@@ -17,8 +17,7 @@ public class HouseholdController {
 
     public static void setRoutes(JavalinConfig config){
         config.routes.get("/household-choice", ctx -> {
-            User user1 = ctx.sessionAttribute("user1");
-            ctx.render("templates/household-choice.html", Map.of("fornavn", user1.getFirstName()));
+            ctx.render("templates/household-choice.html", Map.of("fornavn", User.getFirstName()));
         });
 
         config.routes.get("/create-household", ctx -> ctx.render("public/create-household.html"));

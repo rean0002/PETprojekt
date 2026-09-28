@@ -10,7 +10,7 @@ public class User {
     private String password;
     private int point;
     private Role role;
-    private String firstName;
+    private static String firstName;
     private String lastName;
 
     private String initials;
@@ -63,7 +63,7 @@ public class User {
     public String getEmail() { return email; }
     public String getPassword() { return password; }
 
-    public String getFirstName() {return firstName;}
+    public static String getFirstName() {return firstName;}
     public String getLastName() {return lastName;}
 
     public int getPoint() { return point; }

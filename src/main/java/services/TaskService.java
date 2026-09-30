@@ -11,8 +11,8 @@ import java.util.List;
 
 public class TaskService {
 
-    static List<Task> tasks = new ArrayList<>();
-    static int nextId = 1;
+    static List<Task> tasks = new ArrayList<>(); //bruger vi denne ?
+    static int nextId = 6;   //bruger vi denne ?
 
     public void addTask(String title, String description, User user, TaskCategory category, TaskFrequency frequency) {
 

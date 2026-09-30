@@ -1,4 +1,5 @@
-let counter=0;
+let counter = document.querySelectorAll(".task.completed").length;
+
 
 const taskElm =document.querySelectorAll(".task");
 
@@ -31,15 +32,27 @@ for(const t of taskElm){
 
 
         if(t.classList.contains("completed")){
+                return;}
 
-        } else {
+
             counter++;
-            console.log(counter);
             t.classList.add("task-new-background");
             t.classList.add("completed")
 
-            const img= t.querySelector("img");
-            img.src="svg/flueben.svg";
+            fetch("/tasks/" + t.dataset.id + "/done", { method: "POST" });
+
+
+            const img = t.querySelector("img");
+            if (img) {
+                img.src = "svg/flueben.svg";
+            }
+            const initials = t.querySelector(".initials");
+            if (initials) {
+                const nytBillede = document.createElement("img");
+                nytBillede.src = "svg/flueben.svg";
+                nytBillede.style.gridArea = "box-1";
+                initials.replaceWith(nytBillede);
+            }
 
             const header=t.querySelector(".taskHeader");
             header.classList.add("task-new-text");
@@ -47,12 +60,12 @@ for(const t of taskElm){
 
             updateProgressBar();
 
-        }
+
 
 
     });
 }
-
+updateProgressBar();
 
 
 function updateProgressBar (){
@@ -65,7 +78,6 @@ labelProgressBar.textContent=counter+"/"+taskElm.length;
 if (counter===taskElm.length){
 progressBar.classList.add("newColor");
 labelProgressBar.textContent="";
-console.log("4/4");
 }
 
 }

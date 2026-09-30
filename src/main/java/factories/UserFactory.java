@@ -1,13 +1,18 @@
 package factories;
 
-import entities.Household;
-import entities.Task;
-import entities.User;
+import entities.*;
+import services.TaskService;
+
 import java.util.List;
 import java.util.ArrayList;
 
+
+
 public class UserFactory {
     static List<User> users = new ArrayList<>();
+    static int nextId = 1;
+
+    static TaskService taskservice=new TaskService();
 
 
     public static List<User> createUsers() {
@@ -36,17 +41,10 @@ public class UserFactory {
 
             user1.setTasks(tasks(user1));
             household.setMember(user1);
-            /*for(Task t:user1.getTasks()){
-                household.addTask(t);
-            }*/
+
 
             household.setMember(user2);
             user2.setTasks(tasksTwo(user2));
-        /*for(Task t:user2.getTasks()){
-            household.addTask(t);
-        }*/
-
-
 
 
             household.setMember(user3);
@@ -70,10 +68,41 @@ public class UserFactory {
 
         ArrayList <Task>tasks=new ArrayList<>();
 
-        tasks.add(new Task("vacuum", "everywhere", user));
-        tasks.add(new Task("dust", "bedroom", user));
-        tasks.add(new Task("Clean fridge", "now", user));
-        tasks.add(new Task("meal planning", "plan for 3 days", user));
+
+
+        tasks.add(new Task(
+                nextId++,
+                "Rengør køkken",
+                "Tør bordene af",
+                user,
+                TaskCategory.HOME,
+                TaskFrequency.DAILY
+        ));
+        tasks.add(new Task(
+                nextId++,
+                "støvsug",
+                "soveværelse",
+                user,
+                TaskCategory.CLEANING,
+                TaskFrequency.WEEKLY
+        ));
+        tasks.add(new Task(
+                nextId++,
+                "Madplan",
+                "find på 2 retter",
+                user,
+                TaskCategory.FOOD,
+                TaskFrequency.NONE
+        ));
+
+
+
+       /* tasks.add(new Task(1,"vacuum", "everywhere", user));
+        tasks.add(new Task(2,"dust", "bedroom", user));
+        tasks.add(new Task(3,"Clean fridge", "now", user));
+        tasks.add(new Task(4,"meal planning", "plan for 3 days", user));
+
+        */
 
         return tasks;
     }
@@ -81,8 +110,26 @@ public class UserFactory {
 
         ArrayList <Task>tasks=new ArrayList<>();
 
-        tasks.add(new Task("garbage", "plastic", user));
-        tasks.add(new Task("shop for groceries", "", user));
+        /*tasks.add(new Task(5,"garbage", "plastic", user));
+        tasks.add(new Task(6,"shop for groceries", "", user));
+         */
+
+        tasks.add(new Task(
+                nextId++,
+                "Tag skrald ud",
+                "efter aftensmad",
+                user,
+                TaskCategory.TRASH,
+                TaskFrequency.WEEKLY
+        ));
+        tasks.add(new Task(
+                nextId++,
+                "Køb ind",
+                "husk fødselsdagskort",
+                user,
+                TaskCategory.HOME,
+                TaskFrequency.NONE
+        ));
 
 
         return tasks;

@@ -3,9 +3,9 @@ package entities;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Task {
+public class Task implements Comparable<Task> {
 
-    private int ID;
+    private int id;
     private String title;
     private String description;
     private User responsibleUser;
@@ -17,8 +17,8 @@ public class Task {
     private boolean reassign=false;
     private boolean isDone=false;
 
-    public Task(int ID, String title, String description, User responsibleUser, TaskCategory taskCategory, TaskFrequency taskFrequency){
-        this.ID=ID;
+    public Task(int id, String title, String description, User responsibleUser, TaskCategory taskCategory, TaskFrequency taskFrequency){
+        this.id = id;
         this.title=title;
         this.description=description;
         this.responsibleUser = responsibleUser;
@@ -27,7 +27,8 @@ public class Task {
         //this.taskCategory=entities.TaskCategory.valueOf(taskCategory.toString()); //brug denne syntax når vi bruger database
         //this.taskFrequency=entities.TaskFrequency.valueOf(taskFrequency.toString());
     }
-    public Task(String title, String description, User responssibleUser){
+    public Task(int id, String title, String description, User responssibleUser){
+        this.id = id;
         this.title=title;
         this.description=description;
         this.responsibleUser=responssibleUser;
@@ -41,9 +42,6 @@ public class Task {
     }
 
 
-    public void markAsDone (){ isDone=true;}
-
-
     public TaskCategory getTaskCategory() {
         return taskCategory;
     }
@@ -52,6 +50,12 @@ public class Task {
         return title;
     }
 
+    public int getId() {return id;}
+
+    public boolean isDone() {return isDone;}
+
+    public void setDone(boolean done) {isDone = done;}
+
     public String getDescription() {
         return description;
     }
@@ -59,4 +63,9 @@ public class Task {
     public User getResponsibleUser() {return responsibleUser;}
 
     public void setResponsibleUser(User responsibleUser) {this.responsibleUser = responsibleUser;}
+
+    @Override
+    public int compareTo(Task other) {
+        return Integer.compare(this.id, other.id);
+    }
 }

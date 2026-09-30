@@ -10,7 +10,7 @@ public class User {
     private String password;
     private int point;
     private Role role;
-    private static String firstName;
+    private String firstName;
     private String lastName;
 
     private String initials;
@@ -63,7 +63,7 @@ public class User {
     public String getEmail() { return email; }
     public String getPassword() { return password; }
 
-    public static String getFirstName() {return firstName;}
+    public String getFirstName() {return firstName;}
     public String getLastName() {return lastName;}
 
     public int getPoint() { return point; }
@@ -90,4 +90,18 @@ public class User {
                 ", password='" + password + '\'' +
                 '}';
     }
+
+    public Task findTask(int id) {
+        Task task=null;
+        for (Task t:tasks){
+            if (t.getId()==id){
+                task=t;
+            }
+        } return task;
+    }
+
+
+
+
+
 }

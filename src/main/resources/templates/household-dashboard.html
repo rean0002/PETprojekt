@@ -45,7 +45,7 @@
     <div class="section">
       <div class="taskFlex">
         <div class="task" th:each="task : ${session.user.household.tasks}">
-          <p class="initials" th:text="${task.responsibleUser.getInitials()}" style="grid-area: box-1" >
+          <p class="initials" th:text="${task.responsibleUser.initials}" style="grid-area: box-1" ></p>
           <p class="taskHeader" th:text="${task.title}" style="grid-area: box-2">button header</p>
           <p class="taskDetails" th:text="${task.description}" style="grid-area: box-3">button details</p>
         </div>

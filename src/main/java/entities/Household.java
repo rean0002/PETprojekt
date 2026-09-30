@@ -3,31 +3,22 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.TreeSet;
 
 public class Household {
 
     private String name;
     private ArrayList<User> members;
-    private ArrayList<Task> tasks;
+    private TreeSet<Task> tasks;
     private final String code;
 
     public Household (String name){
         this.name=name;
         members= new ArrayList<>();
-        tasks=new ArrayList<>();
+        tasks=new TreeSet<>();
         this.code=code();
     }
 
-
-    public ArrayList<Task> setHouseholdTasks (){
-        tasks= new ArrayList<>();
-        for(User user:members){
-            for(Task task:user.getTasks()){
-                tasks.add(task);
-            }
-        }
-        return tasks;
-    }
 
     public String code(){
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -58,7 +49,7 @@ public class Household {
         tasks.add(task);
     }
 
-    public ArrayList<Task>getTasks(){
+    public TreeSet<Task>getTasks(){
         for (User u: members){
             for(Task task:u.getTasks()){
                 tasks.add(task);

@@ -5,6 +5,7 @@ import entities.User;
 import factories.UserFactory;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;
+import org.jetbrains.annotations.NotNull;
 import services.DateService;
 import services.UserService;
 
@@ -29,18 +30,19 @@ public class UserController {
 
         config.routes.get("/dashboard", ctx -> renderDashboard(ctx));
 
+        config.routes.post("/tasks/{id}/done", ctx -> markTaskAsDone(ctx));
+
     }
+
 
     public static void login(Context ctx){
         String email = ctx.formParam("email");
         String password = ctx.formParam("password");
 
         try {
-            String date = dateservice.getDate();
-            ctx.attribute("date", date);
             User user = userService.login(email, password);
             ctx.sessionAttribute("user", user);
-            ctx.render("templates/dashboard.html");
+            renderDashboard(ctx);
         }catch(IllegalUserDataException e){
             ctx.result(e.getMessage());
             ctx.status(404);
@@ -50,14 +52,30 @@ public class UserController {
     public static void renderDashboard(Context ctx) {
         String date = dateservice.getDate();
         ctx.attribute("date", date);
-        String toggle=ctx.queryParam("view");
-        if (toggle==null) {
-            ctx.render("templates/dashboard.html");}
-        else if(toggle.equals("alle")){
-            HouseholdController.loadHouseholdDashboard(ctx);
-         }else if(toggle.equals("mig")){
-            ctx.render("templates/dashboard.html");}
+
+        boolean husstand = "alle".equals(ctx.queryParam("view"));
+        ctx.attribute("husstand", husstand);
+
+        if(husstand){
+            User user= ctx.sessionAttribute("user");
+            ctx.attribute("firstName", user.getHousehold().getName());
+            ctx.attribute("tasks", user.getHousehold().getTasks());
+        } else {
+            User user= ctx.sessionAttribute("user");
+            ctx.attribute("firstName", user.getFirstName());
+            ctx.attribute("tasks", user.getTasks());
         }
+        ctx.render("templates/dashboard.html");
+
+
+        }
+
+    private static void markTaskAsDone(Context ctx) {
+        int id = Integer.parseInt(ctx.pathParam("id"));
+        User user = ctx.sessionAttribute("user");
+        user.findTask(id).setDone(true);
+        ctx.status(204);
+    }
 
 
     public static void createUser(Context ctx){

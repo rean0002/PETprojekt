@@ -16,9 +16,7 @@ public class HouseholdController {
 
 
     public static void setRoutes(JavalinConfig config){
-        config.routes.get("/household-choice", ctx -> {
-            ctx.render("templates/household-choice.html", Map.of("fornavn", User.getFirstName()));
-        });
+        config.routes.get("/household-choice", ctx -> {ctx.render("templates/household-choice.html");});
 
         config.routes.get("/create-household", ctx -> ctx.render("public/create-household.html"));
         config.routes.post("/create-household", ctx -> createHousehold(ctx));
@@ -34,16 +32,11 @@ public class HouseholdController {
         String navn = ctx.formParam("navn");
         String medlemmer = ctx.formParam("medlemmer");
 
-
-
-
         UserController.renderDashboard(ctx);
     }
 
     public static void tilknytHousehold(Context ctx){
         String kode = ctx.formParam("kode");
-
-
 
         UserController.renderDashboard(ctx);
     }
@@ -54,9 +47,6 @@ public class HouseholdController {
             String date = dateservice.getDate();
             ctx.attribute("date", date);
             User user = ctx.sessionAttribute("user");
-
-           //Household household = user.getHousehold();
-            //ctx.sessionAttribute("household", household);
 
             ctx.render("templates/household-dashboard.html");
         }catch(Exception e){  //OBS EXCEPTION HANDLING ER FOR ABSTRAKT

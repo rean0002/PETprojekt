@@ -57,6 +57,17 @@ for(const t of taskElm){
             const header=t.querySelector(".taskHeader");
             header.classList.add("task-new-text");
 
+        const details = t.querySelector(".taskDetails");
+
+       /* if (details) {
+            const now = new Date();
+
+            const hours = String(now.getHours()).padStart(2, "0");
+            const minutes = String(now.getMinutes()).padStart(2, "0");
+
+            details.textContent = "Udført klokken " + hours + ":" + minutes;
+        }*/
+
 
             updateProgressBar();
 
@@ -79,5 +90,7 @@ if (counter===taskElm.length){
 progressBar.classList.add("newColor");
 labelProgressBar.textContent="";
 }
+
+
 
 }

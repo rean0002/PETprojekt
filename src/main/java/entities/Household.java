@@ -1,8 +1,8 @@
 package entities;
 
+import services.HouseholdService;
+
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import java.util.TreeSet;
 
 public class Household {
@@ -16,25 +16,9 @@ public class Household {
         this.name=name;
         members= new ArrayList<>();
         tasks=new TreeSet<>();
-        this.code=code();
+        this.code= HouseholdService.code();
     }
 
-
-    public String code(){
-        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        String [] code = new String[6];
-        Random r= new Random();
-
-        code[0]= String.valueOf(alphabet.charAt(r.nextInt(alphabet.length())));
-        code[1]= String.valueOf(alphabet.charAt(r.nextInt(alphabet.length())));
-        code[2]= String.valueOf(alphabet.charAt(r.nextInt(alphabet.length())));
-        code[3]= String.valueOf(alphabet.charAt(r.nextInt(alphabet.length())));
-        code[4]= String.valueOf(alphabet.charAt(r.nextInt(alphabet.length())));
-        code[5]= String.valueOf(alphabet.charAt(r.nextInt(alphabet.length())));
-
-
-        return (code[0]+code[1]+code[2]+code[3]+code[4]+code[5]);
-    }
 
 
     public String getName() {

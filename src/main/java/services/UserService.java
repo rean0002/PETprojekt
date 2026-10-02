@@ -77,4 +77,18 @@ public class UserService {
 
         return user;
     }
+
+    public User getUserByFirstName(String firstName) throws IllegalUserDataException {
+        User user = null;
+
+        for (User u : UserFactory.getUsers()) {
+            if (u.getFirstName().equals(firstName)) {
+                user = u;
+            }
+        } if (user == null){
+            throw new IllegalUserDataException("Email matcher ikke nogen eksisterende bruger");
+        }
+        return null;
+    }
+
 }

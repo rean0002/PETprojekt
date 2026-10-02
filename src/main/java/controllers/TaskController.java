@@ -28,7 +28,7 @@ public class TaskController {
     }
 
 
-    public static void opretOpgave(Context ctx){
+    public static void opretOpgave(Context ctx) throws IllegalUserDataException {
         String title = ctx.formParam("titel");
         String beskrivelse = ctx.formParam("beskrivelse");
         String taskCategory = ctx.formParam("taskCategory");

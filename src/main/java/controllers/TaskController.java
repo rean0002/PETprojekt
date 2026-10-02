@@ -33,14 +33,15 @@ public class TaskController {
         String beskrivelse = ctx.formParam("beskrivelse");
         String taskCategory = ctx.formParam("taskCategory");
         String gentages = ctx.formParam("gentages");
+        String ansvarlig = ctx.formParam("ansvarlig");
 
         User user= ctx.sessionAttribute("user");
 
-        User ansvarlig = userService.getUserByFirstName(ctx.formParam("ansvarlig"));
+        User ansvarligBruger = userService.getUserByFirstName(ctx.formParam("ansvarlig"));
 
 
         try{
-            taskService.createTask(title, beskrivelse, ansvarlig, taskCategory, gentages);
+            taskService.createTask(title, beskrivelse, ansvarligBruger, taskCategory, gentages);
             UserController.renderDashboard(ctx);
         }catch (IllegalTaskDataException e){
             ctx.status(400);

@@ -88,7 +88,7 @@ public class UserService {
         } if (user == null){
             throw new IllegalUserDataException("Email matcher ikke nogen eksisterende bruger");
         }
-        return null;
+        return user;
     }
 
 }

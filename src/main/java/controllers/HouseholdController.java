@@ -9,8 +9,7 @@ import io.javalin.http.Context;
 
 import java.util.Map;
 
-import static controllers.UserController.dateservice;
-import static controllers.UserController.userService;
+import static controllers.UserController.*;
 
 public class HouseholdController {
 
@@ -24,13 +23,21 @@ public class HouseholdController {
         config.routes.get("/tilknyt-household", ctx -> ctx.render("public/tilknyt-household.html"));
         config.routes.post("/tilknyt-household", ctx -> tilknytHousehold(ctx));
 
-        config.routes.post("/household-dashboard", ctx -> loadHouseholdDashboard(ctx));
-        config.routes.get("/household-dashboard", ctx -> loadHouseholdDashboard(ctx));
+        config.routes.post("/household-dashboard", ctx -> renderDashboard(ctx));
     }
 
     public static void createHousehold(Context ctx){
         String navn = ctx.formParam("navn");
         String medlemmer = ctx.formParam("medlemmer");
+        Household household = new Household(navn);
+        ctx.sessionAttribute("household", household);
+
+        User user = ctx.sessionAttribute("user");
+        user.setHousehold(household);
+
+
+
+
 
         UserController.renderDashboard(ctx);
     }
@@ -41,20 +48,20 @@ public class HouseholdController {
         UserController.renderDashboard(ctx);
     }
 
-    public static void loadHouseholdDashboard (Context ctx){
-
-        try {
-            String date = dateservice.getDate();
-            ctx.attribute("date", date);
-            User user = ctx.sessionAttribute("user");
-
-            ctx.render("templates/household-dashboard.html");
-        }catch(Exception e){  //OBS EXCEPTION HANDLING ER FOR ABSTRAKT
-            ctx.result(e.getMessage());
-            ctx.status(404);
-        }
-
-    }
+//    public static void loadHouseholdDashboard (Context ctx){
+//
+//        try {
+//            String date = dateservice.getDate();
+//            ctx.attribute("date", date);
+//            User user = ctx.sessionAttribute("user");
+//
+//            ctx.render("templates/household-dashboard.html");
+//        }catch(Exception e){  //OBS EXCEPTION HANDLING ER FOR ABSTRAKT
+//            ctx.result(e.getMessage());
+//            ctx.status(404);
+//        }
+//
+//    }
 
 
 

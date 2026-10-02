@@ -1,13 +1,11 @@
 package controllers;
 
+import Exceptions.IllegalTaskDataException;
 import entities.User;
 import Exceptions.IllegalUserDataException;
 import entities.Household;
-import entities.User;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;
-
-import java.util.Map;
 
 import static controllers.UserController.*;
 
@@ -26,18 +24,17 @@ public class HouseholdController {
         config.routes.post("/household-dashboard", ctx -> renderDashboard(ctx));
     }
 
-    public static void createHousehold(Context ctx){
+    public static void createHousehold(Context ctx) throws IllegalUserDataException {
         String navn = ctx.formParam("navn");
         String medlemmer = ctx.formParam("medlemmer");
         Household household = new Household(navn);
         ctx.sessionAttribute("household", household);
 
         User user = ctx.sessionAttribute("user");
+        if (user == null){
+            throw new IllegalUserDataException("Kunne ikke finde bruger");
+        }
         user.setHousehold(household);
-
-
-
-
 
         UserController.renderDashboard(ctx);
     }
@@ -47,22 +44,5 @@ public class HouseholdController {
 
         UserController.renderDashboard(ctx);
     }
-
-//    public static void loadHouseholdDashboard (Context ctx){
-//
-//        try {
-//            String date = dateservice.getDate();
-//            ctx.attribute("date", date);
-//            User user = ctx.sessionAttribute("user");
-//
-//            ctx.render("templates/household-dashboard.html");
-//        }catch(Exception e){  //OBS EXCEPTION HANDLING ER FOR ABSTRAKT
-//            ctx.result(e.getMessage());
-//            ctx.status(404);
-//        }
-//
-//    }
-
-
 
 }

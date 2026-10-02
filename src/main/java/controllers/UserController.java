@@ -45,7 +45,7 @@ public class UserController {
             renderDashboard(ctx);
         }catch(IllegalUserDataException e){
             ctx.result(e.getMessage());
-            ctx.status(404);
+            ctx.status(400);
         }
     }
 
@@ -90,8 +90,7 @@ public class UserController {
             ctx.sessionAttribute("user", user);
             ctx.redirect("/household-choice");
         }catch (IllegalUserDataException e){
-            ctx.status(400);
-            ctx.result(e.getMessage());
+            ctx.redirect("/create-user.html?error="+ java.net.URLEncoder.encode(e.getMessage(), java.nio.charset.StandardCharsets.UTF_8));
         }
 
     }

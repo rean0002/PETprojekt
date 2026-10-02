@@ -1,3 +1,5 @@
+import Exceptions.IllegalTaskDataException;
+import Exceptions.IllegalUserDataException;
 import controllers.HouseholdController;
 import controllers.TaskController;
 import controllers.UserController;
@@ -15,7 +17,8 @@ public class Main {
             UserController.setRoutes(config);
             TaskController.setRoutes(config);
             HouseholdController.setRoutes(config);
+            config.routes.exception(IllegalUserDataException.class, (exception, ctx) -> ctx.status(400).result(exception.getMessage()));
+            config.routes.exception(IllegalTaskDataException.class, (exception, ctx) -> ctx.status(400).result(exception.getMessage()));
             config.fileRenderer(new JavalinThymeleaf());
-        }).start(7070);
-    }
+        }).start(7070);}
 }

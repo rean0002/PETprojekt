@@ -7,7 +7,10 @@ import java.util.List;
 
 public class UserService {
 
-    public static void addUser(User user) {
+    public static void addUser(User user) throws IllegalUserDataException {
+        if (user == null){
+            throw new IllegalUserDataException("Brugeren findes ikke");
+        }
         UserFactory.addUser(user);
     }
 
@@ -18,7 +21,7 @@ public class UserService {
             if (u.getEmail().equals(email)) {
                 user=u;
             } }
-        if (user==null){ throw new IllegalUserDataException("Email does not match existing user");}
+        if (user==null){ throw new IllegalUserDataException("Email matcher ikke nogen eksisterende bruger");}
         return user;
     }
 
@@ -48,22 +51,22 @@ public class UserService {
     public User createUser(String firstName, String lastName, String email, String password) throws IllegalUserDataException {
 
         if (firstName == null || firstName.isBlank()){
-            throw new IllegalUserDataException("Please fill out name");
+            throw new IllegalUserDataException("Udfyld navn");
         }
         if (lastName == null || lastName.isBlank()){
-            throw new IllegalUserDataException("Please fill out lastname");
+            throw new IllegalUserDataException("Udfyld efternavn");
         }
         if (email == null || email.isBlank()){
-            throw new IllegalUserDataException("Please fill out email address");
+            throw new IllegalUserDataException("Udfyld email adresse");
         }
         if (password == null || password.isBlank()){
-            throw new IllegalUserDataException("Please fill out password");
+            throw new IllegalUserDataException("Udfyld password");
         }
         if(!validatePassword(password)){
-            throw new IllegalUserDataException("password needs to be ... criteria");
+            throw new IllegalUserDataException("password skal være mellem 8-15 tegn");
         }
         if(emailExists(email)){
-            throw new IllegalUserDataException("email address is already used by another user");
+            throw new IllegalUserDataException("email er allerede i brug");
         }
 
         User user=new User(email, password, firstName, lastName);
@@ -72,14 +75,4 @@ public class UserService {
 
         return user;
     }
-
-    public User getUserByFirstName(String firstName) {
-        for (User u : UserFactory.getUsers()) {
-            if (u.getFirstName().equals(firstName)) {
-                return u;
-            }
-        }
-        return null;
-    }
-
 }

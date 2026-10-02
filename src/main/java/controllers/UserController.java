@@ -5,10 +5,11 @@ import entities.User;
 import factories.UserFactory;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;
-import org.jetbrains.annotations.NotNull;
 import services.DateService;
 import services.UserService;
-
+import entities.Task;
+import java.util.List;
+import java.util.ArrayList;
 import javax.swing.text.DateFormatter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -50,25 +51,52 @@ public class UserController {
     }
 
     public static void renderDashboard(Context ctx) {
-        String date = dateservice.getDate();
-        ctx.attribute("date", date);
 
         boolean husstand = "alle".equals(ctx.queryParam("view"));
         ctx.attribute("husstand", husstand);
+        String dateParam = ctx.queryParam("date");
+        LocalDate selectedDate;
+
+        if (dateParam == null){
+            selectedDate = LocalDate.now();
+        }else {
+            selectedDate = LocalDate.parse(dateParam);
+        }
+        String date = dateservice.getDate(selectedDate);
+        ctx.attribute("date", date);
+        List<LocalDate> next7Days = dateservice.getNext7Days();
+        ctx.attribute("next7Days", next7Days);
+        ctx.attribute("selectedDate", selectedDate);
+
+        List<String> next7DayLabels = new ArrayList<>();
+        for (LocalDate day : next7Days) {
+            next7DayLabels.add(dateservice.getDate(day));
+        }
+        ctx.attribute("next7DayLabels", next7DayLabels);
+
 
         if(husstand){
             User user= ctx.sessionAttribute("user");
             ctx.attribute("firstName", user.getHousehold().getName());
-            ctx.attribute("tasks", user.getHousehold().getTasks());
+            ctx.attribute("tasks", filterTasksByDate(new ArrayList<>(user.getHousehold().getTasks()), selectedDate));
         } else {
             User user= ctx.sessionAttribute("user");
             ctx.attribute("firstName", user.getFirstName());
-            ctx.attribute("tasks", user.getTasks());
+            ctx.attribute("tasks", filterTasksByDate(user.getTasks(), selectedDate));
         }
         ctx.render("templates/dashboard.html");
 
-
         }
+
+    private static List<Task> filterTasksByDate(List<Task> tasks, LocalDate date){
+        List<Task> filtered = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDate()!= null && task.getDate().equals(date)) {
+                filtered.add(task);
+            }
+        }
+        return filtered;
+    }
 
     private static void markTaskAsDone(Context ctx) {
         int id = Integer.parseInt(ctx.pathParam("id"));

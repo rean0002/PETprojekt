@@ -81,3 +81,6 @@ labelProgressBar.textContent="";
 }
 
 }
+function skiftDato(valgtDato) {
+    window.location.href = "/dashboard?date=" + valgtDato;
+}

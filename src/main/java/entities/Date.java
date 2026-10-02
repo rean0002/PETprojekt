@@ -18,4 +18,11 @@ public class Date {
         return formattedDate;
     }
 
+    public static String date(LocalDate dato){
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("EEEE dd. MMMM", new Locale("da"));
+        String formattedDate = dato.format(myFormatObj);
+
+        return formattedDate;
+    }
+
 }

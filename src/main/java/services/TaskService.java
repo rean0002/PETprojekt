@@ -5,15 +5,15 @@ import entities.Task;
 import entities.User;
 import entities.TaskCategory;
 import entities.TaskFrequency;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
 public class TaskService {
 
     static int nextId = 6;
 
-    public Task createTask(String title, String description, User user, String categoryStr, String frequencyStr) throws IllegalTaskDataException {
+    public Task createTask(String title, String description, User user, String categoryStr, String frequencyStr, String dateStr, String timeStr) throws IllegalTaskDataException {
 
         if (title == null || title.isBlank()){
             throw new IllegalTaskDataException("Udfyld venligst en titel");
@@ -44,7 +44,29 @@ public class TaskService {
             throw new IllegalTaskDataException("Ugyldig frekvens valgt");
         }
 
+        if (dateStr == null || dateStr.isBlank()){
+            throw new IllegalTaskDataException("Vælg venligst en dato");
+        }
+        LocalDate date;
+        try {
+            date = LocalDate.parse(dateStr);
+        } catch (DateTimeParseException e) {
+            throw new IllegalTaskDataException("Ugyldig dato");
+        }
+        LocalTime time = null;
+        if (timeStr != null && !timeStr.isBlank()){
+            try {
+                time = LocalTime.parse(timeStr);
+            } catch (DateTimeParseException e) {
+                throw new IllegalTaskDataException("Ugyldigt tidspunkt");
+            }
+        }
+
         Task task = new Task(nextId++, title, description, user, category, frequency);
+        task.setDate(date);
+        if (time != null) {
+            task.setTime(time);
+        }
         user.addTask(task);
 
         return task;

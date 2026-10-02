@@ -23,7 +23,13 @@
             <div class="header">
                 <h1>Velkommen</h1>
                 <h2 th:text="${firstName}">Fornavn</h2>
-                <div id="dato-box" th:text="${date}">dato felt</div>
+                <select id="dato-box" onchange="skiftDato(this.value)">
+                    <option th:each="day, dayStat : ${next7Days}"
+                            th:value="${day}"
+                            th:text="${next7DayLabels[dayStat.index]}"
+                            th:selected="${day == selectedDate}">
+                    </option>
+                </select>
             </div>
         </div>
 
@@ -38,7 +44,7 @@
         </div>
         <div class="idag-ugen">
             <p>I dag</p>
-            <a href="">Se hele ugen</a>
+            <a href="">Se i morgen</a>
         </div>
 
         <!-- tasks -->

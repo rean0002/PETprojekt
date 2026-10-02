@@ -46,11 +46,21 @@ public class Task implements Comparable<Task> {
         return taskCategory;
     }
 
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
+    }
+
     public String getTitle() {
         return title;
     }
 
     public int getId() {return id;}
+
+    public LocalDate getDate() {return date;}
 
     public boolean isDone() {return isDone;}
 
@@ -59,6 +69,7 @@ public class Task implements Comparable<Task> {
     public String getDescription() {
         return description;
     }
+
 
     public User getResponsibleUser() {return responsibleUser;}
 

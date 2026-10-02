@@ -50,7 +50,7 @@ h2{
     margin-top: 4rem;
     width: calc(100% - 24px);
     box-sizing: border-box;
-    height: 150px;
+    height: 152px;
 
     display: flex;
     flex-direction: column;
@@ -72,14 +72,14 @@ h2{
     text-align: center;
     align-content: center;
     font-family: Inter;
-    font-size: 18px;
+    font-size: 17px;
     font-style: normal;
     font-weight: 600;
     line-height: 150%;
     border-radius: 8px;
     background: #FEF8EC;
     width: 208px;
-    height: 33px;
+    height: 43px;
 }
 
 #profilBtn{

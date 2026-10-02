@@ -66,7 +66,9 @@ public class UserService {
             throw new IllegalUserDataException("email address is already used by another user");
         }
 
-        User user=new User(email, password, firstName, lastName);
+
+
+        User user=new User(email, password, UtilService.capitalizeFirst(firstName), UtilService.capitalizeFirst(lastName));
 
         addUser(user);
 

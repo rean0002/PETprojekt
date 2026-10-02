@@ -1,4 +1,4 @@
-import java.util.Random;
+package Sandkasse;
 
 public class code {
 

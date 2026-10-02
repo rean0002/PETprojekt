@@ -11,19 +11,19 @@ import java.util.List;
 
 public class TaskService {
 
-    static List<Task> tasks = new ArrayList<>(); //bruger vi denne ?
+    //static List<Task> tasks = new ArrayList<>(); //bruger vi denne ?
     static int nextId = 6;   //bruger vi denne ?
 
-    public void addTask(String title, String description, User user, TaskCategory category, TaskFrequency frequency) {
+   /* public void addTask(String title, String description, User user, TaskCategory category, TaskFrequency frequency) {
 
         Task task = new Task( nextId++, title, description, user, category, frequency);
 
         tasks.add(task);
-    }
+    }*/
 
-    public List<Task> getTasks() {
+   /* public List<Task> getTasks() {
         return tasks;
-    }
+    }*/
 
     public Task createTask(String title, String description, User user, String categoryStr, String frequencyStr) throws IllegalTaskDataException {
 

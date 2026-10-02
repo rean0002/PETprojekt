@@ -73,10 +73,9 @@
                 <div id="field-ansvarlig" class="field input">
                     <label for="ansvarlig">Ansvarlig</label>
                     <select id="ansvarlig" name="ansvarlig">
-                        <option value="Rebecca">Rebecca</option>
-                        <option value="Olga">Olga</option>
-                        <option value="Alexander">Alexander</option>
-                        <option value="Rasmus">Rasmus</option>
+                        <option th:each="member : ${household.members}"
+                                th:value="${member.firstName}"
+                                th:text="${member.firstName}">name option</option>
                     </select>
                 </div>
 

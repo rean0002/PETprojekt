@@ -66,4 +66,6 @@ public class Household {
         members.add(user);
     }
 
+    public void addMember(User user){members.add(user);}
+
 }

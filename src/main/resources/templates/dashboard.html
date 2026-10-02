@@ -48,7 +48,7 @@
                 <img th:if="${!task.isDone and !husstand}" style="grid-area: box-1" src="svg/person-icon-orange.svg">
                 <p class="initials" th:if="${!task.isDone and husstand}" th:text="${task.responsibleUser.initials}" style="grid-area: box-1" ></p>
                 <img th:if="${task.isDone}" style="grid-area: box-1" src="svg/flueben.svg">
-                <p class="taskHeader" th:text="${task.title}" style="grid-area: box-2">button header</p>
+                <p class="taskHeader" th:classappend="${task.isDone} ? 'task-new-text'" th:text="${task.title}" style="grid-area: box-2">button header</p>
                 <p class="taskDetails" th:text="${task.description}" style="grid-area: box-3">button details</p>
             </div>
 
@@ -63,7 +63,7 @@
             </div>
 
             <div id="btn-plus">
-                <a href="opret-opgave.html">
+                <a href="opret-opgave">
                     <img src="svg/plusknap.svg" alt="knap" class="btn_circle">
                 </a>
             </div>

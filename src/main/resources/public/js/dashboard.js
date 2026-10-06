@@ -39,7 +39,12 @@ for(const t of taskElm){
             t.classList.add("task-new-background");
             t.classList.add("completed")
 
-            fetch("/tasks/" + t.dataset.id + "/done", { method: "POST" });
+            fetch("/tasks/" + t.dataset.id + "/done", { method: "POST" })
+            .then(res => res.json())
+                .then(data => {
+                    const details = t.querySelector(".taskDetails");
+                    details.textContent = "Udført klokken "+data.completedAt;
+                });
 
 
             const img = t.querySelector("img");
@@ -57,16 +62,8 @@ for(const t of taskElm){
             const header=t.querySelector(".taskHeader");
             header.classList.add("task-new-text");
 
-        const details = t.querySelector(".taskDetails");
 
-       /* if (details) {
-            const now = new Date();
 
-            const hours = String(now.getHours()).padStart(2, "0");
-            const minutes = String(now.getMinutes()).padStart(2, "0");
-
-            details.textContent = "Udført klokken " + hours + ":" + minutes;
-        }*/
 
 
             updateProgressBar();

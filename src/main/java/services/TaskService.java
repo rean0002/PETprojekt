@@ -1,10 +1,7 @@
 package services;
 
 import Exceptions.IllegalTaskDataException;
-import entities.Task;
-import entities.User;
-import entities.TaskCategory;
-import entities.TaskFrequency;
+import entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +10,7 @@ public class TaskService {
 
     static int nextId = 6;
 
-    public Task createTask(String title, String description, User user, String categoryStr, String frequencyStr) throws IllegalTaskDataException {
+    public Task createTask(String title, String description, User user, String categoryStr, String frequencyStr, Household household) throws IllegalTaskDataException {
 
         if (title == null || title.isBlank()){
             throw new IllegalTaskDataException("Udfyld venligst en titel");
@@ -45,8 +42,17 @@ public class TaskService {
         }
 
         Task task = new Task(nextId++, title, description, user, category, frequency);
-        user.addTask(task);
+        household.addTask(task);
 
         return task;
+    }
+
+    public Task findTask(int id, Household household) {
+        Task task=null;
+        for (Task t:household.getTasks()){
+            if (t.getId()==id){
+                task=t;
+            }
+        } return task;
     }
 }

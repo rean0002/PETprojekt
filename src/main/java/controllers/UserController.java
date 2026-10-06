@@ -1,25 +1,28 @@
 package controllers;
 
 import Exceptions.IllegalUserDataException;
+import entities.Task;
 import entities.User;
 import factories.UserFactory;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;
 import org.jetbrains.annotations.NotNull;
 import services.DateService;
+import services.TaskService;
 import services.UserService;
 
 import javax.swing.text.DateFormatter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 
 
 public class UserController {
 
     static UserService userService = new UserService();
-    static UserFactory userFactory = new UserFactory();
     static DateService dateservice = new DateService();
+    static TaskService taskService = new TaskService();
 
     public static void setRoutes(JavalinConfig config){
         config.routes.post("/login", ctx -> login(ctx));
@@ -63,7 +66,7 @@ public class UserController {
         } else {
             User user= ctx.sessionAttribute("user");
             ctx.attribute("firstName", user.getFirstName());
-            ctx.attribute("tasks", user.getTasks());
+            ctx.attribute("tasks", user.getHousehold().getTasks());
         }
         ctx.render("templates/dashboard.html");
 
@@ -73,8 +76,14 @@ public class UserController {
     private static void markTaskAsDone(Context ctx) {
         int id = Integer.parseInt(ctx.pathParam("id"));
         User user = ctx.sessionAttribute("user");
-        user.findTask(id).setDone(true);
-        ctx.status(204);
+        Task task=taskService.findTask(id, user.getHousehold());
+        task.setDone(true);
+
+        String tidspunkt = task.getCompletedAt()
+                .format(DateTimeFormatter.ofPattern("HH:mm"));
+
+        ctx.json(Map.of("completedAt", tidspunkt));
+
     }
 
 

@@ -34,12 +34,11 @@ public class Household {
     }
 
     public TreeSet<Task>getTasks(){
-        for (User u: members){
-            for(Task task:u.getTasks()){
-                tasks.add(task);
-            }
-        }
         return tasks;
+    }
+
+    public void setTasks(TreeSet<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public ArrayList<User> getMembers() {

@@ -17,7 +17,7 @@ public class UserService {
     public User getUser(String email) throws IllegalUserDataException{
         User user=null;
 
-        for (User u : UserFactory.getUsers()) {
+        for (User u : UserFactory.currentHousehold().getMembers()) {
             if (u.getEmail().equals(email)) {
                 user=u;
             } }
@@ -81,7 +81,7 @@ public class UserService {
     public User getUserByFirstName(String firstName) throws IllegalUserDataException {
         User user = null;
 
-        for (User u : UserFactory.getUsers()) {
+        for (User u : UserFactory.currentHousehold().getMembers()) {
             if (u.getFirstName().equals(firstName)) {
                 user = u;
             }

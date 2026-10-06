@@ -74,6 +74,8 @@ public class Task implements Comparable<Task> {
        this.completedAt=LocalDateTime.now();
     }
 
+    public LocalDateTime getCompletedAt() {return completedAt;}
+
     public void setResponsibleUser(User responsibleUser) {this.responsibleUser = responsibleUser;}
 
     @Override

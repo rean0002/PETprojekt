@@ -6,6 +6,7 @@ import entities.User;
 import factories.UserFactory;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;
+import mappers.ConnectionPool;
 import org.jetbrains.annotations.NotNull;
 import services.DateService;
 import services.TaskService;
@@ -21,13 +22,21 @@ import java.util.Map;
 
 
 public class UserController {
+    private ConnectionPool connectionPool;
+    private UserService userService;
+    private DateService dateservice;
+    private TaskService taskService;
 
-    static UserService userService = new UserService();
-    static UserFactory userFactory = new UserFactory();
-    static DateService dateservice = new DateService();
-    static TaskService taskService = new TaskService();
+    public UserController (ConnectionPool connectionpool){
+        this.connectionPool = connectionPool;
+        this.userService=new UserService();
+        this.dateservice=new DateService();
+        this.taskService=new TaskService();
+    }
 
-    public static void setRoutes(JavalinConfig config){
+
+
+    public void setRoutes(JavalinConfig config){
         config.routes.post("/login", ctx -> login(ctx));
         config.routes.get("/login", ctx -> ctx.redirect("/index.html"));
 
@@ -41,7 +50,7 @@ public class UserController {
     }
 
 
-    public static void login(Context ctx){
+    public void login(Context ctx){
         String email = ctx.formParam("email");
         String password = ctx.formParam("password");
 
@@ -55,7 +64,7 @@ public class UserController {
         }
     }
 
-    public static void renderDashboard(Context ctx) {
+    public void renderDashboard(Context ctx) {
 
         boolean husstand = "alle".equals(ctx.queryParam("view"));
         ctx.attribute("husstand", husstand); //det afgøres om vi er på husstand eller users dashboard, ved at kigge på url view, hvis view=alle vil boolean være true
@@ -70,7 +79,7 @@ public class UserController {
 
         }
 
-    private static void setTaskAttributes(Context ctx, User user, LocalDate selectedDate, boolean husstand) {
+    private void setTaskAttributes(Context ctx, User user, LocalDate selectedDate, boolean husstand) {
         List <Task> filteredBydate = filterTasksByDate(user.getHousehold().getTasks(), selectedDate);
         List <Task> filteredByUser = filterTaskByUser(filteredBydate, user);
 
@@ -85,7 +94,7 @@ public class UserController {
 
     }
 
-    private static void setDateAttributes(Context ctx, LocalDate selectedDate) {
+    private void setDateAttributes(Context ctx, LocalDate selectedDate) {
         String date = dateservice.getDate(selectedDate); //selectedDate formatteres til "EEEE dd. MMMM"
         ctx.attribute("date", date);
         List<LocalDate> next7Days = dateservice.getNext7Days(); //laves altid på dagens dato
@@ -100,7 +109,7 @@ public class UserController {
 
     }
 
-    private static LocalDate resolveSelectedDate(Context ctx) {
+    private LocalDate resolveSelectedDate(Context ctx) {
 
         String dateParam = ctx.queryParam("date"); //hvilken dato står i url?
         if (dateParam == null){ //hvis der ikke er en dato i url, sæt dato til i dag
@@ -110,7 +119,7 @@ public class UserController {
         }
     }
 
-    private static List<Task> filterTasksByDate(List<Task> tasks, LocalDate date){
+    private List<Task> filterTasksByDate(List<Task> tasks, LocalDate date){
         List<Task> filtered = new ArrayList<>();
         for (Task task : tasks) {
             if (task.getDate()!= null && task.getDate().equals(date)) {
@@ -121,7 +130,7 @@ public class UserController {
     }
 
 
-    private static List<Task> filterTaskByUser (List<Task> tasks, User user){
+    private List<Task> filterTaskByUser (List<Task> tasks, User user){
         List<Task> filtered = new ArrayList<>();
         for (Task task : tasks) {
             if (task.getResponsibleUser() != null && task.getResponsibleUser().equals(user)) {
@@ -132,7 +141,7 @@ public class UserController {
     }
 
 
-    private static void markTaskAsDone(Context ctx) {
+    private void markTaskAsDone(Context ctx) {
         int id = Integer.parseInt(ctx.pathParam("id"));
         User user = ctx.sessionAttribute("user");
         Task task=taskService.findTask(id, user.getHousehold());
@@ -146,7 +155,7 @@ public class UserController {
     }
 
 
-    public static void createUser(Context ctx){
+    public void createUser(Context ctx){
 
         String firstName = ctx.formParam("firstName");
         String lastName = ctx.formParam("lastName");

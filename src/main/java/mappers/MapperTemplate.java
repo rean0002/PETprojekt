@@ -17,7 +17,7 @@ public class MapperTemplate {
             stm.executeUpdate(); //udfør opdatering
             try (ResultSet rs = stm.getGeneratedKeys()) {
                 if (rs.next()) {
-                    argument.setId(rs.getInt("tabel_id")); //tilføj id til aktuelle User objekt
+                    user.setId(rs.getInt("tabel_id")); //tilføj id til aktuelle User objekt
                 } else throw new DatabaseException("argument kunne ikke oprettes");
             }
 

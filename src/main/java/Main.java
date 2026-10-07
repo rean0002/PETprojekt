@@ -10,7 +10,7 @@ import io.javalin.rendering.template.JavalinThymeleaf;
 public class Main {
 
     public static void main(String[] args){
-        UserFactory.createUsers();
+        UserFactory.currentHousehold();
 
         var app = Javalin.create(config -> {
             config.staticFiles.add("/public");

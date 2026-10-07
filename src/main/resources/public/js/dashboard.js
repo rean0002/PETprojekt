@@ -39,7 +39,12 @@ for(const t of taskElm){
             t.classList.add("task-new-background");
             t.classList.add("completed")
 
-            fetch("/tasks/" + t.dataset.id + "/done", { method: "POST" });
+            fetch("/tasks/" + t.dataset.id + "/done", { method: "POST" })
+            .then(res => res.json())
+                .then(data => {
+                    const details = t.querySelector(".taskDetails");
+                    details.textContent = "Udført klokken "+data.completedAt;
+                });
 
 
             const img = t.querySelector("img");
@@ -56,6 +61,9 @@ for(const t of taskElm){
 
             const header=t.querySelector(".taskHeader");
             header.classList.add("task-new-text");
+
+
+
 
 
             updateProgressBar();
@@ -79,6 +87,8 @@ if (counter===taskElm.length){
 progressBar.classList.add("newColor");
 labelProgressBar.textContent="";
 }
+
+
 
 }
 function skiftDato(valgtDato) {

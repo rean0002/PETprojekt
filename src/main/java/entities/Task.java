@@ -1,6 +1,7 @@
 package entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Task implements Comparable<Task> {
@@ -16,6 +17,7 @@ public class Task implements Comparable<Task> {
     private LocalTime time;
     private boolean reassign=false;
     private boolean isDone=false;
+    private LocalDateTime completedAt;
 
     public Task(int id, String title, String description, User responsibleUser, TaskCategory taskCategory, TaskFrequency taskFrequency){
         this.id = id;
@@ -64,7 +66,13 @@ public class Task implements Comparable<Task> {
 
     public boolean isDone() {return isDone;}
 
-    public void setDone(boolean done) {isDone = done;}
+    public void setDone(boolean done) {
+        isDone = done;
+
+        if(done){
+        setCompletedAt();}
+    }
+
 
     public String getDescription() {
         return description;
@@ -72,6 +80,12 @@ public class Task implements Comparable<Task> {
 
 
     public User getResponsibleUser() {return responsibleUser;}
+
+    public void setCompletedAt() {
+       this.completedAt=LocalDateTime.now();
+    }
+
+    public LocalDateTime getCompletedAt() {return completedAt;}
 
     public void setResponsibleUser(User responsibleUser) {this.responsibleUser = responsibleUser;}
 

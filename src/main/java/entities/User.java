@@ -17,7 +17,7 @@ public class User {
 
     private Household household;
 
-    private ArrayList <Task> tasks= new ArrayList<>();
+
 
     // rigtige konstruktør
     public User(int id, String email, String password, int point, Role role, String firstName, String lastName) {
@@ -29,21 +29,13 @@ public class User {
         this.firstName= firstName;
         this.lastName= lastName;
     }
-    public User(String email, String password, String firstName, String lastName, Household household) {
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName=lastName;
-        this.household=household;
-
-    }
     public User(String email, String password, String firstName, String lastName) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName=lastName;
-
     }
+
 
 
     // opgave kostruktør
@@ -52,9 +44,6 @@ public class User {
         this.password = password;
     }
 
-    public void addTask(Task task) {
-        tasks.add(task);
-    }
 
 
 
@@ -69,17 +58,19 @@ public class User {
     public int getPoint() { return point; }
     public Role getRole() { return role; }
 
-    public ArrayList<Task> getTasks() { return tasks; }
-
-    public void setTasks(ArrayList<Task> tasks) { this.tasks = tasks; }
 
     public String getInitials(){
         return String.valueOf(firstName.charAt(0)) +String.valueOf(lastName.charAt(0));
     }
 
-    public Household getHousehold() {return household;}
 
-    public void setHousehold(Household household) {this.household = household;}
+    public Household getHousehold() {
+        return household;
+    }
+
+    public void setHousehold(Household household) {
+        this.household = household;
+    }
 
     @Override
     public String toString() {
@@ -91,14 +82,7 @@ public class User {
                 '}';
     }
 
-    public Task findTask(int id) {
-        Task task=null;
-        for (Task t:tasks){
-            if (t.getId()==id){
-                task=t;
-            }
-        } return task;
-    }
+
 
 
 

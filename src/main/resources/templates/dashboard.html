@@ -55,7 +55,8 @@
                 <p class="initials" th:if="${!task.isDone and husstand}" th:text="${task.responsibleUser.initials}" style="grid-area: box-1" ></p>
                 <img th:if="${task.isDone}" style="grid-area: box-1" src="svg/flueben.svg">
                 <p class="taskHeader" th:classappend="${task.isDone} ? 'task-new-text'" th:text="${task.title}" style="grid-area: box-2">button header</p>
-                <p class="taskDetails" th:text="${task.description}" style="grid-area: box-3">button details</p>
+                <p class="taskDetails" th:if="${!task.isDone}" th:text="${task.description}" style="grid-area: box-3">button details</p>
+                <p class="taskDetails" th:if="${task.isDone}" th:text="'Udført klokken ' + ${#temporals.format(task.completedAt, 'HH:mm')}" style="grid-area: box-3">button details</p>
             </div>
 
 

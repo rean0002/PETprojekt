@@ -28,7 +28,7 @@ public class TaskController {
     }
 
 
-    public static void opretOpgave(Context ctx) throws IllegalUserDataException {
+    public static void opretOpgave(Context ctx) throws IllegalTaskDataException, IllegalUserDataException{
         String title = ctx.formParam("titel");
         String beskrivelse = ctx.formParam("beskrivelse");
         String taskCategory = ctx.formParam("taskCategory");
@@ -39,11 +39,12 @@ public class TaskController {
 
         User user= ctx.sessionAttribute("user");
 
-        User ansvarligBruger = userService.getUserByFirstName(ctx.formParam("ansvarlig"));
+
+        User ansvarligBruger = userService.getUserByFirstName(ansvarlig); //kan der ikke bare stå ansvarlig?
 
 
         try{
-            taskService.createTask(title, beskrivelse, ansvarligBruger, taskCategory, gentages, dato, tidspunkt);
+            taskService.createTask(title, beskrivelse, ansvarligBruger, taskCategory, gentages, dato, tidspunkt, user.getHousehold());
             UserController.renderDashboard(ctx);
         }catch (IllegalTaskDataException e){
             ctx.status(400);

@@ -40,7 +40,7 @@ public class TaskController {
         User user= ctx.sessionAttribute("user");
 
 
-        User ansvarligBruger = userService.getUserByFirstName(ansvarlig); //kan der ikke bare stå ansvarlig?
+        User ansvarligBruger = userService.getUserByFirstName(ansvarlig);
 
 
         try{

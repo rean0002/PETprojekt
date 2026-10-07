@@ -79,15 +79,17 @@ public class UserController {
         }
         ctx.attribute("next7DayLabels", next7DayLabels);
 
+        User user= ctx.sessionAttribute("user");
+        List <Task> filteredBydate = filterTasksByDate(user.getHousehold().getTasks(), selectedDate);
+        List <Task> filteredByUser = filterTaskByUser(filteredBydate, user);
+
 
         if(husstand){
-            User user= ctx.sessionAttribute("user");
             ctx.attribute("firstName", user.getHousehold().getName());
-            ctx.attribute("tasks", filterTasksByDate(new ArrayList<>(user.getHousehold().getTasks()), selectedDate));
+            ctx.attribute("tasks", filteredBydate);
         } else {
-            User user= ctx.sessionAttribute("user");
             ctx.attribute("firstName", user.getFirstName());
-            ctx.attribute("tasks", filterTasksByDate(user.getTasks(), selectedDate));
+            ctx.attribute("tasks", filteredByUser);
         }
         ctx.render("templates/dashboard.html");
 
@@ -102,6 +104,18 @@ public class UserController {
         }
         return filtered;
     }
+
+
+    private static List<Task> filterTaskByUser (List<Task> tasks, User user){
+        List<Task> filtered = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getResponsibleUser() != null && task.getResponsibleUser().equals(user)) {
+                filtered.add(task);
+            }
+        }
+        return filtered;
+    }
+
 
     private static void markTaskAsDone(Context ctx) {
         int id = Integer.parseInt(ctx.pathParam("id"));

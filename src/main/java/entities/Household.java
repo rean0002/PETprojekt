@@ -9,13 +9,14 @@ public class Household {
 
     private String name;
     private ArrayList<User> members;
-    private TreeSet<Task> tasks;
+   // private TreeSet<Task> tasks;
+    private ArrayList <Task> tasks;
     private final String code;
 
     public Household (String name){
         this.name=name;
         members= new ArrayList<>();
-        tasks=new TreeSet<>();
+        tasks=new ArrayList<>();
         this.code= HouseholdService.code();
     }
 
@@ -33,13 +34,16 @@ public class Household {
         tasks.add(task);
     }
 
-    public TreeSet<Task>getTasks(){
+    public ArrayList<Task>getTasks(){
         return tasks;
     }
 
-    public void setTasks(TreeSet<Task> tasks) {
+    /*public void setTasks(TreeSet<Task> tasks) {
         this.tasks = tasks;
-    }
+    }*/
+
+    public void setTasks(ArrayList<Task> tasks) {this.tasks = tasks;}
+
 
     public ArrayList<User> getMembers() {
         return members;

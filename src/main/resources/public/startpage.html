@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/color.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/loginStyle.css" >
+    <link rel="stylesheet" href="css/startpageStyle.css" >
+
+   <meta charset="UTF-8">
+    <title>Velkommen</title>
+    <meta http-equiv="refresh" content="2.5 ;url=index.html">
+</head>
+<body>
+<div class="app-container">
+    <main>
+        <div class="backgroundbox">
+
+            <div class="logo-container">
+                <img id="logo" src="svg/startpage/clean.svg" alt="Logo">
+            </div>
+
+
+        </div>
+    </main>
+</div>
+
+<script>
+    const logoer = ["svg/startpage/dishes.svg", "svg/startpage/dust.svg", "svg/startpage/trash.svg", "svg/startpage/logo.orange.svg"   ];
+    let index = 0;
+    const logoElement = document.querySelector("#logo");
+
+    const interval = setInterval(() => {
+        index++;
+        if (index >= logoer.length) {
+            clearInterval(interval); // stop billedskift
+            return;
+        }
+        logoElement.src = logoer[index];
+    }, 400);
+</script>
+
+</body>
+</html>

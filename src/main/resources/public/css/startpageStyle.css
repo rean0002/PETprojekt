@@ -1,0 +1,20 @@
+.logo-container{
+    display: flex;
+    width: 250px;
+
+
+}
+
+.backgroundbox{
+    display: flex;
+
+    padding-top: 290px;
+
+    justify-content: center;
+    align-items: start;
+
+}
+
+.logo-container img{
+    width: 250px;
+}

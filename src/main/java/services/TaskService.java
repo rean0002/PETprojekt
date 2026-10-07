@@ -66,9 +66,9 @@ public class TaskService {
             }
         }
 
-        Task task = new Task(nextId++, title, description, user, category, frequency);
+        Task task = new Task(nextId++, title, description, user, category, frequency, date);
         household.addTask(task);
-        task.setDate(date);
+        //task.setDate(date);
         if (time != null) {
             task.setTime(time);
         }

@@ -1,5 +1,7 @@
 package mappers;
 
+import entities.User;
+
 import java.sql.*;
 
 public class MapperTemplate {
@@ -27,5 +29,32 @@ public class MapperTemplate {
     }
 
      */
+
+    /*public User getUserByUserName(String userName) throws DatabaseException{
+        User user = null;
+        String query = "SELECT laaner_id, fornavn, efternavn, adresse, postnr, password, by " +
+                "FROM laaner JOIN postnummer USING (postnr)" +
+                "WHERE username = ?";
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement stm = connection.prepareStatement(query)) {
+            stm.setString(1, userName);
+            try (ResultSet rs = stm.executeQuery();) {
+                if (rs.next()) {
+                    int id = rs.getInt("laaner_id");
+                    String firstName = rs.getString("fornavn");
+                    String lastName = rs.getString("efternavn");
+                    String address = rs.getString("adresse");
+                    int zip = rs.getInt("postnr");
+                    String city = rs.getString("by");
+                    String password = rs.getString("password");
+                    user = new User(id, userName, password, firstName, lastName, address, zip, city);
+                }
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            throw new DatabaseException("Søgning efter brugeren fejlede");
+        }
+        return user;
+    }*/
 
 }

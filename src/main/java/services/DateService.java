@@ -10,11 +10,9 @@ public class DateService {
 
     public String getDate(LocalDate dato){
         return Date.date(dato);
-    }
-    public String getDate(){
+    } //formatterer input dato
 
-       return Date.date();
-    }
+    public String getDate(){return Date.date();}
 
     public List<LocalDate> getNext7Days(){
         ArrayList <LocalDate> week = new ArrayList<>();

@@ -58,28 +58,19 @@ public class UserController {
     public static void renderDashboard(Context ctx) {
 
         boolean husstand = "alle".equals(ctx.queryParam("view"));
-        ctx.attribute("husstand", husstand);
-        String dateParam = ctx.queryParam("date");
-        LocalDate selectedDate;
+        ctx.attribute("husstand", husstand); //det afgøres om vi er på husstand eller users dashboard, ved at kigge på url view, hvis view=alle vil boolean være true
 
-        if (dateParam == null){
-            selectedDate = LocalDate.now();
-        }else {
-            selectedDate = LocalDate.parse(dateParam);
-        }
-        String date = dateservice.getDate(selectedDate);
-        ctx.attribute("date", date);
-        List<LocalDate> next7Days = dateservice.getNext7Days();
-        ctx.attribute("next7Days", next7Days);
-        ctx.attribute("selectedDate", selectedDate);
-
-        List<String> next7DayLabels = new ArrayList<>();
-        for (LocalDate day : next7Days) {
-            next7DayLabels.add(dateservice.getDate(day));
-        }
-        ctx.attribute("next7DayLabels", next7DayLabels);
+        LocalDate selectedDate = resolveSelectedDate(ctx);
+        setDateAttributes(ctx, selectedDate);
 
         User user= ctx.sessionAttribute("user");
+        setTaskAttributes(ctx, user, selectedDate, husstand);
+
+        ctx.render("templates/dashboard.html");
+
+        }
+
+    private static void setTaskAttributes(Context ctx, User user, LocalDate selectedDate, boolean husstand) {
         List <Task> filteredBydate = filterTasksByDate(user.getHousehold().getTasks(), selectedDate);
         List <Task> filteredByUser = filterTaskByUser(filteredBydate, user);
 
@@ -91,9 +82,33 @@ public class UserController {
             ctx.attribute("firstName", user.getFirstName());
             ctx.attribute("tasks", filteredByUser);
         }
-        ctx.render("templates/dashboard.html");
 
+    }
+
+    private static void setDateAttributes(Context ctx, LocalDate selectedDate) {
+        String date = dateservice.getDate(selectedDate); //selectedDate formatteres til "EEEE dd. MMMM"
+        ctx.attribute("date", date);
+        List<LocalDate> next7Days = dateservice.getNext7Days(); //laves altid på dagens dato
+        ctx.attribute("next7Days", next7Days);
+        ctx.attribute("selectedDate", selectedDate);
+
+        List<String> next7DayLabels = new ArrayList<>();
+        for (LocalDate day : next7Days) {
+            next7DayLabels.add(dateservice.getDate(day));
         }
+        ctx.attribute("next7DayLabels", next7DayLabels);
+
+    }
+
+    private static LocalDate resolveSelectedDate(Context ctx) {
+
+        String dateParam = ctx.queryParam("date"); //hvilken dato står i url?
+        if (dateParam == null){ //hvis der ikke er en dato i url, sæt dato til i dag
+           return LocalDate.now();
+        }else {
+            return LocalDate.parse(dateParam); //ellers skal url dato parses
+        }
+    }
 
     private static List<Task> filterTasksByDate(List<Task> tasks, LocalDate date){
         List<Task> filtered = new ArrayList<>();

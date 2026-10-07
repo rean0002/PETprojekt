@@ -19,21 +19,16 @@ public class Task implements Comparable<Task> {
     private boolean isDone=false;
     private LocalDateTime completedAt;
 
-    public Task(int id, String title, String description, User responsibleUser, TaskCategory taskCategory, TaskFrequency taskFrequency){
+    public Task(int id, String title, String description, User responsibleUser, TaskCategory taskCategory, TaskFrequency taskFrequency, LocalDate date){
         this.id = id;
         this.title=title;
         this.description=description;
         this.responsibleUser = responsibleUser;
         this.taskCategory=taskCategory;
         this.taskFrequency=taskFrequency;
+        this.date=date;
         //this.taskCategory=entities.TaskCategory.valueOf(taskCategory.toString()); //brug denne syntax når vi bruger database
         //this.taskFrequency=entities.TaskFrequency.valueOf(taskFrequency.toString());
-    }
-    public Task(int id, String title, String description, User responssibleUser){
-        this.id = id;
-        this.title=title;
-        this.description=description;
-        this.responsibleUser=responssibleUser;
     }
 
 

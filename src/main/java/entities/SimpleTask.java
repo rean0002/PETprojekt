@@ -1,5 +1,7 @@
 package entities;
 
+import java.time.LocalDate;
+
 public class SimpleTask extends Task {
 
     //Class entities.SimpleTask extends entities.Task {
@@ -10,8 +12,8 @@ public class SimpleTask extends Task {
 
     private boolean isdone = false;
 
-    SimpleTask (int ID, String title, String description, User user, TaskCategory taskCategory, TaskFrequency taskFrequency){
-        super(ID, title, description, user, taskCategory, taskFrequency);
+    SimpleTask (int ID, String title, String description, User user, TaskCategory taskCategory, TaskFrequency taskFrequency, LocalDate date){
+        super(ID, title, description, user, taskCategory, taskFrequency, date);
     }
 
     public void markAsDone(){

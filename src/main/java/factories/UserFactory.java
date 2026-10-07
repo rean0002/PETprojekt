@@ -3,6 +3,7 @@ package factories;
 import entities.*;
 import services.TaskService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -76,7 +77,8 @@ public class UserFactory {
                 "Tør bordene af",
                 user,
                 TaskCategory.HOME,
-                TaskFrequency.DAILY
+                TaskFrequency.DAILY,
+                LocalDate.of(2026, 10, 7)
         ));
 
         household.addTask(new Task(
@@ -85,7 +87,8 @@ public class UserFactory {
                 "soveværelse",
                 user,
                 TaskCategory.CLEANING,
-                TaskFrequency.WEEKLY
+                TaskFrequency.WEEKLY,
+                LocalDate.of(2026, 10, 7)
         ));
 
         household.addTask(new Task(
@@ -94,7 +97,8 @@ public class UserFactory {
                 "find på 2 retter",
                 user,
                 TaskCategory.FOOD,
-                TaskFrequency.NONE
+                TaskFrequency.NONE,
+                LocalDate.of(2026, 10, 8)
         ));
 
     }
@@ -109,7 +113,8 @@ public class UserFactory {
                 "efter aftensmad",
                 user,
                 TaskCategory.TRASH,
-                TaskFrequency.WEEKLY
+                TaskFrequency.WEEKLY,
+                LocalDate.of(2026, 10, 7)
         ));
         household.addTask(new Task(
                 nextId++,
@@ -117,7 +122,8 @@ public class UserFactory {
                 "husk fødselsdagskort",
                 user,
                 TaskCategory.HOME,
-                TaskFrequency.NONE
+                TaskFrequency.NONE,
+                LocalDate.of(2026, 10, 8)
         ));
 
     }

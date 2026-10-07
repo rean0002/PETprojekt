@@ -5,6 +5,7 @@ import entities.User;
 import entities.TaskCategory;
 import entities.TaskFrequency;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,8 @@ public class TaskFactory {
                 "Tør bordene af",
                 users.get(0),
                 TaskCategory.HOME,
-                TaskFrequency.DAILY
+                TaskFrequency.DAILY,
+                LocalDate.of(2026, 10, 7)
         ));
 
         tasks.add(new Task(
@@ -30,7 +32,8 @@ public class TaskFactory {
                 "Vask alt farvet tøj på 40 grader",
                 users.get(1),
                 TaskCategory.CLEANING,
-                TaskFrequency.WEEKLY
+                TaskFrequency.WEEKLY,
+                LocalDate.of(2026, 10, 7)
         ));
 
 

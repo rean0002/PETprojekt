@@ -13,10 +13,15 @@ const toggle =document.querySelector('#vidergives');
 toggle.addEventListener("change", toggleChange)
 
 function toggleChange (){
+    const currentDate = urlParams.get('date');
+    let dateDel = "";
+    if (currentDate) {
+        dateDel = "&date=" + currentDate;
+    }
     if (toggle.checked) {
-        window.location.href = "/dashboard?view=alle";
+        window.location.href = "/dashboard?view=alle" + dateDel;
     } else {
-        window.location.href = "/dashboard?view=mig";
+        window.location.href = "/dashboard?view=mig" + dateDel;
     }
 }
 
@@ -92,5 +97,6 @@ labelProgressBar.textContent="";
 
 }
 function skiftDato(valgtDato) {
-    window.location.href = "/dashboard?date=" + valgtDato;
+    const recentView = urlParams.get('view');
+    window.location.href = "/dashboard?date=" + valgtDato + "&view=" + recentView;
 }

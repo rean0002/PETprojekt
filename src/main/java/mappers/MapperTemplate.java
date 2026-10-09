@@ -1,5 +1,6 @@
 /*package mappers;
 
+import Exceptions.DatabaseException;
 import entities.Household;
 import entities.User;
 

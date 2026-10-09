@@ -7,19 +7,11 @@ import java.time.LocalTime;
 public class Task implements Comparable<Task> {
 
     private int id;
-    private String title;
-    private String description;
-    private User responsibleUser;
-    private TaskCategory taskCategory;
-    private TaskFrequency taskFrequency;
+    private Routines routines;
+    private LocalDate dueDate;
+    private LocalTime completedAt;
 
-    private LocalDate date;
-    private LocalTime time;
-    private boolean reassign=false;
-    private boolean isDone=false;
-    private LocalDateTime completedAt;
-
-    public Task(int id, String title, String description, User responsibleUser, TaskCategory taskCategory, TaskFrequency taskFrequency, LocalDate date){
+    /*public Task(int id, String title, String description, User responsibleUser, TaskCategory taskCategory, TaskFrequency taskFrequency, LocalDate date){
         this.id = id;
         this.title=title;
         this.description=description;
@@ -29,60 +21,53 @@ public class Task implements Comparable<Task> {
         this.date=date;
         //this.taskCategory=entities.TaskCategory.valueOf(taskCategory.toString()); //brug denne syntax når vi bruger database
         //this.taskFrequency=entities.TaskFrequency.valueOf(taskFrequency.toString());
+    }*/
+
+    public Task (int id, Routines routines, LocalDate dueDate){
+        this.id=id;
+        this.routines = routines;
+        this.dueDate=dueDate;
+    }
+
+    public boolean isDone() {
+        return completedAt != null;
     }
 
 
-
-
-    public void reassignTask(){
-        reassign=true;
-    }
-
-
-    public TaskCategory getTaskCategory() {
-        return taskCategory;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public void setTime(LocalTime time) {
-        this.time = time;
-    }
 
     public String getTitle() {
-        return title;
+        return routines.getTitle();
     }
 
     public int getId() {return id;}
 
-    public LocalDate getDate() {return date;}
+    public LocalDate getDate() {return routines.getDate();}
 
-    public boolean isDone() {return isDone;}
 
-    public void setDone(boolean done) {
-        isDone = done;
 
-        if(done){
-        setCompletedAt();}
+    public void markAsDone() {
+        this.completedAt = LocalTime.now();
     }
 
 
     public String getDescription() {
-        return description;
+        return routines.getDescription();
     }
 
 
-    public User getResponsibleUser() {return responsibleUser;}
+    public User getResponsibleUser() {return routines.getResponsibleUser();}
 
     public void setCompletedAt() {
-       this.completedAt=LocalDateTime.now();
+       this.completedAt=LocalTime.now();
     }
 
-    public LocalDateTime getCompletedAt() {return completedAt;}
+    public void setTimeCompleted(LocalTime timeCompleted) {
+        this.completedAt = timeCompleted;
+    }
 
-    public void setResponsibleUser(User responsibleUser) {this.responsibleUser = responsibleUser;}
+    public LocalTime getCompletedAt() {return completedAt;}
+
+    public void setResponsibleUser(User responsibleUser) {routines.setResponsibleUser(responsibleUser);}
 
     @Override
     public int compareTo(Task other) {

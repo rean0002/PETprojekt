@@ -17,7 +17,7 @@ public class MapperTemplate {
             stm.executeUpdate(); //udfør opdatering
             try (ResultSet rs = stm.getGeneratedKeys()) {
                 if (rs.next()) {
-                    argument.setId(rs.getInt("tabel_id")); //tilføj id til aktuelle User objekt
+                    user.setId(rs.getInt("tabel_id")); //tilføj id til aktuelle User objekt
                 } else throw new DatabaseException("argument kunne ikke oprettes");
             }
 
@@ -56,5 +56,31 @@ public class MapperTemplate {
         }
         return user;
     }*/
+
+       public UserAndHouseholdDTO getUserAndHousehold (User user) throws DatabaseException{
+        Household household;
+        UserAndHouseholdDTO userAndHouseholdDTO=null;
+        String query = "SELECT name, household_id" +
+                "FROM households JOIN users_households USING (household_id)" +
+                "WHERE users.firstname = ?";
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement stm = connection.prepareStatement(query)) {
+            stm.setString(1, user.getFirstName());
+            try (ResultSet rs = stm.executeQuery();) {
+                if (rs.next()) {
+                    int id = rs.getInt("household_id");
+                    String name = rs.getString("navn");
+
+                    household = new Household(id, name);
+                    userAndHouseholdDTO = new UserAndHouseholdDTO(user, household);
+                }
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            throw new DatabaseException("Søgning efter brugeren fejlede");
+        }
+        return userAndHouseholdDTO;
+    }
+
 
 }

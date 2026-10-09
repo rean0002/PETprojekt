@@ -7,6 +7,7 @@ import java.util.TreeSet;
 
 public class Household {
 
+    private int id;
     private String name;
     private ArrayList<User> members;
    // private TreeSet<Task> tasks;
@@ -18,6 +19,13 @@ public class Household {
         members= new ArrayList<>();
         tasks=new ArrayList<>();
         this.code= HouseholdService.code();
+    }
+    public Household (int id, String name, String code){ //bruges af sql
+       this.id=id;
+        this.name=name;
+        this.code=code;
+        members= new ArrayList<>();
+        tasks=new ArrayList<>();
     }
 
 
@@ -55,4 +63,9 @@ public class Household {
 
     public void addMember(User user){members.add(user);}
 
+    public String getCode() {return code;}
+
+    public int getId() {return id;}
+
+    public void setId(int id) {this.id = id;}
 }

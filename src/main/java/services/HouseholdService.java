@@ -10,6 +10,7 @@ private static ArrayList <String> allCodes = new ArrayList<>();
 
 
 
+
     public static String code(){
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         String householdCode=null;

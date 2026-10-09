@@ -6,6 +6,7 @@ import entities.User;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;
 import mappers.ConnectionPool;
+import mappers.UserMapper;
 import services.TaskService;
 import services.UserService;
 
@@ -20,7 +21,7 @@ public class TaskController {
     public TaskController(ConnectionPool connectionpool){
         this.connectionPool = connectionPool;
         this.taskService=new TaskService();
-        this.userService=new UserService();
+        this.userService=new UserService(new UserMapper());
     }
 
 

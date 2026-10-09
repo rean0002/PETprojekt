@@ -1,12 +1,13 @@
-package mappers;
+/*package mappers;
 
+import entities.Household;
 import entities.User;
 
 import java.sql.*;
 
 public class MapperTemplate {
 
-    /*
+
     public User insertTemplate (User user) throws DatabaseException {
         String query = "INSERT INTO tabel (username, fornavn) " +
                 " VALUES ?, ?";
@@ -55,7 +56,7 @@ public class MapperTemplate {
             throw new DatabaseException("Søgning efter brugeren fejlede");
         }
         return user;
-    }*/
+    }
 
        public UserAndHouseholdDTO getUserAndHousehold (User user) throws DatabaseException{
         Household household;
@@ -84,3 +85,4 @@ public class MapperTemplate {
 
 
 }
+*/

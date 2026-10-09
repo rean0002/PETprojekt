@@ -1,6 +1,8 @@
 package mappers;
 
+import Exceptions.DatabaseException;
 import entities.Household;
+import entities.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,10 +15,10 @@ public class HouseholdMapper {
             LoggerFactory.getLogger(HouseholdMapper.class);
 
 
-    public void saveHousehold (Household household) throws DatabaseException { //gem ny household
+    public Household createHousehold (Household household) throws DatabaseException {
         String query = "INSERT INTO households (name, code) " +
-                " VALUES ?, ?";
-        try (Connection connection = connectionPool.getConnection(); //try with resources connection og prepared statement
+                " VALUES (?, ?)";
+        try (Connection connection = connectionPool.getConnection();
              PreparedStatement stm = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             stm.setString(1, household.getName());
             stm.setString(2, household.getCode());
@@ -24,13 +26,14 @@ public class HouseholdMapper {
             try (ResultSet rs = stm.getGeneratedKeys()) {
                 if (rs.next()) {
                     household.setId(rs.getInt("household_id"));
-                } else throw new DatabaseException("Husholdning kunne ikke oprettes");
+                } else throw new DatabaseException("Husholdningen kunne ikke oprettes");
             }
 
         } catch (SQLException e) {
             logger.error(e.getMessage());
-            throw new DatabaseException("Husholdning blev ikke gemt ");
+            throw new DatabaseException("Husholdningen blev ikke gemt ");
         }
+        return household;
     }
 
       public Household getHouseholdById(Household h) throws DatabaseException{
@@ -87,6 +90,8 @@ public class HouseholdMapper {
         }
         return households;
     }
+
+
 
 
 

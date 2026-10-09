@@ -3,20 +3,16 @@ package controllers;
 import Exceptions.IllegalUserDataException;
 import entities.Task;
 import entities.User;
-import factories.UserFactory;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;
 import mappers.ConnectionPool;
-import org.jetbrains.annotations.NotNull;
+import mappers.UserMapper;
 import services.DateService;
 import services.TaskService;
 import services.UserService;
-import entities.Task;
 import java.util.List;
 import java.util.ArrayList;
-import javax.swing.text.DateFormatter;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
@@ -28,8 +24,8 @@ public class UserController {
     private TaskService taskService;
 
     public UserController (ConnectionPool connectionpool){
-        this.connectionPool = connectionPool;
-        this.userService=new UserService();
+
+        this.userService=new UserService(new UserMapper());
         this.dateservice=new DateService();
         this.taskService=new TaskService();
     }

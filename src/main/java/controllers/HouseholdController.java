@@ -1,21 +1,27 @@
 package controllers;
 
-import Exceptions.IllegalTaskDataException;
+import Exceptions.DatabaseException;
 import entities.User;
 import Exceptions.IllegalUserDataException;
 import entities.Household;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;
 import mappers.ConnectionPool;
+import mappers.HouseholdMapper;
+import mappers.UserMapper;
+import services.UserService;
 import services.UtilService;
 
-import static controllers.UserController.*;
 
 public class HouseholdController {
     private ConnectionPool connectionPool;
+    private UserService userService;
+    private HouseholdMapper householdMapper;
 
     public HouseholdController(ConnectionPool connectionpool){
         this.connectionPool = connectionPool;
+        this.userService=new UserService(new UserMapper());
+        this.householdMapper = new HouseholdMapper();
     }
 
 
@@ -34,13 +40,23 @@ public class HouseholdController {
     public void createHousehold(Context ctx) throws IllegalUserDataException {
         String navn = ctx.formParam("navn");
         String medlemmer = ctx.formParam("medlemmer");
-        Household household = new Household(UtilService.capitalizeFirst(navn));
-        ctx.sessionAttribute("household", household);
 
         User user = ctx.sessionAttribute("user");
         if (user == null){
             throw new IllegalUserDataException("Kunne ikke finde bruger");
         }
+
+        Household household = new Household(UtilService.capitalizeFirst(navn));
+
+        try {
+            householdMapper.createHousehold(household);
+        } catch (DatabaseException e) {
+            throw new IllegalUserDataException("Husstanden kunne ikke oprettes");
+        }
+
+        userService.makeAdmin(user.getId(), household.getId());
+
+        ctx.sessionAttribute("household", household);
         user.setHousehold(household);
         household.addMember(user);
 
@@ -55,10 +71,14 @@ public class HouseholdController {
     }
 
 
-
-    public void tilknytHousehold(Context ctx){
+    public void tilknytHousehold(Context ctx) throws IllegalUserDataException {
         String kode = ctx.formParam("kode");
+        User user = ctx.sessionAttribute("user");
+        if (user == null){
+            throw new IllegalUserDataException("Kunne ikke tilknytte husholdning");
+        }
 
+        userService.joinHousehold(user.getId(), kode);
         ctx.redirect("/dashboard.html");
     }
 

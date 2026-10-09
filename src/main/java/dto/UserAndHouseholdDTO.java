@@ -1,3 +1,5 @@
+package dto;
+
 import entities.Household;
 import entities.User;
 

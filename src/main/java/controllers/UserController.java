@@ -1,5 +1,6 @@
 package controllers;
 
+import Exceptions.DatabaseException;
 import Exceptions.IllegalUserDataException;
 import entities.Task;
 import entities.User;
@@ -7,6 +8,7 @@ import factories.UserFactory;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;
 import mappers.ConnectionPool;
+import mappers.HouseholdMapper;
 import org.jetbrains.annotations.NotNull;
 import services.DateService;
 import services.TaskService;
@@ -26,12 +28,14 @@ public class UserController {
     private UserService userService;
     private DateService dateservice;
     private TaskService taskService;
+    private HouseholdMapper householdMapper;
 
     public UserController (ConnectionPool connectionpool){
         this.connectionPool = connectionPool;
         this.userService=new UserService();
         this.dateservice=new DateService();
         this.taskService=new TaskService();
+        this.householdMapper= new HouseholdMapper();
     }
 
 
@@ -80,8 +84,16 @@ public class UserController {
         }
 
     private void setTaskAttributes(Context ctx, User user, LocalDate selectedDate, boolean husstand) {
-        List <Task> filteredBydate = filterTasksByDate(user.getHousehold().getTasks(), selectedDate);
-        List <Task> filteredByUser = filterTaskByUser(filteredBydate, user);
+
+        List <Task> filteredBydate=null;
+        List <Task> filteredByUser=null;
+
+        try{
+        filteredBydate = filterTasksByDate(householdMapper.tasks(user.getHousehold()), selectedDate);
+        filteredByUser = filterTaskByUser(filteredBydate, user);
+       }catch (DatabaseException d){
+           d.getMessage();
+       }
 
 
         if(husstand){
@@ -144,13 +156,26 @@ public class UserController {
     private void markTaskAsDone(Context ctx) {
         int id = Integer.parseInt(ctx.pathParam("id"));
         User user = ctx.sessionAttribute("user");
-        Task task=taskService.findTask(id, user.getHousehold());
-        task.setDone(true);
+        ArrayList <Task> tasks=null;
 
-        String tidspunkt = task.getCompletedAt()
+        try {tasks =householdMapper.tasks(user.getHousehold());
+        }catch (DatabaseException d){
+            d.getMessage();
+        }
+
+        for(Task t:tasks){
+            if (t.getId()==id){
+                t.markAsDone();
+
+                String tidspunkt = t.getCompletedAt()
                 .format(DateTimeFormatter.ofPattern("HH:mm"));
 
-        ctx.json(Map.of("completedAt", tidspunkt));
+                ctx.json(Map.of("completedAt", tidspunkt));
+            }
+        }
+
+
+
 
     }
 

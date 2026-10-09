@@ -10,14 +10,13 @@ public class Household {
     private int id;
     private String name;
     private ArrayList<User> members;
-   // private TreeSet<Task> tasks;
-    private ArrayList <Task> tasks;
+    private ArrayList <Routines> routines;
     private final String code;
 
     public Household (String name){
         this.name=name;
         members= new ArrayList<>();
-        tasks=new ArrayList<>();
+        routines=new ArrayList<>();
         this.code= HouseholdService.code();
     }
     public Household (int id, String name, String code){ //bruges af sql
@@ -25,7 +24,13 @@ public class Household {
         this.name=name;
         this.code=code;
         members= new ArrayList<>();
-        tasks=new ArrayList<>();
+        routines=new ArrayList<>();
+    }
+    public Household (String name, String code){ //bruges når husholdning oprettes
+        this.name=name;
+        this.code=code;
+        members= new ArrayList<>();
+        routines=new ArrayList<>();
     }
 
 
@@ -38,20 +43,17 @@ public class Household {
         this.name = name;
     }
 
-    public void addTask (Task task){
-        tasks.add(task);
+    public ArrayList<Routines> getRoutines() {
+        return routines;
     }
 
-    public ArrayList<Task>getTasks(){
-        return tasks;
+    public void setRoutines(ArrayList<Routines> routines) {
+        this.routines = routines;
     }
 
-    /*public void setTasks(TreeSet<Task> tasks) {
-        this.tasks = tasks;
-    }*/
-
-    public void setTasks(ArrayList<Task> tasks) {this.tasks = tasks;}
-
+    public void addRoutine(Routines routine){
+        routines.add(routine);
+    }
 
     public ArrayList<User> getMembers() {
         return members;

@@ -1,33 +1,27 @@
 package services;
 
 import Exceptions.IllegalTaskDataException;
-import entities.Task;
-import entities.User;
-import entities.TaskCategory;
-import entities.TaskFrequency;
+import entities.*;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
-import entities.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class TaskService {
+public class RoutinesService {
 
     static int nextId = 6;
 
-    public Task createTask(String title, String description, User user, String categoryStr, String frequencyStr, String dateStr, String timeStr, Household household) throws IllegalTaskDataException {
+    public Routines createRoutine(String title, String description, User user, String categoryStr, String frequencyStr, String dateStr, String timeStr, Household household) throws IllegalTaskDataException {
 
-        if (title == null || title.isBlank()) {
+        if (title == null || title.isBlank()){
             throw new IllegalTaskDataException("Udfyld venligst en titel");
         }
 
-        if (user == null) {
+        if (user == null){
             throw new IllegalTaskDataException("Brugeren findes ikke");
         }
 
-        if (categoryStr == null || categoryStr.isBlank()) {
+        if (categoryStr == null || categoryStr.isBlank()){
             throw new IllegalTaskDataException("Vælg venligst en kategori");
         }
 
@@ -38,17 +32,17 @@ public class TaskService {
             throw new IllegalTaskDataException("Ugyldig kategori valgt");
         }
 
-        if (frequencyStr == null || frequencyStr.isBlank()) {
+        if (frequencyStr == null || frequencyStr.isBlank()){
             throw new IllegalTaskDataException("Vælg venligst en frekvens");
         }
         TaskFrequency frequency;
         try {
             frequency = TaskFrequency.valueOf(frequencyStr);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e){
             throw new IllegalTaskDataException("Ugyldig frekvens valgt");
         }
 
-        if (dateStr == null || dateStr.isBlank()) {
+        if (dateStr == null || dateStr.isBlank()){
             throw new IllegalTaskDataException("Vælg venligst en dato");
         }
         LocalDate date;
@@ -58,35 +52,24 @@ public class TaskService {
             throw new IllegalTaskDataException("Ugyldig dato");
         }
         LocalTime time = null;
-        if (timeStr != null && !timeStr.isBlank()) {
+        if (timeStr != null && !timeStr.isBlank()){
             try {
                 time = LocalTime.parse(timeStr);
             } catch (DateTimeParseException e) {
                 throw new IllegalTaskDataException("Ugyldigt tidspunkt");
             }
-
-
-        /*Task task = new Task(nextId++, title, description, user, category, frequency, date);
-        household.addTask(task);
-        //task.setDate(date);
-        if (time != null) {
-            task.setTime(time);
         }
+        //   public Routines(String title, String description, User responsibleUser,
+        // bruges når rutine oprettes
+        //                    TaskCategory category, TaskFrequency frequency, LocalDate date, LocalTime time){
 
-*/
-            return null;
-        }
+        Routines routine = new Routines(title, description, user, category, frequency, date, time);
+        household.addRoutine(routine);
 
-/*
-        public Task findTask ( int id, Household household){
-            Task task = null;
-            for (Task t : household.getTasks()) {
-                if (t.getId() == id) {
-                    task = t;
-                }
-            }
-            return task;
-        }*/
-return null;
+
+
+        return routine;
     }
+
+
 }

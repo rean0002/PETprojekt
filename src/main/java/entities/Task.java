@@ -29,6 +29,13 @@ public class Task implements Comparable<Task> {
         this.dueDate=dueDate;
     }
 
+    public Task (Routines routines, LocalDate dueDate){ //når routine autogenererer task objekter
+        this.routines = routines;
+        this.dueDate=dueDate;
+    }
+
+
+
     public boolean isDone() {
         return completedAt != null;
     }

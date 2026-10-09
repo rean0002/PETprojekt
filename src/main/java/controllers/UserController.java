@@ -159,7 +159,8 @@ public class UserController {
         User user = ctx.sessionAttribute("user");
         ArrayList <Task> tasks=null;
 
-        try {tasks =householdMapper.tasks(user.getHousehold());
+        try {
+            tasks =householdMapper.tasks(user.getHousehold());
         }catch (DatabaseException d){
             d.getMessage();
         }

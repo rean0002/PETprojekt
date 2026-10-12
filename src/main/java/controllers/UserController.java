@@ -2,9 +2,9 @@ package controllers;
 
 import Exceptions.DatabaseException;
 import Exceptions.IllegalUserDataException;
+import entities.Household;
 import entities.Task;
 import entities.User;
-import factories.UserFactory;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;
 import mappers.ConnectionPool;
@@ -43,7 +43,7 @@ public class UserController {
 
     public void setRoutes(JavalinConfig config){
         config.routes.post("/login", ctx -> login(ctx));
-        config.routes.get("/login", ctx -> ctx.redirect("/index.html"));
+        config.routes.get("/login", ctx -> ctx.redirect("/login.html"));
 
         config.routes.get("/create-user", ctx -> ctx.redirect("/create-user.html"));
         config.routes.post("/create-user", ctx -> createUser(ctx));
@@ -52,7 +52,12 @@ public class UserController {
 
         config.routes.post("/tasks/{id}/done", ctx -> markTaskAsDone(ctx));
 
+        config.routes.get("/households/{id}/selected", ctx -> householdSelected(ctx));
+
+        config.routes.get("/select-household", ctx -> renderSelectHousehold(ctx));
+
     }
+
 
 
     public void login(Context ctx){
@@ -62,11 +67,29 @@ public class UserController {
         try {
             User user = userService.login(email, password);
             ctx.sessionAttribute("user", user);
-            renderDashboard(ctx);
+            ctx.redirect("select-household");
         }catch(IllegalUserDataException e){
             ctx.result(e.getMessage());
             ctx.status(400);
         }
+    }
+
+    private void renderSelectHousehold(Context ctx) {
+
+        User user= ctx.sessionAttribute("user");
+
+        ArrayList <Household> households = null;
+
+        try{
+            households=householdMapper.usersHouseholds(user);
+
+            ctx.attribute("households", households);
+            ctx.attribute("firstName", user.getFirstName());
+            ctx.render("templates/select-household.html");
+        }catch (DatabaseException e){
+            e.getMessage();
+        }
+
     }
 
     public void renderDashboard(Context ctx) {
@@ -89,8 +112,10 @@ public class UserController {
         List <Task> filteredBydate=null;
         List <Task> filteredByUser=null;
 
+        Household household= ctx.sessionAttribute("household");
+
         try{
-        filteredBydate = filterTasksByDate(householdMapper.tasks(user.getHousehold()), selectedDate);
+        filteredBydate = filterTasksByDate(householdMapper.tasks(household), selectedDate);
         filteredByUser = filterTaskByUser(filteredBydate, user);
        }catch (DatabaseException d){
            d.getMessage();
@@ -98,7 +123,7 @@ public class UserController {
 
 
         if(husstand){
-            ctx.attribute("firstName", user.getHousehold().getName());
+            ctx.attribute("firstName", household.getName());
             ctx.attribute("tasks", filteredBydate);
         } else {
             ctx.attribute("firstName", user.getFirstName());
@@ -157,10 +182,11 @@ public class UserController {
     private void markTaskAsDone(Context ctx) {
         int id = Integer.parseInt(ctx.pathParam("id"));
         User user = ctx.sessionAttribute("user");
+        Household household = ctx.sessionAttribute("household");
         ArrayList <Task> tasks=null;
 
         try {
-            tasks =householdMapper.tasks(user.getHousehold());
+            tasks =householdMapper.tasks(household);
         }catch (DatabaseException d){
             d.getMessage();
         }
@@ -181,9 +207,17 @@ public class UserController {
                 ctx.json(Map.of("completedAt", tidspunkt));
             }
         }
+    }
 
+    private void householdSelected(Context ctx) {
+        int id = Integer.parseInt(ctx.pathParam("id"));
 
-
+        try{
+            ctx.sessionAttribute("household",householdMapper.getHouseholdById(id));
+            ctx.redirect("/dashboard.html");
+        } catch (DatabaseException e) {
+            e.getMessage(); //dårlig håndtering
+        }
 
     }
 

@@ -41,14 +41,15 @@ public class HouseholdMapper {
         return household;
     }
 
-      public Household getHouseholdById(Household h) throws DatabaseException{
+      public Household getHouseholdById(int householdId) throws DatabaseException{
         Household household = null;
-        String query = "SELECT household_id, name, code " +
-                "FROM households" +
-                "WHERE id = ?";
+        String query = """
+                SELECT household_id, name, code
+                FROM households
+                WHERE id = ?""";
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement stm = connection.prepareStatement(query)) {
-            stm.setInt(1, h.getId());
+            stm.setInt(1, householdId);
             try (ResultSet rs = stm.executeQuery();) {
                 if (rs.next()) {
                     int id = rs.getInt("household_id");
@@ -67,52 +68,23 @@ public class HouseholdMapper {
 
 
 
-    public ArrayList <Household> getUsersHouseholds(int userId) throws DatabaseException{ //hent alle housholds som en bruger er medlem af
-       ArrayList <Household> households=null;
-        Household household = null;
 
-        String query =
-                "SELECT * FROM users_households" +
-                "JOIN households" +
-                "ON houssehold_id=households_household_id" +
-                "WHERE users_user_id = ?;";
-        try (Connection connection = connectionPool.getConnection();
-             PreparedStatement stm = connection.prepareStatement(query)) {
-            stm.setInt(1, userId);
-            try (ResultSet rs = stm.executeQuery();) {
-                if (rs.next()) {
-                    int id = rs.getInt("household_id");
-                    String name = rs.getString("name");
-                    String code = rs.getString("code");
-
-                    household = new Household(id, name, code);
-                    households.add(household);
-                }
-            }
-        } catch (SQLException e) {
-            logger.error(e.getMessage());
-            throw new DatabaseException("Søgning efter brugeren fejlede");
-        }
-        return households;
-    }
-
-
-    public ArrayList<Household> households (User user) throws DatabaseException{
+    public ArrayList<Household> usersHouseholds (User user) throws DatabaseException{ //hent alle housholds som en bruger er medlem af
 
         ArrayList<Household>households = new ArrayList<>();
 
         String query = """
                 SELECT name, household_id, code
-                FROM households JOIN users_households USING (household_id)
-                WHERE user_id = ?""";
+                FROM households JOIN users_households ON (household_id = households_household_id)
+                WHERE users_user_id = ?""";
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement stm = connection.prepareStatement(query)) {
             stm.setInt(1, user.getId());
 
             try (ResultSet rs = stm.executeQuery();) {
-                if (rs.next()) {
+                while (rs.next()) {
                     int id = rs.getInt("household_id");
-                    String name = rs.getString("navn");
+                    String name = rs.getString("name");
                     String code = rs.getString("code");
 
                     Household household = new Household(id, name, code);
@@ -121,7 +93,7 @@ public class HouseholdMapper {
                 }
             } } catch (SQLException e) {
             logger.error(e.getMessage());
-            throw new DatabaseException("Søgning efter brugeren fejlede");
+            throw new DatabaseException("Søgning efter husstand fejlede");
         }
         return households;
     }

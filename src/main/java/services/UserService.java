@@ -2,10 +2,10 @@ package services;
 import Exceptions.DatabaseException;
 import Exceptions.IllegalUserDataException;
 import entities.User;
-import factories.UserFactory;
 import mappers.ConnectionPool;
 import mappers.UserMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
@@ -17,14 +17,14 @@ public class UserService {
 
     }
 
-    public static void addUser(User user) throws IllegalUserDataException {
+    /*public static void addUser(User user) throws IllegalUserDataException {//factory
         if (user == null) {
             throw new IllegalUserDataException("Brugeren findes ikke");
         }
         UserFactory.addUser(user);
-    }
+    }*/
 
-    public User getUser(String email) throws IllegalUserDataException {
+   /* public User getUser(String email) throws IllegalUserDataException { //fra factory arkitektur
         User user = null;
 
         for (User u : UserFactory.currentHousehold().getMembers()) {
@@ -36,14 +36,17 @@ public class UserService {
             throw new IllegalUserDataException("Email matcher ikke nogen eksisterende bruger");
         }
         return user;
-    }
+    }*/
 
-    public boolean emailExists(String email) {
-        for (User u : UserFactory.getUsers()) {
-            if (u.getEmail().equals(email)) {
-                return true;
-            }
-        }
+    public boolean emailExists(String email) {//olga har lavet om til at bruge mapper. den er ikke så elegant.
+       User user=null;
+       try{
+           user=userMapper.getUserByEmail(email);
+           if(user!=null){return true;
+           }
+       } catch (DatabaseException e) {
+           e.getMessage();
+       }
         return false;
     }
 
@@ -97,18 +100,16 @@ public class UserService {
         }
     }
 
-    public User getUserByFirstName(String firstName) throws IllegalUserDataException {
-        User user = null;
-
-        for (User u : UserFactory.currentHousehold().getMembers()) {
-            if (u.getFirstName().equals(firstName)) {
-                user = u;
+    public User getUserByFirstNameAndHouseholdId(int householdId, String name ) throws IllegalUserDataException {
+        try{
+            User user=userMapper.findUserByHouseholdIdAndName(householdId, name);
+            if (user == null) {
+                throw new IllegalUserDataException("Email matcher ikke nogen eksisterende bruger");
             }
+            return user;
+        }catch(DatabaseException e){
+            throw new IllegalUserDataException("der opstod en fejl, ansvarlig bruger kan ikke findes");
         }
-        if (user == null) {
-            throw new IllegalUserDataException("Email matcher ikke nogen eksisterende bruger");
-        }
-        return user;
     }
 
     public void joinHousehold(int userId, String code) throws IllegalUserDataException {
@@ -125,5 +126,15 @@ public class UserService {
         } catch (DatabaseException e) {
             throw new IllegalUserDataException("Kunne ikke gøre brugeren til admin");
         }
+    }
+
+    public ArrayList<User> addMembersToHousehold(int id) {
+        ArrayList<User> members = new ArrayList<>();
+        try {
+            members = userMapper.findUsersByHouseholdId(id);
+        }catch(DatabaseException e){
+            e.getMessage();
+        }
+        return members;
     }
 }

@@ -121,6 +121,10 @@ public class Routines {
         return responsibleUser;
     }
 
+    public void setResponsibleUser(User responsibleUser) {
+        this.responsibleUser = responsibleUser;
+    }
+
     public TaskCategory getTaskCategory() {
         return taskCategory;
     }

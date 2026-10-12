@@ -1,5 +1,6 @@
 package services;
 
+import Exceptions.DatabaseException;
 import Exceptions.IllegalTaskDataException;
 import entities.Task;
 import entities.User;
@@ -10,12 +11,12 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import entities.*;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskService {
 
-    static int nextId = 6;
 
     public Task createTask(String title, String description, User user, String categoryStr, String frequencyStr, String dateStr, String timeStr, Household household) throws IllegalTaskDataException {
 
@@ -63,30 +64,17 @@ public class TaskService {
                 time = LocalTime.parse(timeStr);
             } catch (DateTimeParseException e) {
                 throw new IllegalTaskDataException("Ugyldigt tidspunkt");
-            }
+            }}
 
+            Routines routine = new Routines(title, description, user, category, frequency, date, time);
 
-        /*Task task = new Task(nextId++, title, description, user, category, frequency, date);
-        household.addTask(task);
-        //task.setDate(date);
-        if (time != null) {
-            task.setTime(time);
-        }
-
-*/
             return null;
         }
 
-/*
-        public Task findTask ( int id, Household household){
-            Task task = null;
-            for (Task t : household.getTasks()) {
-                if (t.getId() == id) {
-                    task = t;
-                }
-            }
-            return task;
-        }*/
-return null;
-    }
+
+
+
+
+
+
 }

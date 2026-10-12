@@ -9,6 +9,7 @@ import io.javalin.http.Context;
 import mappers.ConnectionPool;
 import mappers.HouseholdMapper;
 import mappers.UserMapper;
+import services.HouseholdService;
 import services.UserService;
 import services.UtilService;
 
@@ -17,11 +18,12 @@ public class HouseholdController {
     private ConnectionPool connectionPool;
     private UserService userService;
     private HouseholdMapper householdMapper;
+    private HouseholdService householdService;
 
     public HouseholdController(ConnectionPool connectionpool){
         this.connectionPool = connectionPool;
         this.userService=new UserService(new UserMapper());
-        this.householdMapper = new HouseholdMapper();
+        this.householdService=new HouseholdService(new HouseholdMapper());
     }
 
 
@@ -34,7 +36,7 @@ public class HouseholdController {
         config.routes.get("/tilknyt-household", ctx -> renderHouseholdchoice(ctx));
         config.routes.post("/tilknyt-household", ctx -> tilknytHousehold(ctx));
 
-       // config.routes.post("/household-dashboard", ctx -> renderDashboard(ctx));
+
     }
 
     public void createHousehold(Context ctx) throws IllegalUserDataException {
@@ -46,7 +48,7 @@ public class HouseholdController {
             throw new IllegalUserDataException("Kunne ikke finde bruger");
         }
 
-        Household household = new Household(UtilService.capitalizeFirst(navn));
+        Household household = householdService.createHousehold(UtilService.capitalizeFirst(navn));
 
         try {
             householdMapper.createHousehold(household);
@@ -57,7 +59,7 @@ public class HouseholdController {
         userService.makeAdmin(user.getId(), household.getId());
 
         ctx.sessionAttribute("household", household);
-        user.setHousehold(household);
+
         household.addMember(user);
 
         ctx.redirect("/dashboard.html");

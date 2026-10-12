@@ -2,6 +2,7 @@ package controllers;
 
 import Exceptions.IllegalTaskDataException;
 import Exceptions.IllegalUserDataException;
+import entities.Household;
 import entities.User;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;
@@ -10,13 +11,14 @@ import mappers.UserMapper;
 import services.TaskService;
 import services.UserService;
 
-
+import java.util.ArrayList;
 
 
 public class TaskController {
     private ConnectionPool connectionPool;
     private TaskService taskService;
     private UserService userService;
+
 
     public TaskController(ConnectionPool connectionpool){
         this.connectionPool = connectionPool;
@@ -31,9 +33,13 @@ public class TaskController {
         config.routes.get("/opret-opgave", ctx -> visOpretOpgave(ctx));
     }
 
-    private void visOpretOpgave(Context ctx) {
+    private void visOpretOpgave(Context ctx) { //skal rettes med household soim sessionattribute
         User user = ctx.sessionAttribute("user");
-        ctx.attribute("household", user.getHousehold());
+        Household household = ctx.sessionAttribute("household");
+
+        household.setMembers(userService.addMembersToHousehold(household.getId()));
+
+
         ctx.render("/templates/opret-opgave.html");
     }
 
@@ -48,13 +54,14 @@ public class TaskController {
         String tidspunkt = ctx.formParam("tidspunkt");
 
         User user= ctx.sessionAttribute("user");
+        Household household=ctx.sessionAttribute("household");
 
 
-        User ansvarligBruger = userService.getUserByFirstName(ansvarlig);
+        User ansvarligBruger = userService.getUserByFirstNameAndHouseholdId(household.getId(), ansvarlig);
 
 
         try{
-            taskService.createTask(title, beskrivelse, ansvarligBruger, taskCategory, gentages, dato, tidspunkt, user.getHousehold());
+            taskService.createTask(title, beskrivelse, ansvarligBruger, taskCategory, gentages, dato, tidspunkt, household);
             ctx.redirect("/dashboard.html");
         }catch (IllegalTaskDataException e){
             ctx.status(400);

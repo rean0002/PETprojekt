@@ -63,6 +63,10 @@ public class Household {
         members.add(user);
     }
 
+    public void setMembers(ArrayList<User> members) {
+        this.members = members;
+    }
+
     public void addMember(User user){members.add(user);}
 
     public String getCode() {return code;}

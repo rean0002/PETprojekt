@@ -15,7 +15,7 @@ public class User {
 
     private String initials;
 
-    private Household household;
+    private ArrayList <Household> households;
 
 
 
@@ -30,6 +30,13 @@ public class User {
         this.lastName= lastName;
     }
     public User(String email, String password, String firstName, String lastName) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName=lastName;
+    }
+    public User(int id, String email, String password, String firstName, String lastName) {
+        this.id=id;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -73,13 +80,15 @@ public class User {
     }
 
 
-    public Household getHousehold() {
-        return household;
+    //public Household getHousehold() {return household;}
+
+    public ArrayList<Household> getHouseholds() {return households;}
+
+    public void addHousehold (Household household){
+        households.add(household);
     }
 
-    public void setHousehold(Household household) {
-        this.household = household;
-    }
+   // public void setHousehold(Household household) {this.household = household;}
 
     @Override
     public String toString() {

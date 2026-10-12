@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class UserMapper {
 
@@ -80,8 +81,35 @@ public class UserMapper {
                     int userId = rs.getInt("user_id");
                     String firstName = rs.getString("firstname");
                     String lastName = rs.getString("lastname");
-                    user = new User(email, password, firstName, lastName);
-                    user.setId(userId);
+                    user = new User(userId, email, password, firstName, lastName);
+                }
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            throw new DatabaseException("Søgning efter brugeren fejlede");
+        }
+        return user;
+    }
+
+    public User getUserByEmail(String email)  throws DatabaseException {
+        User user = null;
+
+        String query = "SELECT user_id, firstname, lastname, email, password " +
+                "FROM users " +
+                "WHERE email = ?";
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement stm = connection.prepareStatement(query)) {
+            stm.setString(1, email);
+
+            try (ResultSet rs = stm.executeQuery();) {
+                if (rs.next()) {
+                    int userId = rs.getInt("user_id");
+                    String firstName = rs.getString("firstname");
+                    String lastName = rs.getString("lastname");
+                    String password = rs.getString("password");
+                    user = new User(userId, email, password, firstName, lastName);
+
                 }
             }
         } catch (SQLException e) {
@@ -162,6 +190,65 @@ public class UserMapper {
         if (roleId == -1) {
             throw new DatabaseException("Rollen findes ikke");
         } return roleId;
+    }
+
+    public User findUserByHouseholdIdAndName(int id, String name)throws DatabaseException{
+
+        User user= null;
+        String query="""
+                SELECT *
+                FROM users_households, users
+                JOIN users
+                ON users_user_id = user_id
+                WHERE users.firstname=? and household_id=?
+                """;
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement stm = connection.prepareStatement(query)) {
+            stm.setString(1, name);
+            stm.setInt(2, id);
+            try (ResultSet rs = stm.executeQuery();) {
+                if (rs.next()) {
+                    int user_id = rs.getInt("user_id");
+                    String firstname = rs.getString("firstname");
+                    String lastname = rs.getString("lastname");
+                    user=new User(user_id, firstname, lastname);
+                }
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            throw new DatabaseException("Fejl ved søgning efter ansvarlig bruger");
+        }
+        return user;
+    }
+
+    public ArrayList<User> findUsersByHouseholdId(int id)throws DatabaseException{
+
+        ArrayList <User> users= new ArrayList<>();
+
+        String query="""
+                SELECT *
+                FROM users_households, users
+                JOIN users
+                ON users_user_id = user_id
+                WHERE household_id=?
+                """;
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement stm = connection.prepareStatement(query)) {
+            stm.setInt(1, id);
+            try (ResultSet rs = stm.executeQuery();) {
+                while (rs.next()) {
+                    int user_id = rs.getInt("user_id");
+                    String firstname = rs.getString("firstname");
+                    String lastname = rs.getString("lastname");
+                    User user=new User(user_id, firstname, lastname);
+                    users.add(user);
+                }
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            throw new DatabaseException("Fejl ved søgning efter hvilke brugere der er tilknyttet denne husholdning");
+        }
+        return users;
     }
 
 }

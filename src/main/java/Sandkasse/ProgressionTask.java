@@ -1,4 +1,4 @@
-package entities;
+/*package entities;
 
 import java.time.LocalDate;
 
@@ -16,4 +16,4 @@ public class ProgressionTask extends Task {
     }
 
 
-}
+}*/

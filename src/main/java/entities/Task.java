@@ -34,6 +34,10 @@ public class Task implements Comparable<Task> {
         this.dueDate=dueDate;
     }
 
+    public Task (int id, LocalDate dueDate){ //bruges i taskmapper.
+        this.id=id;
+        this.dueDate=dueDate;
+    }
 
 
     public boolean isDone() {

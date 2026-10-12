@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/toggle.css">
     <link rel="stylesheet" href="css/dashboardStyle.css">
-    <script src="js/dashboard.js" defer></script>
+    <link rel="stylesheet" href="css/selectHouseholdStyle.css">
+   <!-- <script src="js/dashboard.js" defer></script> -->
 </head>
 <body>
 <div class="app-container">
@@ -33,39 +34,17 @@
         <!-- households -->
         <div class="section">
             <div class="houseHoldFlex">
-                <div class="household" th:each="household : ${households}" >
+                <a class="household" th:each="household : ${households}" th:href="@{/households/{id}/selected(id=${household.id})}">
                     <img  style="grid-area: box-1" src="svg/select-household.svg">
                     <p class="householdName"  th:text="${household.name}" style="grid-area: box-2">household name</p>
                     <p class="householdCode"  th:text="${household.code}" style="grid-area: box-3">household code</p>
-                </div>
-
-
+                    <a/>
             </div>
-
-
         </div>
 
     </main>
-
-
-    <footer> <!-- footer menu
-        <a href="dashboard.html" class="nav-item active">
-            <img src="svg/nav1.svg" alt="">
-            <span>Hjem</span>
-        </a>
-        <a href="husstand.html" class="nav-item">
-            <img src="svg/nav2.svg" alt="">
-            <span>Husstand</span>
-        </a>
-        <a href="point.html" class="nav-item">
-            <img src="svg/nav3.svg" alt="">
-            <span>Point</span>
-        </a>
-        <a href="reminders.html" class="nav-item">
-            <img src="svg/nav4.svg" alt="">
-            <span>Reminders</span>
-        </a>-->
-    </footer>
 </div>
+
+
 </body>
 </html>

@@ -1,14 +1,22 @@
 package services;
 
+import Exceptions.DatabaseException;
+import entities.Household;
+import mappers.HouseholdMapper;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class HouseholdService {
 
-private static ArrayList <String> allCodes = new ArrayList<>();
+    private HouseholdMapper householdMapper;
+    private static ArrayList <String> allCodes = new ArrayList<>(); //skal laves om
 
 
+public HouseholdService(HouseholdMapper householdMapper){
+    this.householdMapper=householdMapper;
 
+}
 
 
     public static String code(){
@@ -37,6 +45,14 @@ private static ArrayList <String> allCodes = new ArrayList<>();
         allCodes.add(code);
 
         return householdCode;
+    }
+
+    public Household createHousehold (String name){
+
+        Household household= new Household(name, code());
+
+        return household;
+
     }
 
 

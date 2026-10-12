@@ -1,0 +1,37 @@
+.household {
+    background-color: var(--yellow50percent);
+    width: 366px;
+    height: 60px;
+    font-size: 15px;
+    border-radius: 12px;
+    padding: 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+
+    display: grid;
+    grid-template-columns: 54px 1fr 108px;
+    grid-template-rows: 1fr;
+    align-items: center;
+
+
+
+    grid-template-areas:
+        "box-1 box-2 box-3"
+
+}
+.householdName{
+    font-size: 20px;
+    color: var(--brown);
+    padding-left: 10px;
+}
+
+.householdCode{
+    font-size: 12px;
+    color: var(--brown);
+    padding-left: 10px;
+}
+
+.household img {
+    justify-self: center;
+}

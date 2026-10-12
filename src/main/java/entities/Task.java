@@ -48,7 +48,7 @@ public class Task implements Comparable<Task> {
 
     public int getId() {return id;}
 
-    public LocalDate getDate() {return routines.getDate();}
+    public LocalDate getDueDate() {return dueDate;}
 
 
 

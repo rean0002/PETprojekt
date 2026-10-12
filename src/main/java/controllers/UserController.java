@@ -135,7 +135,7 @@ public class UserController {
     private List<Task> filterTasksByDate(List<Task> tasks, LocalDate date){
         List<Task> filtered = new ArrayList<>();
         for (Task task : tasks) {
-            if (task.getDate()!= null && task.getDate().equals(date)) {
+            if (task.getDueDate()!= null && task.getDueDate().equals(date)) {
                 filtered.add(task);
             }
         }
@@ -168,6 +168,12 @@ public class UserController {
         for(Task t:tasks){
             if (t.getId()==id){
                 t.markAsDone();
+               try{
+                householdMapper.saveTaskDoneTime(t);
+               } catch (DatabaseException e) {
+                   e.getMessage();
+               }
+
 
                 String tidspunkt = t.getCompletedAt()
                 .format(DateTimeFormatter.ofPattern("HH:mm"));

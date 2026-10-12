@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.sql.Time;
 import java.time.LocalTime;
@@ -208,9 +209,23 @@ public class HouseholdMapper {
         return tasks;
 }
 
+
+public void saveTaskDoneTime(Task task)throws DatabaseException{
+    String query = "UPDATE tasks SET time_completed = ?, date_completed=? WHERE task_id = ?";
+
+    try (Connection connection = connectionPool.getConnection();
+         PreparedStatement stm = connection.prepareStatement(query)) {
+        stm.setObject(1, LocalTime.now());
+        stm.setObject(2, LocalDate.now());
+        stm.setInt(3, task.getId());
+        int rowsAffected = stm.executeUpdate();
+    } catch (SQLException e){
+        logger.error(e.getMessage());
+        throw new DatabaseException("kunne ikke gemme opggavens udførselstidspunkt");
     }
 
 
+}
 
 
 
@@ -218,3 +233,4 @@ public class HouseholdMapper {
 
 
 
+    }

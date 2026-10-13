@@ -172,7 +172,7 @@ public class UserController {
     private List<Task> filterTaskByUser (List<Task> tasks, User user){
         List<Task> filtered = new ArrayList<>();
         for (Task task : tasks) {
-            if (task.getResponsibleUser() != null && task.getResponsibleUser().equals(user)) {
+            if (task.getResponsibleUser() != null && task.getResponsibleUser().getId() == user.getId()) {
                 filtered.add(task);
             }
         }

@@ -155,8 +155,8 @@ public class HouseholdMapper {
                     Time sqlTime = rs.getTime("time");
                     LocalTime time = (sqlTime != null) ? sqlTime.toLocalTime() : null;
 
-                    TaskCategory category = mapCategory(category_title);
-                    TaskFrequency frequency = mapFrequency(frequency_title);
+                    TaskCategory category = TaskCategory.valueOf(category_title);
+                    TaskFrequency frequency = TaskFrequency.valueOf(frequency_title);
 
                     Routines routine = routines.get(routine_id);
 
@@ -181,28 +181,6 @@ public class HouseholdMapper {
         return tasks;
 }
 
-
-private TaskCategory mapCategory(String title) {
-    return switch (title) {
-        case "Rengøring" -> TaskCategory.CLEANING;
-        case "Indkøb" -> TaskCategory.SHOPPING;
-        case "Madlavning" -> TaskCategory.FOOD;
-        case "Vasketøj" -> TaskCategory.LAUNDRY;
-        case "Udendørs" -> TaskCategory.HOME;
-        case "Andet" -> TaskCategory.OTHER;
-        default -> TaskCategory.OTHER;
-    };
-}
-
-private TaskFrequency mapFrequency(String title) {
-    return switch (title) {
-        case "Dagligt" -> TaskFrequency.DAILY;
-        case "Ugentligt" -> TaskFrequency.WEEKLY;
-        case "Månedligt" -> TaskFrequency.MONTHLY;
-        case "Én gang" -> TaskFrequency.NONE;
-        default -> TaskFrequency.NONE;
-    };
-}
 
 public void saveTaskDoneTime(Task task)throws DatabaseException{
     String query = "UPDATE tasks SET time_completed = ?, date_completed=? WHERE task_id = ?";

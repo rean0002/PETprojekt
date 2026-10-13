@@ -49,8 +49,8 @@ public class TaskMapper {
     }
 
     public Routines createRoutine(Routines routine, int householdId) throws DatabaseException {
-        int categoryId = findCategoryId(mapCategoryToTitle(routine.getTaskCategory()));
-        int frequencyId = findFrequencyId(mapFrequencyToTitle(routine.getTaskFrequency()));
+        int categoryId = findCategoryId(routine.getTaskCategory().name());
+        int frequencyId = findFrequencyId(routine.getTaskFrequency().name());
 
         String query = "INSERT INTO routines (title, description, start_date, \"time\", frequency_id, category_id, household_id, user_id) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -68,7 +68,10 @@ public class TaskMapper {
             try (ResultSet rs = stm.getGeneratedKeys()) {
                 if (rs.next()) {
                     routine.setId(rs.getInt("routines_id"));
-                } else throw new DatabaseException("Rutinen kunne ikke oprettes");
+                } else {
+                    logger.error("Ingen genereret routines_id blev returneret ved oprettelse af rutine");
+                    throw new DatabaseException("Rutinen kunne ikke oprettes");
+                }
             }
         } catch (SQLException e) {
             logger.error(e.getMessage());
@@ -112,6 +115,7 @@ public class TaskMapper {
             throw new DatabaseException("Fejl ved søgning efter kategori");
         }
         if (categoryId == -1) {
+            logger.error("Ingen kategori fundet med titlen: " + title);
             throw new DatabaseException("Kategorien findes ikke");
         }
         return categoryId;
@@ -133,30 +137,12 @@ public class TaskMapper {
             throw new DatabaseException("Fejl ved søgning efter frekvens");
         }
         if (frequencyId == -1) {
+            logger.error("Ingen frekvens fundet med titlen: " + title);
             throw new DatabaseException("Frekvensen findes ikke");
         }
         return frequencyId;
     }
 
-    private String mapCategoryToTitle(TaskCategory category) {
-        return switch (category) {
-            case CLEANING -> "Rengøring";
-            case SHOPPING -> "Indkøb";
-            case FOOD -> "Madlavning";
-            case LAUNDRY -> "Vasketøj";
-            case HOME -> "Udendørs";
-            default -> "Andet";
-        };
-    }
-
-    private String mapFrequencyToTitle(TaskFrequency frequency) {
-        return switch (frequency) {
-            case DAILY -> "Dagligt";
-            case WEEKLY -> "Ugentligt";
-            case MONTHLY -> "Månedligt";
-            default -> "Én gang";
-        };
-    }
 
 
 

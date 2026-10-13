@@ -36,7 +36,7 @@ public class TaskMapper {
                 if (rs.next()) {
                     int task_id = rs.getInt("task_id");
                     int routines_id = rs.getInt("routines_id");
-                    LocalDate dueDate = rs.getObject("due_date", LocalDate.class);
+                    LocalDate dueDate = rs.getObject("date_due", LocalDate.class);
 
                             task= new Task (task_id, dueDate);
                 }

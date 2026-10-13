@@ -8,4 +8,5 @@ public enum TaskCategory {
     HOME,
     EXERCISE,
     TRASH,
+    OTHER,
 }

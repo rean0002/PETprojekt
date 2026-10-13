@@ -118,7 +118,7 @@ public class HouseholdMapper {
                        r.start_date, 
                        r.time,
                        t.time_completed AS task_time_completed,
-                       t.due_date
+                       t.date_due
                 FROM households h
                 JOIN routines r USING (household_id)
                 JOIN tasks t USING (routines_id)
@@ -147,7 +147,7 @@ public class HouseholdMapper {
                     String category_title = rs.getString("category_title");
                     String frequency_title = rs.getString("frequency_title");
                     LocalDate startDate = rs.getObject("start_date", LocalDate.class);
-                    LocalDate dueDate = rs.getObject("due_date", LocalDate.class);
+                    LocalDate dueDate = rs.getObject("date_due", LocalDate.class);
 
                     Time sqltaskTime = rs.getTime("task_time_completed");
                     LocalTime time_completed = (sqltaskTime != null) ? sqltaskTime.toLocalTime() : null;
@@ -155,8 +155,8 @@ public class HouseholdMapper {
                     Time sqlTime = rs.getTime("time");
                     LocalTime time = (sqlTime != null) ? sqlTime.toLocalTime() : null;
 
-                    TaskCategory category = TaskCategory.valueOf(category_title);
-                    TaskFrequency frequency = TaskFrequency.valueOf(frequency_title);
+                    TaskCategory category = mapCategory(category_title);
+                    TaskFrequency frequency = mapFrequency(frequency_title);
 
                     Routines routine = routines.get(routine_id);
 
@@ -181,6 +181,28 @@ public class HouseholdMapper {
         return tasks;
 }
 
+
+private TaskCategory mapCategory(String title) {
+    return switch (title) {
+        case "Rengøring" -> TaskCategory.CLEANING;
+        case "Indkøb" -> TaskCategory.SHOPPING;
+        case "Madlavning" -> TaskCategory.FOOD;
+        case "Vasketøj" -> TaskCategory.LAUNDRY;
+        case "Udendørs" -> TaskCategory.HOME;
+        case "Andet" -> TaskCategory.OTHER;
+        default -> TaskCategory.OTHER;
+    };
+}
+
+private TaskFrequency mapFrequency(String title) {
+    return switch (title) {
+        case "Dagligt" -> TaskFrequency.DAILY;
+        case "Ugentligt" -> TaskFrequency.WEEKLY;
+        case "Månedligt" -> TaskFrequency.MONTHLY;
+        case "Én gang" -> TaskFrequency.NONE;
+        default -> TaskFrequency.NONE;
+    };
+}
 
 public void saveTaskDoneTime(Task task)throws DatabaseException{
     String query = "UPDATE tasks SET time_completed = ?, date_completed=? WHERE task_id = ?";

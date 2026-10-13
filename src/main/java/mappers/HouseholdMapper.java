@@ -46,7 +46,7 @@ public class HouseholdMapper {
         String query = """
                 SELECT household_id, name, code
                 FROM households
-                WHERE id = ?""";
+                WHERE household_id = ?""";
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement stm = connection.prepareStatement(query)) {
             stm.setInt(1, householdId);

@@ -214,7 +214,7 @@ public class UserController {
 
         try{
             ctx.sessionAttribute("household",householdMapper.getHouseholdById(id));
-            ctx.redirect("/dashboard.html");
+            ctx.redirect("/dashboard");
         } catch (DatabaseException e) {
             e.getMessage(); //dårlig håndtering
         }

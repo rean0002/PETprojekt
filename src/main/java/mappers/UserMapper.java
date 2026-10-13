@@ -197,10 +197,10 @@ public class UserMapper {
         User user= null;
         String query="""
                 SELECT *
-                FROM users_households, users
+                FROM users_households
                 JOIN users
                 ON users_user_id = user_id
-                WHERE users.firstname=? and household_id=?
+                WHERE users.firstname=? and households_household_id=?
                 """;
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement stm = connection.prepareStatement(query)) {
@@ -227,10 +227,10 @@ public class UserMapper {
 
         String query="""
                 SELECT *
-                FROM users_households, users
+                FROM users_households
                 JOIN users
                 ON users_user_id = user_id
-                WHERE household_id=?
+                WHERE households_household_id=?
                 """;
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement stm = connection.prepareStatement(query)) {

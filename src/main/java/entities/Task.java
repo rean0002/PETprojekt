@@ -10,6 +10,7 @@ public class Task implements Comparable<Task> {
     private Routines routines;
     private LocalDate dueDate;
     private LocalTime completedAt;
+    private LocalDate completedDate;
 
     /*public Task(int id, String title, String description, User responsibleUser, TaskCategory taskCategory, TaskFrequency taskFrequency, LocalDate date){
         this.id = id;
@@ -77,6 +78,10 @@ public class Task implements Comparable<Task> {
     }
 
     public LocalTime getCompletedAt() {return completedAt;}
+
+    public LocalDate getCompletedDate() {return completedDate;}
+
+    public void setCompletedDate(LocalDate completedDate) {this.completedDate = completedDate;}
 
     public void setResponsibleUser(User responsibleUser) {routines.setResponsibleUser(responsibleUser);}
 

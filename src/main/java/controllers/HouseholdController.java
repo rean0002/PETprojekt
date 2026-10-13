@@ -17,7 +17,7 @@ import services.UtilService;
 public class HouseholdController {
     private ConnectionPool connectionPool;
     private UserService userService;
-    private HouseholdMapper householdMapper;
+   // private HouseholdMapper householdMapper;
     private HouseholdService householdService;
 
     public HouseholdController(ConnectionPool connectionpool){
@@ -48,13 +48,9 @@ public class HouseholdController {
             throw new IllegalUserDataException("Kunne ikke finde bruger");
         }
 
+
         Household household = householdService.createHousehold(UtilService.capitalizeFirst(navn));
 
-        try {
-            householdMapper.createHousehold(household);
-        } catch (DatabaseException e) {
-            throw new IllegalUserDataException("Husstanden kunne ikke oprettes");
-        }
 
         userService.makeAdmin(user.getId(), household.getId());
 
@@ -62,7 +58,7 @@ public class HouseholdController {
 
         household.addMember(user);
 
-        ctx.redirect("/dashboard.html");
+        ctx.redirect("/dashboard");
     }
 
     public void renderHouseholdchoice(Context ctx){

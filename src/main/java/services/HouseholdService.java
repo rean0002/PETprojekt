@@ -11,10 +11,11 @@ public class HouseholdService {
 
     private HouseholdMapper householdMapper;
     private static ArrayList <String> allCodes = new ArrayList<>(); //skal laves om
+    //liste af alle koder i households, via mapper Select code from households, løb denne igennem i stedet
 
 
 public HouseholdService(HouseholdMapper householdMapper){
-    this.householdMapper=householdMapper;
+    this.householdMapper= householdMapper;
 
 }
 
@@ -47,9 +48,23 @@ public HouseholdService(HouseholdMapper householdMapper){
         return householdCode;
     }
 
+    private Household saveHousehold (Household household){
+
+
+        try {
+            householdMapper.createHousehold(household);
+        } catch (DatabaseException e) {
+            e.getMessage();
+        }
+
+        return household;
+
+    }
+
     public Household createHousehold (String name){
 
         Household household= new Household(name, code());
+        saveHousehold(household);
 
         return household;
 

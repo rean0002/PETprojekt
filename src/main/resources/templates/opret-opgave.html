@@ -41,9 +41,10 @@
                     <label>Kategori</label>
                     <div class="pille-row">
                         <button type="button" class="category" data-kategori="CLEANING">Rengøring</button>
-                        <button type="button" class="category" data-kategori="TRASH">Affald</button>
-                        <button type="button" class="category" data-kategori="FOOD">Køkken</button>
+                        <button type="button" class="category" data-kategori="FOOD">Madlavning</button>
+                        <button type="button" class="category" data-kategori="SHOPPING">Indkøb</button>
                     </div>
+
 
                     <input type="hidden" id="taskCategory" name="taskCategory">
 
@@ -66,7 +67,10 @@
                         <option value="NONE">Gentages ikke</option>
                         <option value="DAILY">Dagligt</option>
                         <option value="WEEKLY" selected>Ugentligt</option>
+                        <option value="EVERY_OTHER_DAY">Hver anden dag</option>
+                        <option value="BI_WEEKLY">to gange om ugen</option>
                         <option value="MONTHLY">Månedligt</option>
+                        <option value="BI_MONTHLY">to gange månedligt</option>
                     </select>
                 </div>
 

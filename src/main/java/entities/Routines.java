@@ -18,6 +18,8 @@ public class Routines {
     private LocalTime time;
     private boolean reassign = false;
 
+    private ArrayList <Task>tasks;
+
 
     public Routines(int id, String title, String description, User responsibleUser,
                     TaskCategory category, TaskFrequency frequency, LocalDate date, LocalTime time) {
@@ -40,7 +42,7 @@ public class Routines {
         this.taskFrequency = frequency;
         this.date = date;
         this.time = time;
-        ArrayList<Task> tasks = tasks(date, frequency);
+        tasks = tasks(date, frequency);
     }
 
 
@@ -132,4 +134,6 @@ public class Routines {
     public TaskFrequency getTaskFrequency() {
         return taskFrequency;
     }
+
+    public ArrayList<Task> getTasks() {return tasks;}
 }

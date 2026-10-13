@@ -219,6 +219,7 @@ class UserMapperTest {
 
 
 
+
         } catch (SQLException e) {
             fail("Test data setup failed: " + e.getMessage());
         }
@@ -236,4 +237,5 @@ class UserMapperTest {
     @Test
     void getUserByEmail() {
     }
+
 }

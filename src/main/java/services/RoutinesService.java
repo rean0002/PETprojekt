@@ -2,14 +2,18 @@ package services;
 
 import Exceptions.IllegalTaskDataException;
 import entities.*;
+import mappers.ConnectionPool;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
 public class RoutinesService {
+    private ConnectionPool connectionPool;
 
-    static int nextId = 6;
+    public RoutinesService(ConnectionPool connectionPool){
+        this.connectionPool=connectionPool;
+    }
 
     public Routines createRoutine(String title, String description, User user, String categoryStr, String frequencyStr, String dateStr, String timeStr, Household household) throws IllegalTaskDataException {
 

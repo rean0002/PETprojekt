@@ -32,12 +32,12 @@ public class UserController {
     private TaskService taskService;
     private HouseholdMapper householdMapper;
 
-    public UserController (ConnectionPool connectionpool){
+    public UserController (ConnectionPool connectionPool){
 
-        this.userService=new UserService(new UserMapper());
+        this.userService=new UserService(connectionPool);
         this.dateservice=new DateService();
-        this.taskService=new TaskService(new TaskMapper());
-        this.householdMapper= new HouseholdMapper();
+        this.taskService=new TaskService(connectionPool);
+        this.householdMapper= new HouseholdMapper(connectionPool);
     }
 
 

@@ -10,10 +10,12 @@ import java.util.List;
 
 public class UserService {
     private UserMapper userMapper;
+    private ConnectionPool connectionPool;
 
 
-    public UserService(UserMapper userMapper) {
-        this.userMapper = userMapper;
+    public UserService(ConnectionPool connectionPool) {
+        this.connectionPool=connectionPool;
+        this.userMapper = new UserMapper(connectionPool);
 
     }
 

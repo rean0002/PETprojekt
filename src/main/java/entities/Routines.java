@@ -48,7 +48,7 @@ public class Routines {
 
     private ArrayList<Task> tasks(LocalDate date, TaskFrequency taskFrequency) {
 
-        ArrayList<Task> tasks = null;
+        ArrayList<Task> tasks = new ArrayList<>();
 
         switch (taskFrequency) {
             case NONE:
@@ -136,4 +136,10 @@ public class Routines {
     }
 
     public ArrayList<Task> getTasks() {return tasks;}
+
+    public LocalDate getDate() {return date;}
+
+    public LocalTime getTime() {return time;}
+
+    public void setId(int id) {this.id = id;}
 }

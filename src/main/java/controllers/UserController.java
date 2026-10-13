@@ -8,6 +8,7 @@ import entities.User;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;
 import mappers.ConnectionPool;
+import mappers.TaskMapper;
 import mappers.UserMapper;
 import mappers.HouseholdMapper;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +36,7 @@ public class UserController {
 
         this.userService=new UserService(new UserMapper());
         this.dateservice=new DateService();
-        this.taskService=new TaskService();
+        this.taskService=new TaskService(new TaskMapper());
         this.householdMapper= new HouseholdMapper();
     }
 

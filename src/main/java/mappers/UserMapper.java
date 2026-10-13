@@ -192,16 +192,16 @@ public class UserMapper {
         } return roleId;
     }
 
-    public User findUserByHouseholdIdAndName(int id, String name)throws DatabaseException{
+    public User findUserByHouseholdIdAndName(int id, String name) throws DatabaseException {
 
-        User user= null;
-        String query="""
-                SELECT *
-                FROM users_households, users
-                JOIN users
-                ON users_user_id = user_id
-                WHERE users.firstname=? and household_id=?
-                """;
+        User user = null;
+        String query = """
+            SELECT *
+            FROM users_households
+            JOIN users
+            ON users_user_id = user_id
+            WHERE users.firstname = ? AND households_household_id = ?
+            """;
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement stm = connection.prepareStatement(query)) {
             stm.setString(1, name);
@@ -209,9 +209,11 @@ public class UserMapper {
             try (ResultSet rs = stm.executeQuery();) {
                 if (rs.next()) {
                     int user_id = rs.getInt("user_id");
+                    String email = rs.getString("email");
+                    String password = rs.getString("password");
                     String firstname = rs.getString("firstname");
                     String lastname = rs.getString("lastname");
-                    user=new User(user_id, firstname, lastname);
+                    user = new User(user_id, email, password, firstname, lastname);
                 }
             }
         } catch (SQLException e) {
@@ -227,10 +229,10 @@ public class UserMapper {
 
         String query="""
                 SELECT *
-                FROM users_households, users
+                FROM users_households
                 JOIN users
                 ON users_user_id = user_id
-                WHERE household_id=?
+                WHERE households_household_id=?
                 """;
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement stm = connection.prepareStatement(query)) {
@@ -238,9 +240,11 @@ public class UserMapper {
             try (ResultSet rs = stm.executeQuery();) {
                 while (rs.next()) {
                     int user_id = rs.getInt("user_id");
+                    String email = rs.getString("email");
+                    String password = rs.getString("password");
                     String firstname = rs.getString("firstname");
                     String lastname = rs.getString("lastname");
-                    User user=new User(user_id, firstname, lastname);
+                    User user=new User(user_id, email, password, firstname, lastname);
                     users.add(user);
                 }
             }

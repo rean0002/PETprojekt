@@ -6,6 +6,7 @@ import entities.Task;
 import entities.User;
 import entities.TaskCategory;
 import entities.TaskFrequency;
+import mappers.TaskMapper;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -16,6 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskService {
+
+    private TaskMapper taskMapper;
+
+    public TaskService(TaskMapper taskMapper) {
+        this.taskMapper = taskMapper;
+    }
 
 
     public Task createTask(String title, String description, User user, String categoryStr, String frequencyStr, String dateStr, String timeStr, Household household) throws IllegalTaskDataException {
@@ -67,6 +74,12 @@ public class TaskService {
             }}
 
             Routines routine = new Routines(title, description, user, category, frequency, date, time);
+
+            try {
+                taskMapper.createRoutine(routine, household.getId());
+            } catch (DatabaseException e) {
+                throw new IllegalTaskDataException("Opgaven kunne ikke gemmes i databasen");
+            }
 
             return null;
         }

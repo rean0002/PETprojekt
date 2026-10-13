@@ -7,6 +7,7 @@ import entities.User;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;
 import mappers.ConnectionPool;
+import mappers.TaskMapper;
 import mappers.UserMapper;
 import services.TaskService;
 import services.UserService;
@@ -22,7 +23,7 @@ public class TaskController {
 
     public TaskController(ConnectionPool connectionpool){
         this.connectionPool = connectionPool;
-        this.taskService=new TaskService();
+        this.taskService=new TaskService(new TaskMapper());
         this.userService=new UserService(new UserMapper());
     }
 
@@ -33,12 +34,12 @@ public class TaskController {
         config.routes.get("/opret-opgave", ctx -> visOpretOpgave(ctx));
     }
 
-    private void visOpretOpgave(Context ctx) { //skal rettes med household soim sessionattribute
+    private void visOpretOpgave(Context ctx) {
         User user = ctx.sessionAttribute("user");
         Household household = ctx.sessionAttribute("household");
 
         household.setMembers(userService.addMembersToHousehold(household.getId()));
-
+        ctx.attribute("household", household);
 
         ctx.render("/templates/opret-opgave.html");
     }
@@ -62,7 +63,7 @@ public class TaskController {
 
         try{
             taskService.createTask(title, beskrivelse, ansvarligBruger, taskCategory, gentages, dato, tidspunkt, household);
-            ctx.redirect("/dashboard.html");
+            ctx.redirect("/dashboard");
         }catch (IllegalTaskDataException e){
             ctx.status(400);
             ctx.result(e.getMessage());

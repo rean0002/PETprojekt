@@ -209,8 +209,8 @@ public void saveTaskDoneTime(Task task)throws DatabaseException{
 
     try (Connection connection = connectionPool.getConnection();
          PreparedStatement stm = connection.prepareStatement(query)) {
-        stm.setObject(1, LocalTime.now());
-        stm.setObject(2, LocalDate.now());
+        stm.setObject(1, task.getCompletedAt());
+        stm.setObject(2, task.getCompletedDate());
         stm.setInt(3, task.getId());
         int rowsAffected = stm.executeUpdate();
     } catch (SQLException e){

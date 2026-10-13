@@ -192,7 +192,7 @@ public class UserMapper {
         } return roleId;
     }
 
-    public User findUserByHouseholdIdAndName(int id, String name) throws DatabaseException {
+    public User findUserByHouseholdIdAndName(int id, String name)throws DatabaseException{
 
         User user = null;
         String query = """
@@ -209,11 +209,9 @@ public class UserMapper {
             try (ResultSet rs = stm.executeQuery();) {
                 if (rs.next()) {
                     int user_id = rs.getInt("user_id");
-                    String email = rs.getString("email");
-                    String password = rs.getString("password");
                     String firstname = rs.getString("firstname");
                     String lastname = rs.getString("lastname");
-                    user = new User(user_id, email, password, firstname, lastname);
+                    user=new User(user_id, firstname, lastname);
                 }
             }
         } catch (SQLException e) {

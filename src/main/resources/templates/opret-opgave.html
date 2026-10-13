@@ -70,6 +70,7 @@
                         <option value="BI_WEEKLY">to gange om ugen</option>
                         <option value="MONTHLY">Månedligt</option>
                         <option value="BI_MONTHLY">to gange månedligt</option>
+                    </select>
                 </div>
 
                 <div id="field-ansvarlig" class="field input">
@@ -105,6 +106,8 @@
     document.querySelectorAll(".category").forEach(btn => {
         btn.addEventListener("click", () => {
             document.getElementById("taskCategory").value = btn.dataset.kategori;
+            document.querySelectorAll(".category").forEach(b => b.classList.remove("selected"));
+            btn.classList.add("selected");
         });
     });
 </script>

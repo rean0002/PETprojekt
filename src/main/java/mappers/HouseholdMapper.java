@@ -66,6 +66,31 @@ public class HouseholdMapper {
         return household;
     }
 
+    public Household getHouseholdByCode(String code) throws DatabaseException{
+        Household household = null;
+        String query = """
+                SELECT household_id, name, code
+                FROM households
+                WHERE code = ?""";
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement stm = connection.prepareStatement(query)) {
+            stm.setString(1, code);
+            try (ResultSet rs = stm.executeQuery();) {
+                if (rs.next()) {
+                    int id = rs.getInt("household_id");
+                    String name = rs.getString("name");
+                    String foundCode = rs.getString("code");
+
+                    household = new Household(id, name, foundCode);
+                }
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            throw new DatabaseException("Søgning efter husstand fejlede");
+        }
+        return household;
+    }
+
 
 
 

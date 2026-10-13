@@ -53,6 +53,10 @@ label{
     background-color: var(--orange);
     color: var(--white);
 }
+.category.selected{
+    background-color: var(--orange);
+    color: var(--white);
+}
 
 input, select {
     color: var(--brown);
@@ -102,4 +106,7 @@ input, select {
     width: 18px;
     border-radius: 4px;
 }
-
+.category.selected{
+    background-color: var(--orange);
+    color: var(--white);
+}

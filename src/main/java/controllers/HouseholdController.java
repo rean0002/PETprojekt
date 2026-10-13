@@ -24,6 +24,7 @@ public class HouseholdController {
         this.connectionPool = connectionPool;
         this.userService=new UserService(new UserMapper());
         this.householdService=new HouseholdService(new HouseholdMapper());
+        this.householdMapper=new HouseholdMapper();
     }
 
 
@@ -77,7 +78,15 @@ public class HouseholdController {
         }
 
         userService.joinHousehold(user.getId(), kode);
-        ctx.redirect("/dashboard.html");
+
+        try {
+            Household household = householdMapper.getHouseholdByCode(kode);
+            ctx.sessionAttribute("household", household);
+        } catch (DatabaseException e) {
+            throw new IllegalUserDataException("Husstanden kunne ikke findes");
+        }
+
+        ctx.redirect("/dashboard");
     }
 
 }

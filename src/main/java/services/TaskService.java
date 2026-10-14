@@ -6,6 +6,7 @@ import entities.Task;
 import entities.User;
 import entities.TaskCategory;
 import entities.TaskFrequency;
+import mappers.ConnectionPool;
 import mappers.TaskMapper;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -19,9 +20,11 @@ import java.util.List;
 public class TaskService {
 
     private TaskMapper taskMapper;
+    private ConnectionPool connectionPool;
 
-    public TaskService(TaskMapper taskMapper) {
-        this.taskMapper = taskMapper;
+    public TaskService(ConnectionPool connectionPool) {
+        this.connectionPool=connectionPool;
+        this.taskMapper=new TaskMapper(connectionPool);
     }
 
 

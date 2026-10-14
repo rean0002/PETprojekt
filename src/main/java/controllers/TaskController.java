@@ -21,10 +21,10 @@ public class TaskController {
     private UserService userService;
 
 
-    public TaskController(ConnectionPool connectionpool){
+    public TaskController(ConnectionPool connectionPool){
         this.connectionPool = connectionPool;
-        this.taskService=new TaskService(new TaskMapper());
-        this.userService=new UserService(new UserMapper());
+        this.taskService=new TaskService(connectionPool);
+        this.userService=new UserService(connectionPool);
     }
 
 

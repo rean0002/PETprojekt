@@ -19,6 +19,8 @@ public class HouseholdMapper {
     private static final Logger logger =
             LoggerFactory.getLogger(HouseholdMapper.class);
 
+    public HouseholdMapper(ConnectionPool connectionPool){this.connectionPool=connectionPool;}
+
 
     public Household createHousehold (Household household) throws DatabaseException {
         String query = "INSERT INTO households (name, code) " +

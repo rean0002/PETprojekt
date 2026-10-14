@@ -20,11 +20,11 @@ public class HouseholdController {
    private HouseholdMapper householdMapper;
     private HouseholdService householdService;
 
-    public HouseholdController(ConnectionPool connectionpool){
+    public HouseholdController(ConnectionPool connectionPool){
         this.connectionPool = connectionPool;
-        this.userService=new UserService(new UserMapper());
-        this.householdService=new HouseholdService(new HouseholdMapper());
-        this.householdMapper= new HouseholdMapper();
+        this.userService=new UserService(connectionPool);
+        this.householdService=new HouseholdService(connectionPool);
+        this.householdMapper=new HouseholdMapper(connectionPool);
     }
 
 

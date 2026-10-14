@@ -2,6 +2,7 @@ package services;
 
 import Exceptions.DatabaseException;
 import entities.Household;
+import mappers.ConnectionPool;
 import mappers.HouseholdMapper;
 
 import java.util.ArrayList;
@@ -9,13 +10,14 @@ import java.util.Random;
 
 public class HouseholdService {
 
+    private ConnectionPool connectionPool;
     private HouseholdMapper householdMapper;
     private static ArrayList <String> allCodes = new ArrayList<>(); //skal laves om
     //liste af alle koder i households, via mapper Select code from households, løb denne igennem i stedet
 
 
-public HouseholdService(HouseholdMapper householdMapper){
-    this.householdMapper= householdMapper;
+public HouseholdService(ConnectionPool connectionPool){
+    this.householdMapper= new HouseholdMapper(connectionPool);
 
 }
 

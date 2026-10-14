@@ -18,6 +18,8 @@ public class TaskMapper {
     private static final Logger logger =
             LoggerFactory.getLogger(TaskMapper.class);
 
+    public TaskMapper(ConnectionPool connectionPool){this.connectionPool=connectionPool;}
+
 
     public Task getTaskById(int id ) throws DatabaseException {
         Task task = null;

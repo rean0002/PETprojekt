@@ -15,6 +15,8 @@ public class UserMapper {
     private static final Logger logger =
             LoggerFactory.getLogger(UserMapper.class);
 
+    public UserMapper (ConnectionPool connectionPool){this.connectionPool=connectionPool;}
+
 
     public User createUser (User user) throws DatabaseException {
         String query = "INSERT INTO users (firstname, lastname, email, password) " +

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public class DateService {
 
+    public DateService(){}
+
     public String getDate(LocalDate dato){
         return Date.date(dato);
     } //formatterer input dato

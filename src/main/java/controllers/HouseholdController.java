@@ -17,14 +17,14 @@ import services.UtilService;
 public class HouseholdController {
     private ConnectionPool connectionPool;
     private UserService userService;
-   // private HouseholdMapper householdMapper;
+   private HouseholdMapper householdMapper;
     private HouseholdService householdService;
 
     public HouseholdController(ConnectionPool connectionpool){
         this.connectionPool = connectionPool;
         this.userService=new UserService(new UserMapper());
         this.householdService=new HouseholdService(new HouseholdMapper());
-        this.householdMapper=new HouseholdMapper();
+        this.householdMapper= new HouseholdMapper();
     }
 
 

@@ -1,5 +1,7 @@
 package mappers;
 
+import Exceptions.DatabaseException;
+import entities.User;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -217,6 +219,105 @@ class UserMapperTest {
             """);
 
 
+            // USERS
+            stmt.execute("""
+        INSERT INTO test.users (firstname, lastname, email, password) VALUES
+          ('Olga', 'Hansen', 'olga@test.dk', 'password1'),
+          ('Rebecca', 'Jensen', 'rebecca@test.dk', 'password2'),
+          ('Maja', 'Sørensen', 'maja@test.dk', 'password3'),
+          ('Alexander', 'Nielsen', 'alexander@test.dk', 'password4'),
+          ('Rasmus', 'Pedersen', 'rasmus@test.dk', 'password5'),
+          ('Sofie', 'Andersen', 'sofie@test.dk', 'password6'),
+          ('Mikkel', 'Larsen', 'mikkel@test.dk', 'password7'),
+          ('Ida', 'Christensen', 'ida@test.dk', 'password8'),
+          ('Jonas', 'Møller', 'jonas@test.dk', 'password9'),
+          ('Emma', 'Rasmussen', 'emma@test.dk', 'password10')
+        """);
+
+            // HOUSEHOLDS
+            stmt.execute("""
+        INSERT INTO test.households (name, code) VALUES
+          ('Studiegruppen', 'K7M2QX'),
+          ('Kollektivet', 'B4ZT9R'),
+          ('Familien Hansen', 'W3N8HD'),
+          ('Bofællesskabet', 'P6C1YJ'),
+          ('Lejligheden', 'T9X5LA')
+        """);
+
+            // USERS_HOUSEHOLDS
+            stmt.execute("""
+        INSERT INTO test.users_households (users_user_id, households_household_id, role_id) VALUES
+          (1, 1, 1),
+          (2, 1, 2),
+          (3, 1, 2),
+          (4, 2, 1),
+          (5, 2, 2),
+          (1, 2, 2),
+          (6, 3, 1),
+          (7, 3, 2),
+          (3, 3, 2),
+          (8, 4, 1),
+          (2, 4, 2),
+          (9, 5, 1),
+          (10, 5, 2)
+        """);
+
+            // ROUTINES
+            stmt.execute("""
+        INSERT INTO test.routines (title, description, start_date, "time", frequency_id, category_id, household_id, user_id) VALUES
+          ('Støvsug stuen', 'Støvsug stue og gang', '2026-10-05', '10:00', 3, 1, 1, 1),
+          ('Lav aftensmad', 'Lav aftensmad til hele husstanden', '2026-10-05', '17:30', 2, 2, 1, 2),
+          ('Tøm skraldespanden', 'Tøm skraldespanden i køkkenet', '2026-10-06', NULL, 4, 7, 1, 3),
+          ('Vask tøj', 'Vask og hæng en maskine tøj op', '2026-10-07', '18:00', 5, 4, 2, 4),
+          ('Køb ind', 'Køb ind til ugen', '2026-10-08', '16:00', 3, 3, 2, 5),
+          ('Gør badeværelset rent', 'Skrub bad, håndvask og toilet', '2026-10-10', NULL, 6, 1, 2, 1),
+          ('Gå tur med hunden', 'Gå en lang tur med hunden', '2026-10-05', '07:30', 2, 6, 3, 6),
+          ('Vand planterne', 'Vand alle planter i huset', '2026-10-06', '09:00', 5, 5, 3, 7),
+          ('Ryd op i kælderen', 'Sorter og ryd op i kælderen', '2026-10-12', NULL, 7, 8, 3, 3),
+          ('Tør støv af', 'Tør støv af på hylder og borde', '2026-10-09', '11:00', 3, 1, 4, 8),
+          ('Lav frokost', 'Lav frokost til dagen', '2026-10-07', '12:00', 4, 2, 4, 2),
+          ('Skift sengetøj', 'Skift sengetøj i alle senge', '2026-10-15', NULL, 7, 4, 4, 8),
+          ('Løb en tur', 'Løb en tur på 5 km', '2026-10-05', '06:30', 5, 6, 5, 9),
+          ('Tag skrald ud', 'Tag skrald ud til containeren', '2026-10-08', '20:00', 2, 7, 5, 10),
+          ('Betal husleje', 'Overfør husleje til udlejer', '2026-10-01', NULL, 6, 8, 5, 9)
+        """);
+
+            // TASKS
+            stmt.execute("""
+        INSERT INTO test.tasks (routines_id, date_due) VALUES
+          (1, '2026-10-05'),
+          (1, '2026-10-12'),
+          (2, '2026-10-05'),
+          (2, '2026-10-06'),
+          (3, '2026-10-06'),
+          (3, '2026-10-08'),
+          (4, '2026-10-07'),
+          (4, '2026-10-10'),
+          (5, '2026-10-08'),
+          (5, '2026-10-15'),
+          (6, '2026-10-10'),
+          (6, '2026-11-10'),
+          (7, '2026-10-05'),
+          (7, '2026-10-06'),
+          (8, '2026-10-06'),
+          (8, '2026-10-09'),
+          (9, '2026-10-12'),
+          (9, '2026-10-26'),
+          (10, '2026-10-09'),
+          (10, '2026-10-16'),
+          (11, '2026-10-07'),
+          (11, '2026-10-09'),
+          (12, '2026-10-15'),
+          (12, '2026-10-29'),
+          (13, '2026-10-05'),
+          (13, '2026-10-08'),
+          (14, '2026-10-08'),
+          (14, '2026-10-09'),
+          (15, '2026-10-01'),
+          (15, '2026-11-01')
+        """);
+
+
 
 
 
@@ -231,11 +332,24 @@ class UserMapperTest {
     }
 
     @Test
-    void getUserByUserId() {
+    void getUserByUserId () throws DatabaseException {
+
+        User user = userMapper.getUserByUserId(1);
+
+        assertEquals("Olga", user.getFirstName());
     }
 
     @Test
-    void getUserByEmail() {
+    void getUserByEmail() throws DatabaseException{
+
+        User user = userMapper.getUserByEmail("maja@test.dk");
+
+        assertEquals("Maja", user.getFirstName());
+
     }
+
+
+
+
 
 }
